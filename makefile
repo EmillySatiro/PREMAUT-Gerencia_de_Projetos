@@ -1,5 +1,5 @@
 run_dev:
-	docker compose -f docker-compose.dev.yml up --build
+	docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml up --build
 
 run_prod:
 	docker compose up --build

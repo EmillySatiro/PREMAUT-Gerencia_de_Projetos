@@ -8,4 +8,6 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
+# Run the dev script. We rely on docker-compose env var `NEXT_PRIVATE_NO_TURBOPACK`
+# (set in docker-compose.dev.yml) to disable Turbopack when desired.
 CMD ["npm", "run", "dev"]
