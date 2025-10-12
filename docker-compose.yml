@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: back_premaut
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    build: ./frontend
+    container_name: front_premaut
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
