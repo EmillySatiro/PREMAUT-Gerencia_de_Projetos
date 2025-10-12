@@ -154,3 +154,12 @@ body {
 }
 
 /* TopBar styles moved to src/app/pages/home/topbar.module.css */
+
+/* Utility to hide native scrollbars (horizontal/vertical) while keeping scrolling functional */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
