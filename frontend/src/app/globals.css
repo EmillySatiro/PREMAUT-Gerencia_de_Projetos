@@ -1,8 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f6f4f0;
   --foreground: #171717;
+  /* Project color tokens */
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0369a1;
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #f59e0b;
+  
+  --verde-base: #4DA1A9;
+  --azul-base: #6D94C5;
 }
 
 @theme inline {
@@ -12,15 +21,136 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/*
+  To use the custom font "Wash Your Hand", place font files in:
+    public/fonts/WashYourHand.woff2
+    public/fonts/WashYourHand.woff  (optional fallback)
+
+  Example file names: public/fonts/WashYourHand.woff2
+*/
+
+@font-face {
+    font-family: "Wash Your Hand";
+    src: url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.eot");
+    src: url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/422c16c46f1d460d0db8f8eadd43b4f6.svg#Wash Your Hand")format("svg");
+}
+
+@font-face {
+    font-family: "Inria Serif Regular";
+    src: url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.eot");
+    src: url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/43c6c5e9fb4d295b9a03eb1b03d9f859.svg#Inria Serif Regular")format("svg");
+}
+
+/*
+  Afacad family (variable + static fallbacks)
+  Files are expected under: public/fonts/Afacad/
+  Example URLs: /fonts/Afacad/Afacad-VariableFont_wght.ttf
+*/
+
+/* Variable weight (normal) */
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/Afacad-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variable weight (italic) */
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/Afacad-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Static fallbacks (explicit weights) */
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Afacad';
+  src: url('/fonts/Afacad/static/Afacad-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
+
+
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* TopBar styles moved to src/app/pages/home/topbar.module.css */

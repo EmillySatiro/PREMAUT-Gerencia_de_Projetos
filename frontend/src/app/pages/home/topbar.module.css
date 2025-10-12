@@ -1,0 +1,25 @@
+.premautTitle {
+  color: var(--azul-base, #6D94C5);
+  font-family: "Wash Your Hand";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -1.393px;
+}
+
+.topbarLink {
+  color: #383838;
+  font-family: "Inria Serif Regular";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.125rem 0.25rem;
+}
+
+.topbarLink:hover {
+  opacity: 0.9;
+}
