@@ -57,7 +57,7 @@ export const Somos: React.FC = () => {
             className='flex flex-col items-center justify-center space-y-4 py-8 px-16'
             style={
                 {
-                    backgroundImage: "url('/assets/images/fundo_somos.jpg')",
+                    backgroundImage: "url('/assets/images/fundo_girassol.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundColor: 'rgba(211,211,211,0.9)',

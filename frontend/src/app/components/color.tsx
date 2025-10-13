@@ -15,7 +15,12 @@ export class Colors {
 	static readonly warning = '#f59e0b';
 
     static readonly azulBase = '#6D94C5'; // Custom blue color
+    static readonly azulEscuro = '#507CB4'; // Custom blue color
 	static readonly verdeBase = '#4DA1A9'; // Custom green color
+	static readonly verdeClarinho = '#D2E9DF'; // Custom green color
+
+	// Neutral grays
+	static readonly gray600 = '#4b5563';
 
 	// Utility to get raw hex if needed
 		static hex(name: 'primary' | 'primaryDark' | 'background' | 'foreground' | 'success' | 'danger' | 'warning') {
