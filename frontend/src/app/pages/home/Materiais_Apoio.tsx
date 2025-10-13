@@ -339,7 +339,7 @@ export const MateriaisApoio: React.FC = () => {
             className='flex flex-col items-center justify-center px-10 py-8'
             style={
                 {
-                    backgroundImage: "url('/assets/images/fundo_materiais.jpg')",
+                    backgroundImage: "url('/assets/images/fundo_girassol.jpg')",
                     backgroundSize: 'cover',
                     backgroundColor: 'rgba(211,211,211,0.9)',
                     backgroundBlendMode: 'overlay',
@@ -388,8 +388,8 @@ export const MateriaisApoio: React.FC = () => {
                         border: '3.733px solid #FFF',
                         background: 'rgba(255,255,255,0)',
                         boxShadow: '0 4.977px 4.977px 0 rgba(0,0,0,0.67)',
-                        backdropFilter: 'blur(31.10564422607422px)',
-                        WebkitBackdropFilter: 'blur(31.10564422607422px)',
+                        backdropFilter: 'blur(2px)',
+                        WebkitBackdropFilter: 'blur(2px)',
                         padding: '8px 16px',
                         cursor: 'pointer',
                         outline: 'none',
