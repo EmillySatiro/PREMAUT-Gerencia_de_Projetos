@@ -7,10 +7,12 @@ import MateriaisApoio from './Materiais_Apoio';
 const Content: React.FC = () => {
   return (
     <main>
-      <ShowCards images={[
-      '/assets/images/card_1.jpg',
-      ]} />
-      <Somos />
+      <section id="noticias">
+        <ShowCards images={['/assets/images/card_1.jpg']} />
+      </section>
+      <section id="sobre">
+        <Somos />
+      </section>
       <Objetivo />
       <MateriaisApoio />
     </main>

@@ -173,3 +173,8 @@ body {
   line-height: 1;
   letter-spacing: -1.393px;
 }
+
+/* Smooth scrolling for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}

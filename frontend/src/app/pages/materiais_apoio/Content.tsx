@@ -72,9 +72,12 @@ export const MateriaisApoio: React.FC = () => {
         return 6;
     };
 
-    const [gridColumns, setGridColumns] = React.useState(getGridColumns());
+    // Use a stable initial value to avoid SSR/CSR hydration mismatch
+    const [gridColumns, setGridColumns] = React.useState(6);
 
     React.useEffect(() => {
+        // Update to actual size after mount
+        setGridColumns(getGridColumns());
         const handleResize = () => setGridColumns(getGridColumns());
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);

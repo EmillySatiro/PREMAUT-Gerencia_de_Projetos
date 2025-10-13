@@ -26,9 +26,9 @@ export const TopBar: React.FC = () => {
         }
       >
         <nav className="hidden sm:flex items-center space-x-4">
-          <a className={styles.topbarLink}>Inicio</a>
-          <a className={styles.topbarLink}>Noticias</a>
-          <a className={styles.topbarLink}>Sobre</a>
+          <a href="" className={styles.topbarLink}>Inicio</a>
+          <a href="#noticias" className={styles.topbarLink}>Noticias</a>
+          <a href="#sobre" className={styles.topbarLink}>Sobre</a>
           <a className={styles.topbarLink}>Painel</a>
         </nav>
       </div>
