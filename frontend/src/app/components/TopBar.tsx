@@ -1,12 +1,18 @@
 import React from 'react';
-import Colors from '../../components/color';
+import Colors from './color';
 
-export const TopBar: React.FC = () => {
+interface TopBarProps {
+  background_image?: string;
+}
+
+export const TopBar: React.FC<TopBarProps> = ({
+  background_image = '/assets/images/fundo_girassol.jpg',
+}) => {
   return (
     <header
       className="sticky top-0 z-40 flex items-center justify-between h-16 px-6"
       style={{
-        backgroundImage: "url('/assets/images/fundo_girassol.jpg')",
+        backgroundImage: `url('${background_image}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
