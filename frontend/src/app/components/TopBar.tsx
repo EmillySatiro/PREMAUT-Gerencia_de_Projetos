@@ -10,7 +10,7 @@ export const TopBar: React.FC<TopBarProps> = ({
 }) => {
   return (
     <header
-      className="sticky top-0 z-40 flex items-center justify-between h-16 px-6"
+      className="sticky top-0 z-40 flex items-center justify-between h-25 px-6"
       style={{
         backgroundImage: `url('${background_image}')`,
         backgroundSize: 'cover',
