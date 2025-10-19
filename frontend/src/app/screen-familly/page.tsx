@@ -21,7 +21,7 @@ export default function ScreenFamilly() {
               className="w-24 h-24 rounded-full border border-gray-200"
             />
             <img
-              src="/assets/images/perfil_pequeno.png"
+              src="/assets/images/mdi_user.svg"
               alt="Ícone de usuário"
               className="absolute inset-0 w-24 h-24 p-6 opacity-70"
             />
