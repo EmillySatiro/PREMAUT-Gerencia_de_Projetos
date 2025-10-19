@@ -1,0 +1,244 @@
+:root {
+  --bg: #f8f6f2;
+  --border: #999;
+  --text: #2a2a2a;
+  --radius: 10px;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  padding: 40px;
+}
+
+.titulo {
+    color: rgba(6.13, 6.13, 6.13, 0.72);
+    font-size: 70.3px;
+    font-family: "Inria Serif", serif;
+    font-weight: 700;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.05;
+    margin: 0 0 18px;
+    gap: 20px;
+
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 700px;
+}
+
+/* Campos individuais */
+.campo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* espaçamento entre label e input/textarea */
+    margin-bottom: 20px; /* espaço entre campos */
+}
+
+.campo label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--bg);
+  padding: 0 6px;
+  font-size: 14px;
+  color: #555;
+  pointer-events: none;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: 16px;
+  background: #faf9f6;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: #000;
+}
+
+/* Campos lado a lado */
+.linha {
+  display: flex;
+  gap: 20px;
+}
+
+.metade {
+  flex: 1;
+}
+
+/* Ajuste visual para o select/date */
+input[type="date"] {
+  color-scheme: light;
+  cursor: pointer;
+}
+
+.submit-button {
+  background: #6B9BD1;
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background: #5A8BC0;
+}
+
+.relatorio-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    width: 100vw;
+    /* sem padding no top e nas laterais para ficar grudado;
+       mantém um padding inferior para espaçamento do conteúdo */
+    padding: 0 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--bg);
+    overflow: auto;
+    z-index: 999;
+}
+
+/* opcional: centro do conteúdo com largura máxima */
+.relatorio-container .relatorio-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* botão de voltar com hitbox quadrada (tamanho mínimo acessível) */
+.back-button {
+    --back-size: 44px; /* ajuste o tamanho do quadrado aqui */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--back-size);
+    height: var(--back-size);
+    padding: 0; /* garante que o tamanho venha da width/height */
+
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+/* ícone/texto centralizado dentro do quadrado */
+.back-button > * {
+    pointer-events: none; /* evita que elementos internos alterem a hitbox */
+}
+
+/* estados */
+.back-button:hover {
+    background: rgba(0, 0, 0, 0);
+    border-color: #666;
+}
+
+.back-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(107,155,209,0.18);
+}
+
+.campo select,
+.campo .input-genero {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    font-size: 16px;
+    background: #faf9f6;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.campo select:focus,
+.campo .input-genero:focus {
+    border-color: #000;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+position: fixed;
+top: 16px;
+right: 16px;
+z-index: 1001;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.circle-avatar {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  flex: 0 0 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%; /* deixa circular */
+  background: radial-gradient(circle, #e0e0e0 0%, #bdbdbd 100%);
+}
+
+
+.avatar {
+  position: relative;
+  width: 116px;         /* tamanho do ellipse de fundo */
+  height: 116px;
+  flex: 0 0 116px;
+  display: flex;        /* centra o ícone 54x54 */
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.Icon_perfil {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* variante menor/maior se precisar */
+.back-button.small { --back-size: 36px; }
+.back-button.large { --back-size: 56px; }
+/* Responsivo */
+@media (max-width: 600px) {
+  .linha {
+    flex-direction: column;
+  }
+}
+ 

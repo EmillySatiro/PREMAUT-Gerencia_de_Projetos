@@ -48,8 +48,9 @@ export default function CadastroEvento() {
                 height="54"
                 />
             </button>
-
+            <div style={{ marginTop: "50px", marginBottom: "50px" }}>
             <h1 className="titulo">Cadastro de Evento</h1>
+            </div>
 
             <div className="campo">
                 <label htmlFor="titulo">Titulo</label>
