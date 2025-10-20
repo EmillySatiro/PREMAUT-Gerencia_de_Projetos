@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from "../components/white_header";
+import Header from "../../components/white_header";
 
 export default function TelaAdmin() {
   const usuarios = Array(6).fill({ nome: "Fulano de Tal" });
