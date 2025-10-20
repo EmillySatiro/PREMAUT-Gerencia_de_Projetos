@@ -1,5 +1,5 @@
 :root {
-  --brand-blue: #6D94C5;
+  --brand-blue: #ffffff;
   --brand-teal: #4DA1A9;
   --bg: #F6F4F0;
 }
@@ -13,52 +13,121 @@ body, html {
   background-size: cover;
 }
 
-.container {
+.logo-icon {
+  position: absolute;
+  top: 20px;
+  left: 90px;
+  width: 171.197px;
+  height: 63.757px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  z-index: 10;
 }
 
-.card {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 320px;
-  text-align: center;
-  backdrop-filter: blur(4px);
+@media (max-width: 1024px) {
+  .logo-icon {
+    left: 40px;
+    top: 24px;
+    width: 150px;
+  }
 }
 
-.card h2 {
+@media (max-width: 768px) {
+  .logo-icon {
+    left: 24px;
+    top: 20px;
+    width: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-icon {
+    left: 16px;
+    top: 16px;
+    width: 120px;
+  }
+}
+/* Container principal */
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden; /* mantém overflow escondido */
+}
+
+/* Texto PREMAUT */
+.logo-text {
+  width: 102.62px; height: 25.65px; left: 158.58px; top: 74.98px;
+  position: absolute;
   color: var(--brand-blue);
-  margin-bottom: 1.5rem;
+  font-size: 23.22px;
+  font-family: "Wash Your Hand", cursive;
+  font-weight: 400;
+  word-wrap: break-word;
 }
 
-form {
+
+/* Container principal */
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
-input {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+/* Card branco centralizado com margens fixas */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 93px - 199px);
+  max-width: 1228px;
+  min-width: 320px;
+  height: calc(100% - 141px*2); /* topo + bottom */
+  max-height: 742px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 10px 10px 45.5px rgba(0,0,0,0.25);
+  border-radius: 40px;
+  backdrop-filter: blur(5px);
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 32px 28px;
+  z-index: 20;
 }
 
-button {
-  background-color: var(--brand-blue);
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Título Cadastro */
+.title {
+  left: 169px; top: 201px; position: absolute;
+  color: black; font-size: 48.93px; font-family: "Inria Serif", serif; font-weight: 700; word-wrap: break-word;
 }
 
-button:hover {
-  background-color: #2b4fba;
-}
+/* Botão Cadastrar */
+.button { width: 458px; height: 72px; left: 489px; top: 700px; position: absolute; background: var(--brand-teal); border-radius: 20px; }
+.button-text { left: 670px; top: 722px; position: absolute; color: white; font-size: 23.22px; font-family: "Inria Serif", serif; font-weight: 700; word-wrap: break-word; }
+
+/* Labels dos campos */
+.label { position: absolute; color: rgba(0,0,0,0.54); font-size: 23.22px; font-family: "Inria Serif", serif; font-weight: 400; word-wrap: break-word; }
+.label.nome { left: 229px; top: 392px; }
+.label.telefone { left: 841px; top: 392px; }
+.label.nascimento { left: 841px; top: 489px; }
+.label.genero { left: 229px; top: 489px; }
+.label.senha { left: 841px; top: 586px; }
+.label.email { left: 229px; top: 586px; }
+
+/* Elementos decorativos */
+.decor1 { width: 24px; height: 24px; left: 1205px; top: 624px; position: absolute; overflow: hidden; }
+.decor1-inner { width: 22px; height: 15px; left: 1px; top: 4.5px; position: absolute; background: var(--brand-teal); }
+.decor2 { width: 20.78px; height: 18px; left: 596.52px; top: 537px; position: absolute; transform: rotate(-60deg); transform-origin: top left; background: var(--brand-teal); }
+
+/* Avatar */
+.avatar-outer { width: 155px; height: 155px; left: 643px; top: 213px; position: absolute; background: #d9d9d9; border-radius: 9999px; }
+.avatar-inner-container { width: 72.16px; height: 72.16px; left: 684.42px; top: 254.42px; position: absolute; overflow: hidden; }
+.avatar-inner { width: 48.1px; height: 48.1px; left: 12.03px; top: 12.03px; position: absolute; background: var(--brand-blue); }
+
+/* Link de cadastro */
+.register-link { position: absolute; left: 635px; top: 825px; font-family: "Inria Serif", serif; font-size: 15px; font-weight: 300; color: black; display: flex; gap: 4px; align-items: center; }
+.register-link-highlight span { color: var(--brand-teal); font-weight: 700; cursor: pointer; }
