@@ -11,11 +11,14 @@ body {
   font-family: var(--font);
   color: var(--text);
   padding: 40px;
+  margin: 0;
 }
 
+/* Título responsivo */
 .titulo {
     color: rgba(6.13, 6.13, 6.13, 0.72);
-    font-size: 70.3px;
+    /* Fonte fluida entre 28px e 70.3px conforme largura */
+    font-size: clamp(28px, 6vw, 70.3px);
     font-family: "Inria Serif", serif;
     font-weight: 700;
     word-wrap: break-word;
@@ -23,14 +26,19 @@ body {
     line-height: 1.05;
     margin: 0 0 18px;
     gap: 20px;
-
+    max-width: 100%;
 }
 
+/* Formulário centralizado e com padding lateral responsivo */
 .formulario {
   display: flex;
   flex-direction: column;
   gap: 18px;
   max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 /* Campos individuais */
@@ -53,17 +61,19 @@ body {
   pointer-events: none;
 }
 
+/* Inputs/textarea com padding e fontes adaptativas */
 .campo input,
 .campo textarea {
   width: 100%;
   border: 2px solid var(--border);
   border-radius: var(--radius);
   padding: 14px;
-  font-size: 16px;
+  font-size: clamp(14px, 2.2vw, 16px);
   background: #faf9f6;
   color: var(--text);
   outline: none;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
 .campo input:focus,
@@ -79,6 +89,7 @@ body {
 
 .metade {
   flex: 1;
+  min-width: 0; /* evita overflow em inputs flexíveis */
 }
 
 /* Ajuste visual para o select/date */
@@ -87,6 +98,7 @@ input[type="date"] {
   cursor: pointer;
 }
 
+/* Botão enviar: em telas pequenas ocupa toda largura */
 .submit-button {
   background: #6B9BD1;
   color: white;
@@ -104,6 +116,7 @@ input[type="date"] {
   background: #5A8BC0;
 }
 
+/* Container fixo (relatório) com padding responsivo e safe-area */
 .relatorio-container {
     position: fixed;
     top: 0;
@@ -112,9 +125,8 @@ input[type="date"] {
     bottom: 0;
     box-sizing: border-box;
     width: 100vw;
-    /* sem padding no top e nas laterais para ficar grudado;
-       mantém um padding inferior para espaçamento do conteúdo */
-    padding: 0 0 40px;
+    /* padding superior e laterais para não colar na borda do dispositivo */
+    padding: env(safe-area-inset-top, 16px) 16px 40px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -128,6 +140,8 @@ input[type="date"] {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 /* botão de voltar com hitbox quadrada (tamanho mínimo acessível) */
@@ -166,9 +180,60 @@ input[type="date"] {
 /* variante menor/maior se precisar */
 .back-button.small { --back-size: 36px; }
 .back-button.large { --back-size: 56px; }
-/* Responsivo */
+
+/* Responsividade: ajustes em pontos comuns */
+@media (max-width: 900px) {
+  .relatorio-container .relatorio-inner {
+    max-width: 900px;
+  }
+
+  .linha {
+    gap: 16px;
+  }
+
+  .submit-button {
+    padding: 0.9rem 2rem;
+    float: right;
+  }
+}
+
 @media (max-width: 600px) {
+  body {
+    padding: 16px;
+  }
+
+  .formulario {
+    padding: 0 12px;
+  }
+
+  /* campos dispostos em coluna quando espaço for limitado */
   .linha {
     flex-direction: column;
+  }
+
+  .campo label {
+    /* em telas pequenas, torna o label posicionado dentro do fluxo para evitar sobreposição */
+     font-size: 13px;
+    left: 10px;
+  }
+
+  .campo input,
+  .campo textarea {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .submit-button {
+    width: 100%;
+    float: none;
+    padding: 0.9rem 1rem;
+  }
+
+  .relatorio-container {
+    padding: env(safe-area-inset-top, 12px) 12px 28px;
+  }
+
+  .titulo {
+    margin-bottom: 12px;
   }
 }
