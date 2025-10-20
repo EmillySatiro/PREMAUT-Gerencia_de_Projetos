@@ -2,7 +2,7 @@ import React from "react";
 
 import './styles.css'; 
 
-const Login: React.FC = () => {
+const Esqueci_a_senha: React.FC = () => {
   return (
     <div className="container">
       {/* Conteúdo principal centralizado sobre o fundo */}
@@ -11,28 +11,22 @@ const Login: React.FC = () => {
           <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
         </div>
         <div className="login-card">
-          <div className="login-title">Entrar</div>
+          <div className="login-title">Esqueceu sua  senha</div>
           <div className="login-description">
-            Bem-vindo ao PREMAUT, um projeto que apoia, acolhe e inclui pessoas com autismo.
+            Digite o seu e-mail para recuperar sua conta.
+            Chegará um código de confirmação no seu e-mail , 
+            clique em continuar para digitar o código. 
           </div>
             <div className="campo">
-              <label htmlFor="email">E-mail / Usuário</label>
-              <input
+            <label htmlFor="email">E-mail / Usuário</label>
+            <input
                 id="email"
                 type="text"
                 placeholder="Digite seu e-mail ou usuário"
-              />
+            />
             </div>
 
-            <div className="campo">
-              <label htmlFor="senha">Senha</label>
-              <input
-                id="senha"
-                type="password"
-                placeholder="Digite sua senha"
-              />
-            </div>
-          <div className="login-button">Entrar</div>
+          <div className="login-button">Continuar</div>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
@@ -46,4 +40,4 @@ const Login: React.FC = () => {
     );
 };
 
-export default Login;
+export default Esqueci_a_senha;
