@@ -18,6 +18,7 @@ body {
     background-color: #f3f3f300; /* cor de fallback */
 }
 
+
 /* overlay opcional para escurecer ligeiramente o fundo */
 body::before {
     content: "";
@@ -26,14 +27,22 @@ body::before {
     background: rgba(0, 0, 0, 0);
     pointer-events: none;
 }
-.topbar-wrapper {
-display: flex;
-align-items: center;
-gap: 0.25rem; /* espaço entre o ícone e o texto */
-justify-content: flex-start;
-transform: translateX(-550px); /* desloca mais para a esquerda; ajuste o valor conforme necessário */
-margin: -40px 0 50px 50px; /* ajuste vertical conforme necessário */
+
+.linha {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap; /* permite quebrar linha em telas menores */
 }
+
+.campo {
+  flex: 1 1 calc(33.333% - 13.33px); /* 3 campos por linha */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0 0 0;
+}
+
 
 .editar-perfil-container {
   background: url("/assets/images/fundo_pecas.png") no-repeat center center fixed;
@@ -47,13 +56,38 @@ margin: -40px 0 50px 50px; /* ajuste vertical conforme necessário */
   padding: 40px 20px;
 }
 
-.voltar {
-  position: absolute;
-  top: 50px;
-  left: 30px;
-  background: none;
-  border: none;
+.logo-icon {
+  width: 200px; /* aumentei um pouco */
+  height: 180px;
+  background-image: url('/assets/images/logo_completa.png');
+  background-size: contain; /* mantém proporção */
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  position: fixed; /* fixa na tela */
+  top: 20px;       /* distância do topo */
+  left: 20px;      /* distância da esquerda */
+  z-index: 1000;   /* garante que fique acima de outros elementos */
+}
+
+.register-link {
+  display: flex;
+  flex-direction: row;   /* já estava, mantém na horizontal */
+  align-items: center;   /* alinha verticalmente */
+  justify-content: center;
+  gap: 4px;              /* espaço entre os elementos */
+  margin-top: 24px;      /* distância do botão */
+  font-family: "Inria Serif";
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: -0.9px;
+}
+
+.register-link-highlight {
+   color: #4DA1A9;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: 0;         /* remover margin-top: auto */
 }
 
 /* Card */
