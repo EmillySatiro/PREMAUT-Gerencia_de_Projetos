@@ -15,12 +15,23 @@ const Login: React.FC = () => {
           <div className="login-description">
             Bem-vindo ao PREMAUT, um projeto que apoia, acolhe e inclui pessoas com autismo.
           </div>
+            <div className="campo">
+              <label htmlFor="email">E-mail / Usuário</label>
+              <input
+                id="email"
+                type="text"
+                placeholder="Digite seu e-mail ou usuário"
+              />
+            </div>
 
-          <div className="input-label">E-mail/Usuário</div>
-          <input className="input-field" type="text" />
-
-          <div className="input-label">Senha</div>
-          <input className="input-field" type="password" />
+            <div className="campo">
+              <label htmlFor="senha">Senha</label>
+              <input
+                id="senha"
+                type="password"
+                placeholder="Digite sua senha"
+              />
+            </div>
 
           <div className="login-button">Entrar</div>
 
