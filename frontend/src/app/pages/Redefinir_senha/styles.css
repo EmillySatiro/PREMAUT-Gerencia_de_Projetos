@@ -137,6 +137,7 @@ body, html {
 
 /* Botão de login */
 .login-button {
+  margin-top: 16px;
   width: 100%;
   height: 56px;
   border-radius: 20px;
