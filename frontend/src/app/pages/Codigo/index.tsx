@@ -2,7 +2,7 @@ import React from "react";
 
 import './styles.css'; 
 
-const Esqueci_a_senha: React.FC = () => {
+const Codigo: React.FC = () => {
   return (
     <div className="container">
       {/* Conteúdo principal centralizado sobre o fundo */}
@@ -13,20 +13,18 @@ const Esqueci_a_senha: React.FC = () => {
         <div className="login-card">
           <div className="login-title">Esqueceu sua  senha</div>
           <div className="login-description">
-            Digite o seu e-mail para recuperar sua conta.
-            Chegará um código de confirmação no seu e-mail , 
-            clique em continuar para digitar o código. 
+           Digite o código que mandamos para seu e-mail. Logo em seguida redefina sua senha. 
           </div>
             <div className="campo">
-            <label htmlFor="email">E-mail </label>
+            <label htmlFor="email">Código</label>
             <input
                 id="email"
                 type="text"
-                placeholder="Digite seu e-mail"
+                placeholder="Digite o código"
             />
             </div>
 
-          <div className="login-button">Continuar</div>
+          <div className="login-button">Redefinir</div>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
@@ -40,4 +38,4 @@ const Esqueci_a_senha: React.FC = () => {
     );
 };
 
-export default Esqueci_a_senha;
+export default Codigo;
