@@ -1,6 +1,7 @@
 import React from "react";
 
 import './styles.css'; 
+import Link from "next/link";
 
 const Login: React.FC = () => {
   return (
@@ -32,14 +33,20 @@ const Login: React.FC = () => {
                 placeholder="Digite sua senha"
               />
             </div>
-
-          <div className="login-button">Entrar</div>
+          <Link href="./home" className="login-button">
+            Entrar
+          </Link>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
-            <div className="register-link-highlight">
+            <Link href="./cadastro" className="register-link-highlight">
               <span>Cadastre-se</span>
-            </div>
+            </Link>
+          </div>
+          <div className="register-link2">
+            <Link href="./Esqueci_a_senha" className="register-link-highlight2">
+              <span>Esqueceu sua senha?</span>
+            </Link>
           </div>
         </div>
         </div>
