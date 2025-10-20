@@ -1,133 +1,307 @@
-:root {
-  --brand-blue: #ffffff;
-  --brand-teal: #4DA1A9;
-  --bg: #F6F4F0;
+/* fundo global */
+html, body {
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  height: 100%;
-  background: var(--brand-blue) url('/assets/images/fundo_top_bottom.png') no-repeat center center fixed;
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+    background-image: url("/assets/images/fundo_top_bottom.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #f3f3f300; /* cor de fallback */
+}
+
+/* overlay opcional para escurecer ligeiramente o fundo */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+}
+.topbar-wrapper {
+display: flex;
+align-items: center;
+gap: 0.25rem; /* espaço entre o ícone e o texto */
+justify-content: flex-start;
+transform: translateX(-550px); /* desloca mais para a esquerda; ajuste o valor conforme necessário */
+margin: -40px 0 50px 50px; /* ajuste vertical conforme necessário */
+}
+
+.editar-perfil-container {
+  background: url("/assets/images/fundo_pecas.png") no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 40px 20px;
 }
 
-.logo-icon {
+.voltar {
   position: absolute;
-  top: 20px;
-  left: 90px;
-  width: 171.197px;
-  height: 63.757px;
+  top: 50px;
+  left: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Card */
+.perfil-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 600px;
+  max-width: 95%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ícone */
+.icone-perfil {
+  background: #e0e0e0;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  margin: 0 auto 30px;
 }
 
-@media (max-width: 1024px) {
-  .logo-icon {
-    left: 40px;
-    top: 24px;
-    width: 150px;
-  }
+.icone-perfil img {
+  width: 48px;
+  height: 48px;
 }
 
-@media (max-width: 768px) {
-  .logo-icon {
-    left: 24px;
-    top: 20px;
-    width: 130px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo-icon {
-    left: 16px;
-    top: 16px;
-    width: 120px;
-  }
-}
-/* Container principal */
-.container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden; /* mantém overflow escondido */
-}
-
-/* Texto PREMAUT */
-.logo-text {
-  width: 102.62px; height: 25.65px; left: 158.58px; top: 74.98px;
-  position: absolute;
-  color: var(--brand-blue);
-  font-size: 23.22px;
-  font-family: "Wash Your Hand", cursive;
-  font-weight: 400;
-  word-wrap: break-word;
-}
-
-
-/* Container principal */
-.container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+/* Form */
+.form-perfil {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.linha {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.campo {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  margin: 20px 0 0 0;
 }
 
-/* Card branco centralizado com margens fixas */
-.card {
+/* Input e Select com bordas arredondadas */
+.campo input,
+.campo select {
+  width: 100%;
+  padding: 14px 12px 10px;
+  border: 2px solid #4db6ac;
+  border-radius: 15px;
+  font-size: 15px;
+  color: #333;
+  background: rgba(255, 255, 255, 0.6);
+  outline: none;
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+/* Efeito ao focar */
+.campo input:focus,
+.campo select:focus {
+  border-color: #007c75;
+}
+
+/* Label posicionada sobre a borda */
+.campo label {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: calc(100% - 93px - 199px);
-  max-width: 1228px;
-  min-width: 320px;
-  height: calc(100% - 141px*2); /* topo + bottom */
-  max-height: 742px;
-  background: rgba(255,255,255,0.8);
-  box-shadow: 10px 10px 45.5px rgba(0,0,0,0.25);
-  border-radius: 40px;
-  backdrop-filter: blur(5px);
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  padding: 32px 28px;
-  z-index: 20;
+  top: -10px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0 8px;
+  font-size: 15px;
+  color: #555;
+  pointer-events: none;
 }
 
-/* Título Cadastro */
-.title {
-  left: 169px; top: 201px; position: absolute;
-  color: black; font-size: 48.93px; font-family: "Inria Serif", serif; font-weight: 700; word-wrap: break-word;
+/* Para selects (seta customizada) */
+.campo select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg fill='%234db6ac' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
 }
 
-/* Botão Cadastrar */
-.button { width: 458px; height: 72px; left: 489px; top: 700px; position: absolute; background: var(--brand-teal); border-radius: 20px; }
-.button-text { left: 670px; top: 722px; position: absolute; color: white; font-size: 23.22px; font-family: "Inria Serif", serif; font-weight: 700; word-wrap: break-word; }
+/* larguras específicas */
+.email-campo {
+  width: 100%;
+}
 
-/* Labels dos campos */
-.label { position: absolute; color: rgba(0,0,0,0.54); font-size: 23.22px; font-family: "Inria Serif", serif; font-weight: 400; word-wrap: break-word; }
-.label.nome { left: 229px; top: 392px; }
-.label.telefone { left: 841px; top: 392px; }
-.label.nascimento { left: 841px; top: 489px; }
-.label.genero { left: 229px; top: 489px; }
-.label.senha { left: 841px; top: 586px; }
-.label.email { left: 229px; top: 586px; }
+/* botões */
+.botao-salvar {
+  background-color: #4db6ac;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-/* Elementos decorativos */
-.decor1 { width: 24px; height: 24px; left: 1205px; top: 624px; position: absolute; overflow: hidden; }
-.decor1-inner { width: 22px; height: 15px; left: 1px; top: 4.5px; position: absolute; background: var(--brand-teal); }
-.decor2 { width: 20.78px; height: 18px; left: 596.52px; top: 537px; position: absolute; transform: rotate(-60deg); transform-origin: top left; background: var(--brand-teal); }
+.botao-salvar:hover {
+  background-color: #379c93;
+}
 
-/* Avatar */
-.avatar-outer { width: 155px; height: 155px; left: 643px; top: 213px; position: absolute; background: #d9d9d9; border-radius: 9999px; }
-.avatar-inner-container { width: 72.16px; height: 72.16px; left: 684.42px; top: 254.42px; position: absolute; overflow: hidden; }
-.avatar-inner { width: 48.1px; height: 48.1px; left: 12.03px; top: 12.03px; position: absolute; background: var(--brand-blue); }
+.esqueci-senha {
+  margin-top: 10px;
+  display: block;
+  font-size: 13px;
+  color: #777;
+  text-decoration: none;
+}
 
-/* Link de cadastro */
-.register-link { position: absolute; left: 635px; top: 825px; font-family: "Inria Serif", serif; font-size: 15px; font-weight: 300; color: black; display: flex; gap: 4px; align-items: center; }
-.register-link-highlight span { color: var(--brand-teal); font-weight: 700; cursor: pointer; }
+.esqueci-senha:hover {
+  text-decoration: underline;
+}
+
+/* ----------------------
+   Regras responsivas
+   ---------------------- */
+
+/* Tablets e telas menores que desktop */
+@media (max-width: 900px) {
+  .perfil-card {
+    width: 90%;
+    padding: 30px;
+    border-radius: 16px;
+  }
+
+  .linha {
+    gap: 16px;
+  }
+
+  .icone-perfil {
+    width: 72px;
+    height: 72px;
+  }
+  .icone-perfil img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .voltar {
+    top: 36px;
+    left: 18px;
+  }
+}
+
+/* Dispositivos móveis (smartphones) */
+@media (max-width: 700px) {
+  .editar-perfil-container {
+    background-attachment: scroll; /* melhora performance e comportamento em mobile */
+    padding: 24px 12px;
+  }
+
+  .perfil-card {
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  }
+
+  .linha {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .campo {
+    margin: 12px 0 0 0;
+  }
+
+  .campo input,
+  .campo select {
+    padding: 12px 10px;
+    font-size: 15px;
+  }
+
+  .campo label {
+    left: 14px;
+    font-size: 14px;
+    top: -8px;
+  }
+
+  .icone-perfil {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+  }
+  .icone-perfil img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .botao-salvar {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  .voltar {
+    top: 18px;
+    left: 12px;
+  }
+
+  .campo select {
+    background-position: right 8px center;
+  }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 420px) {
+  .perfil-card {
+    padding: 18px;
+  }
+
+  .campo input,
+  .campo select {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  .campo label {
+    left: 10px;
+    font-size: 13px;
+    top: -7px;
+  }
+
+  .icone-perfil {
+    width: 56px;
+    height: 56px;
+  }
+  .icone-perfil img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .linha {
+    gap: 10px;
+  }
+}
