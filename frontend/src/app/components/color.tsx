@@ -15,8 +15,13 @@ export class Colors {
 	static readonly verdeClarinho = '#D2E9DF';
 	static readonly gray600 = '#4b5563';
 
-	static hex(name: 'primary' | 'primaryDark' | 'background' | 'foreground' | 'success' | 'danger' | 'warning') {
-		return (Colors as any)[name] as string;
+	static hex(
+	name: keyof Pick<
+		typeof Colors,
+		'primary' | 'primaryDark' | 'background' | 'foreground' | 'success' | 'danger' | 'warning'
+	>
+	): string {
+		return Colors[name] as string;
 	}
 }
 
