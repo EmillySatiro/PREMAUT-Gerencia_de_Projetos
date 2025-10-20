@@ -171,6 +171,23 @@ body, html {
   font-weight: 700;
   cursor: pointer;
 }
+.register-link2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font-family: "Inria Serif";
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: -0.9px;
+  justify-content: center;
+}
+
+.register-link-highlight2 {
+  color: var(--brand-teal);
+  font-weight: 700;
+  cursor: pointer;
+}
 
 /* RESPONSIVIDADE */
 @media (max-width: 1024px) {

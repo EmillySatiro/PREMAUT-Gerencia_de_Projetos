@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 import './styles.css'; 
 
 const Esqueci_a_senha: React.FC = () => {
@@ -26,13 +26,15 @@ const Esqueci_a_senha: React.FC = () => {
             />
             </div>
 
-          <div className="login-button">Continuar</div>
+            <Link href="./Codigo" className="login-button">
+              Continuar
+            </Link>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
-            <div className="register-link-highlight">
+            <Link href="./cadastro" className="register-link-highlight">
               <span>Cadastre-se</span>
-            </div>
+            </Link>
           </div>
         </div>
         </div>

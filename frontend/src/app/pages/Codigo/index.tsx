@@ -1,7 +1,7 @@
 import React from "react";
 
 import './styles.css'; 
-
+import Link from "next/link";
 const Codigo: React.FC = () => {
   return (
     <div className="container">
@@ -24,13 +24,15 @@ const Codigo: React.FC = () => {
             />
             </div>
 
-          <div className="login-button">Redefinir</div>
+            <div className="login-button">
+            <Link href="./Redefinir_senha">Redefinir</Link>
+            </div>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
-            <div className="register-link-highlight">
+            <Link href="./cadastro" className="register-link-highlight">
               <span>Cadastre-se</span>
-            </div>
+            </Link>
           </div>
         </div>
         </div>

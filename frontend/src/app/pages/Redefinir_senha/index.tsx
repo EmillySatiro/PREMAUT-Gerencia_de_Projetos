@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 import './styles.css'; 
 
 const Redefinir_senha: React.FC = () => {
@@ -32,13 +32,17 @@ const Redefinir_senha: React.FC = () => {
                 placeholder="Digite sua nova senha"
               />
             </div>
-          <div className="login-button">Confirmar</div>
+            <button type="submit" className="login-button">
+                              <Link href="./Login">
+                                Redefinir
+                              </Link>
+                            </button>
 
-          <div className="register-link">
+        <div className="register-link">
             <span>Não possui cadastro? </span>
-            <div className="register-link-highlight">
+            <Link href="./cadastro" className="register-link-highlight">
               <span>Cadastre-se</span>
-            </div>
+            </Link>
           </div>
         </div>
         </div>

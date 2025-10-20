@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
+import Link from "next/link";
 import "./styles.css";
 
 export default function cadastro() {
@@ -22,8 +22,6 @@ export default function cadastro() {
   return (
     <div className="editar-perfil-container">
      
-   
-
       <div className="logo-icon"></div>
       
       <div className="perfil-card">
@@ -105,15 +103,12 @@ export default function cadastro() {
             </div>
           </div>
 
-          <button type="submit" className="botao-salvar">
-            Cadastrar
-          </button>
-        <div className="register-link">
-            <span>Não possui cadastro? </span>
-                <div className="register-link-highlight">
-                  <span>Cadastre-se</span>
-                </div>
-            </div>
+                <button type="submit" className="botao-salvar">
+                  <Link href="./Login">
+                    Cadastrar
+                  </Link>
+                </button>
+
         </form>
       </div>
     </div>
