@@ -62,14 +62,6 @@ export default function ScreenMonitor() {
                 <ul className="text-sm text-gray-600 space-y-3">
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/perfil_pequeno.png"
-                    alt="Aluno vinculado"
-                    className="w-5 h-5"
-                    />
-                    <span>Aluno vinculado: Fulano de tal</span>
-                </li>
-                <li className="flex items-center gap-2">
-                    <img
                     src="/assets/images/genero.png"
                     alt="Gênero"
                     className="w-5 h-5"
@@ -86,9 +78,9 @@ export default function ScreenMonitor() {
                 </li>
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/email.png"
+                    src="/assets/images/telefone.png"
                     alt="Telefone"
-                    className="w-5 h-5"
+                    className="w-4 h-4"
                     />
                     <span>Telefone: (89) 99400-0000</span>
                 </li>
@@ -109,16 +101,16 @@ export default function ScreenMonitor() {
 
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-600">
                 <li>
-                <strong>Período da Monitoria:</strong> 2024.1
+                <strong>Início da Orientação:</strong> 2024.1
                 </li>
                 <li>
-                <strong>Fim do Período da Monitoria:</strong> 2024.2
+                <strong>Fim do Período da Orientação:</strong> 2024.2
                 </li>
                 <li>
                 <strong>Curso:</strong> Psicologia
                 </li>
                 <li>
-                <strong>Professor responsável:</strong> Taylor Swift
+                <strong>Especialidade:</strong> Saúde da criança e do adolescente
                 </li>
             </ul>
             </div>
