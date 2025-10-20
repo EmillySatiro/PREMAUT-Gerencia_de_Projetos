@@ -10,7 +10,6 @@ const Login: React.FC = () => {
         <div className="logo-icon">
           <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
         </div>
-
         <div className="login-card">
           <div className="login-title">Entrar</div>
           <div className="login-description">
