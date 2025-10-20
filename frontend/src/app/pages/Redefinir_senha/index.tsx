@@ -33,7 +33,7 @@ const Redefinir_senha: React.FC = () => {
               />
             </div>
             <button type="submit" className="login-button">
-                              <Link href="./Login">ED
+                              <Link href="./Login">
                                 Redefinir
                               </Link>
                             </button>
