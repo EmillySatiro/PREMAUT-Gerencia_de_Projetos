@@ -46,7 +46,7 @@ export default function TelaAdmin() {
           <div className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56">
             <div className="flex items-center gap-3">
               <NextImage
-                src="/assets/images/mdi_filter.png"
+                src={Icons.mdi_filtro}
                 alt="Filtro"
                 width={24}
                 height={24}
@@ -54,7 +54,7 @@ export default function TelaAdmin() {
               <span className="text-[#009B9E] font-semibold text-lg">ALUNOS</span>
             </div>
             <NextImage
-              src="/assets/images/listar_alunos.png"
+              src={Icons.seta_baixo}
               alt="Listar"
               width={22}
               height={22}
@@ -72,7 +72,7 @@ export default function TelaAdmin() {
               {/* Ícone três pontos */}
               <button className="absolute top-5 right-5">
                 <NextImage
-                  src="/assets/images/tres_pontos_bolinha.png"
+                  src={Icons.icone_3pontos}
                   alt="Opções"
                   width={8}
                   height={28}

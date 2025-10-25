@@ -5,6 +5,7 @@
 import Icons from '@/app/components/assets/icons';
 import Image from '@/app/components/assets/images';
 import React from 'react';
+import Image from '@/app/components/assets/images';
 
 export const Somos: React.FC = () => {
     const items: { topic: string; value: string }[] = [
