@@ -27,7 +27,7 @@ export default function HomePage() {
         <div className="header-section">
           <div className="patient-info">
             <div className="avatar">
-              <img src="/assets/images/mdi_user.svg" alt="Icon" />
+              <img src={Icons.mdi_user} alt="Icon" />
             </div>
             <div className="patient-name-section">
               <h2>Nome do paciente</h2>

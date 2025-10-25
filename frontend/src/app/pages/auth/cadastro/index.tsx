@@ -27,7 +27,7 @@ export default function cadastro() {
       <div className="perfil-card">
 
         <div className="icone-perfil">
-          <img src="/assets/images/mdi_user.svg" alt="Perfil" />
+          <img src={Icons.mdi_user} alt="Perfil" />
         </div>
 
         <form className="form-perfil" onSubmit={handleSubmit}>

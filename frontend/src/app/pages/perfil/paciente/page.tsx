@@ -2,12 +2,14 @@
 
 import React from 'react';
 import TopBar from "@/app/components/TopBar";
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 
 export default function ScreenPaciente() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* TopBar */}
-      <TopBar background_image="/assets/images/fundo_somos.jpg" />
+      <TopBar background_image={Image.fundoSomos} />
 
       {/* Conteúdo principal */}
       <main className="flex-1 bg-white px-8 py-10">
@@ -16,12 +18,12 @@ export default function ScreenPaciente() {
           {/* Ícone do usuário */}
           <div className="relative">
             <img
-              src="/assets/images/circulo_perfil.png"
+              src={Icons.circuloPerfil}
               alt="Foto do paciente"
               className="w-24 h-24 rounded-full border border-gray-200"
             />
             <img
-              src="/assets/images/mdi_user.svg"
+              src={Icons.mdi_user}
               alt="Ícone de paciente"
               className="absolute inset-0 w-24 h-24 p-6 opacity-70"
             />
@@ -51,7 +53,7 @@ export default function ScreenPaciente() {
               style={{ borderColor: '#335B8D', color: '#335B8D' }}
             >
               <img
-                src="/assets/images/lapis_azul.png"
+                src={Icons.lapisAzul}
                 alt="Editar"
                 className="w-4 h-4"
               />
@@ -200,7 +202,7 @@ export default function ScreenPaciente() {
           {/* Direita */}
           <div className="w-full flex justify-center">
             <img
-              src="/assets/images/grafico.png"
+              src={Image.grafico}
               alt="Gráfico de incidentes e autocorreção"
               className="w-full max-w-2xl rounded-lg shadow-md"
             />
@@ -222,7 +224,7 @@ export default function ScreenPaciente() {
               style={{ backgroundColor: '#335B8D' }}
             >
               <img
-                src="/assets/images/lapis_branco.png"
+                src={Icons.lapisBranco}
                 alt="Ícone escrever"
                 className="w-4 h-4"
               />
@@ -240,14 +242,14 @@ export default function ScreenPaciente() {
                 <div
                   className="absolute inset-0 opacity-10 bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('/assets/images/fundo_somos.jpg')",
+                    backgroundImage: `url(${Image.fundoSomos})`,
                   }}
                 ></div>
 
                 {/* Conteúdo */}
                 <div className="relative flex items-center gap-3">
                   <img
-                    src="/assets/images/relatorio.png"
+                    src={Icons.relatorio}
                     alt="Ícone de relatório"
                     className="w-6 h-6"
                   />

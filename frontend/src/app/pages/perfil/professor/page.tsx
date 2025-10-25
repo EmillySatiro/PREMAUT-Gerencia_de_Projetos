@@ -18,7 +18,7 @@ export default function ScreenProfessor() {
                     {/* Ícone do usuário */}
                     <div className="relative">
                         <img
-                            src={Icons.circulo_perfil}
+                            src={Icons.circuloPerfil}
                             alt="Foto do usuário"
                             className="w-24 h-24 rounded-full"
                         />
