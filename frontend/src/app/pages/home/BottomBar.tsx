@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '@/app/styles/topbar.module.css';
-import Colors from '@/app/components/color';
+import Colors from '@/app/components/assets/color';
 
 export const BottomBar: React.FC = () => {
   return (
