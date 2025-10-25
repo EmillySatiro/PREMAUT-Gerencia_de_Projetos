@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from '../styles/patient_header.module.css';
+import Icons from './assets/icons';
 
 interface PatientHeaderProps {
   patientName: string;

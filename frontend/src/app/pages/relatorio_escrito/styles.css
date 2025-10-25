@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   z-index: 0;
-  overflow: hidden;
+  overflow: hidden; /* garante que o blur não extrapole */
 }
 
 .relatorio-container::before {
@@ -16,7 +16,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/assets/images/fundo_somos.jpg');
+  background-image: url('/assets/images/fundo_somos.jpg'); /* sem /public */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +25,7 @@
 }
 
 .relatorio-content {
-  padding: 32px 0;
+  padding: 2rem;
   width: 100%;
   margin: 0 auto;
 }
@@ -155,18 +155,55 @@
   background: #6B9BD1;
   color: white;
   border: none;
-  width: 296px;
-  height: 65px;
+  padding: 1rem 3rem;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
-  margin-top: 16px;
-  margin-right: 36px;
   float: right;
+  transition: background 0.3s;
 }
 
 .submit-button:hover {
   background: #5A8BC0;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border: 2px solid #6B9BD1;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #F0F4F8;
+}
+
+.dropdown-item.selected {
+  background: #E3EBF5;
+  color: #6B9BD1;
+  font-weight: 600;
 }
