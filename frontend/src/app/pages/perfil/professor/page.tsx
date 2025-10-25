@@ -2,12 +2,14 @@
 
 import React from 'react';
 import TopBar from "@/app/components/TopBar";
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function ScreenProfessor() {
     return (
         <div className="min-h-screen flex flex-col">
             {/* TopBar */}
-            <TopBar background_image="/assets/images/fundo_somos.jpg" />
+            <TopBar background_image={Image.fundoSomos} />
 
             {/* Conteúdo principal */}
             <main className="flex-1 bg-white px-8 py-10">
@@ -16,12 +18,12 @@ export default function ScreenProfessor() {
                     {/* Ícone do usuário */}
                     <div className="relative">
                         <img
-                            src="/assets/images/circulo_perfil.png"
+                            src={Icons.circulo_perfil}
                             alt="Foto do usuário"
-                            className="w-24 h-24 rounded-full border border-gray-200"
+                            className="w-24 h-24 rounded-full"
                         />
                         <img
-                            src="/assets/images/mdi_user.svg"
+                            src={Icons.mdi_user}
                             alt="Ícone de usuário"
                             className="absolute inset-0 w-24 h-24 p-6 opacity-70"
                         />
@@ -45,7 +47,7 @@ export default function ScreenProfessor() {
 
                         <button className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-[#FFCBBD] text-[#FFCBBD] rounded-full px-4 py-2 text-sm hover:bg-[#FFEBE5] transition">
                             <img
-                                src="/assets/images/lapisrosa.svg"
+                                src={Icons.lapisRosa}
                                 alt="Editar"
                                 className="w-4 h-4"
                             />
@@ -62,7 +64,7 @@ export default function ScreenProfessor() {
                         <ul className="text-sm text-gray-600 space-y-3">
                             <li className="flex items-center gap-2">
                                 <img
-                                    src="/assets/images/genero.png"
+                                    src={Icons.genero}
                                     alt="Gênero"
                                     className="w-5 h-5"
                                 />
@@ -70,7 +72,7 @@ export default function ScreenProfessor() {
                             </li>
                             <li className="flex items-center gap-2">
                                 <img
-                                    src="/assets/images/aniversario.png"
+                                    src={Icons.aniversario}
                                     alt="Aniversário"
                                     className="w-5 h-5"
                                 />
@@ -78,7 +80,7 @@ export default function ScreenProfessor() {
                             </li>
                             <li className="flex items-center gap-2">
                                 <img
-                                    src="/assets/images/telefone.png"
+                                    src={Icons.telefone}
                                     alt="Telefone"
                                     className="w-4 h-4"
                                 />
@@ -86,7 +88,7 @@ export default function ScreenProfessor() {
                             </li>
                             <li className="flex items-center gap-2">
                                 <img
-                                    src="/assets/images/email.png"
+                                    src={Icons.email}
                                     alt="E-mail"
                                     className="w-5 h-5"
                                 />
@@ -134,7 +136,7 @@ export default function ScreenProfessor() {
                                 >
                                     {/* Ícone de 3 pontos no canto superior direito */}
                                     <img
-                                        src="/assets/images/points3.svg"
+                                        src={Icons.icone_3pontos}
                                         alt="Opções"
                                         className="absolute top-4 right-4 w-6 h-6 opacity-80"
                                     />
@@ -166,7 +168,7 @@ export default function ScreenProfessor() {
                         {/* Botão Adicionar */}
                         <button className="flex items-center gap-2 bg-[#FAE0D9] text-[#4A4A4A] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#FFF1ED] transition">
                             <img
-                                src="/assets/images/pencialcinza.svg"
+                                src={Icons.lapisCinza}
                                 alt="Adicionar"
                                 className="w-5 h-5"
                             />
@@ -176,7 +178,7 @@ export default function ScreenProfessor() {
                         {/* Container do livro */}
                         <div className="w-[314px] h-[574px] rounded-[24.75px] border-2 border-[#FED5CA] flex items-center justify-center bg-[url('/assets/images/fundo_girassol.jpg')] bg-cover bg-center">
                             <img
-                                src="/assets/images/capa_livro.jpg"
+                                src={Image.capaLivro}
                                 alt="Capa do livro"
                                 className="w-[234px] h-[324px] object-cover rounded"
                             />
@@ -191,7 +193,7 @@ export default function ScreenProfessor() {
                         {/* Botão Criar evento */}
                         <button className="flex items-center gap-2 bg-[#FAE0D9] text-[#4A4A4A] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#FFF1ED] transition">
                             <img
-                                src="/assets/images/pencialcinza.svg"
+                                src={Icons.lapisCinza}
                                 alt="Criar evento"
                                 className="w-5 h-5"
                             />
@@ -205,7 +207,7 @@ export default function ScreenProfessor() {
                                 <h3 className="font-semibold text-gray-800">Eventos criados</h3>
                                 <div className="w-6 h-6 rounded-full bg-[#FAE0D9] flex items-center justify-center">
                                     <img
-                                        src="/assets/images/solar_bell-broken.svg"
+                                        src={Icons.solarHeartBroken}
                                         alt="Notificação"
                                         className="w-3 h-3"
                                     />
