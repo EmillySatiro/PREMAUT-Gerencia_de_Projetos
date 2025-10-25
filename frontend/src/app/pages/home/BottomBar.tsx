@@ -7,14 +7,14 @@ export const BottomBar: React.FC = () => {
     <footer
       className="flex items-center justify-between h-16 px-6"
       style={{
-        backgroundImage: "url('/assets/images/fundo_top_bottom.png')",
+        backgroundImage: `url(${Image.fundoTopBottom})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
     >
       <div className="flex items-center space-x-1">
-        <img src="/assets/images/solar_heart-broken.svg" alt="Coração" className="h-10 w-10" />
+        <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
         <span className={styles.premautTitle}>PREMAUT</span>
       </div>
       <div className="flex items-center space-x-2">

@@ -23,7 +23,7 @@ export default function EditarPerfil() {
     <div
       className="topbar-wrapper"
     >
-      <img src="/assets/images/solar_heart-broken.svg" alt="Coração" className="h-10 w-10" />
+      <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
       <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
     </div>
 
