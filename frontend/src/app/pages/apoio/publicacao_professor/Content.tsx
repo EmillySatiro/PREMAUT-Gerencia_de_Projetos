@@ -1,5 +1,7 @@
 "use client";
 
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 import Colors from '@/app/components/color';
 import React from 'react';
 
@@ -8,47 +10,47 @@ export const MateriaisApoio: React.FC = () => {
 
     const livros: { urlImage: string; name: string; qtdPag: string }[] = [
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 1',
             qtdPag: '20 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 2',
             qtdPag: '15 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 3',
             qtdPag: '30 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
@@ -225,7 +227,7 @@ export const MateriaisApoio: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                     }}>
-                        <img src="/assets/images/lupa.svg" alt="Lupa" className="w-6 h-6" />
+                        <img src={Icons.lupa} alt="Lupa" className="w-6 h-6" />
                     </span>
                 </div>
             </div>
@@ -254,7 +256,7 @@ export const MateriaisApoio: React.FC = () => {
                                 Editar
                             </button>
                             <button
-                                onClick={() => { /* delete action */ setDialogOpen(false); console.log('Excluir', selectedLivro); }}
+                                onClick={() => { setDialogOpen(false); console.log('Excluir', selectedLivro); }}
                                 style={{
                                     background: '#fff',
                                     color: '#000',

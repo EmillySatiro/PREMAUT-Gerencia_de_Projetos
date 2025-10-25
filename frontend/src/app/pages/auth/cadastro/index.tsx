@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import "./styles.css";
 
+import Icons from "@/app/components/assets/icons";
+
 export default function cadastro() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
@@ -18,7 +20,6 @@ export default function cadastro() {
     console.log({ nome, genero, telefone, email, nascimento });
   };
 
-
   return (
     <div className="editar-perfil-container">
      
@@ -27,7 +28,7 @@ export default function cadastro() {
       <div className="perfil-card">
 
         <div className="icone-perfil">
-          <img src="/assets/images/mdi_user.svg" alt="Perfil" />
+          <img src={Icons.mdi_user} alt="Perfil" />
         </div>
 
         <form className="form-perfil" onSubmit={handleSubmit}>
