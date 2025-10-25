@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import TopBar from "@/app/components/TopBar";
 import './styles.css';
+
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 
