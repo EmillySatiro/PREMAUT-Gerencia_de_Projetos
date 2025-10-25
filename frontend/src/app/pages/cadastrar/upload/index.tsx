@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import TopBar from '@/app/components/TopBar';
 import './styles.css';
+import Icons from '@/app/components/assets/icons';
 
 export default function HomePage() {
   const [arquivo, setArquivo] = useState<File | null>(null);
@@ -41,7 +42,7 @@ export default function HomePage() {
       
       <div className="upload-content">
         <button className="back-button" onClick={handleBack}>
-          <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
 
         <div className="upload-container">

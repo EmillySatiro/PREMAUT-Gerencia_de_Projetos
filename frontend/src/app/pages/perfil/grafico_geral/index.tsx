@@ -1,60 +1,66 @@
 "use client";
 
 import React, { useState } from 'react';
-import TopBar from '@/app/components/TopBar';
-import FormSection from '@/app/components/form_relatorio';
-import TypeDropdown from '@/app/components/type_dropdown';
-import PatientHeader from '@/app/components/paciente_header';
+import TopBar from "@/app/components/TopBar";
 import './styles.css';
-
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 
 export default function HomePage() {
-  const [assunto, setAssunto] = useState('');
-  const [body, setBody] = useState('');
-  const [selectedType, setSelectedType] = useState('INCIDENTES');
+  const [selectedType, setSelectedType] = useState('Filtrar');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const options = ['INCIDENTES', 'OCORRÊNCIAS', 'OBSERVAÇÕES', 'EVOLUÇÃO'];
-
-  const handleSubmit = () => {
-    console.log({ assunto, body, selectedType });
-  };
-
-  const handleBack = () => {
-    console.log('Voltar');
-  };
 
   return (
     <div className="relatorio-container">
       <TopBar background_image='' />
       <div className="relatorio-content">
-        <PatientHeader 
-          patientName="Nome do paciente" 
-          onBackClick={handleBack}
-        >
-          <div className="type-selector">
-            <TypeDropdown 
-              options={options}
-              selectedType={selectedType}
-              onSelectType={setSelectedType}
-            />
-          </div>
-        </PatientHeader>
-
-        <FormSection
-          labelText="Assunto:" 
-          assuntoValue={assunto} 
-          onAssuntoChange={setAssunto}
-          bodyValue={body}
-          onBodyChange={setBody}
-          assuntoPlaceholder=""
-          bodyPlaceholder=""
-        />
-        
-        <button className="submit-button" onClick={handleSubmit}>
-          CADASTRAR
+        <button className="back-button">
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
+
+        <div className="header-section">
+          <div className="type-selector">
+            <div className="dropdown">
+              <button
+                className="type-button active"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                {selectedType}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }}
+                >
+                  <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {isDropdownOpen && (
+                <div className="dropdown-menu">
+                  {options.map((option) => (
+                    <button
+                      key={option}
+                      className={`dropdown-item ${selectedType === option ? 'selected' : ''}`}
+                      onClick={() => {
+                        setSelectedType(option);
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="graph-container">
+            <img src={Image.grafico} alt="Gráfico" className="responsive-graph" />
+          </div>
+        </div>
       </div>
     </div>
   );
