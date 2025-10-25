@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import TopBar from "../../components/TopBar";
+import TopBar from "../../../components/TopBar";
 import "./styles.css";
 
 export default function EditarPerfil() {
