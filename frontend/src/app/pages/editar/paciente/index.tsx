@@ -63,7 +63,7 @@ export default function CadastroEvento() {
                     <div className="patient-info" style={{ display: "flex", alignItems: "center" }}>
                     <div className="circle-avatar">
                         <img
-                        src="/assets/images/mdi_user.svg"
+                        src={Icons.mdi_user}
                         alt="Icon_perfil"
                         style={{ width: 54, height: 54 }}
                         />

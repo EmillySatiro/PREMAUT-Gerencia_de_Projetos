@@ -2,12 +2,14 @@
 
 import React from 'react';
 import TopBar from "@/app/components/TopBar";
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function ScreenFamilly() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* TopBar */}
-      <TopBar background_image="/assets/images/fundo_somos.jpg" />
+      <TopBar background_image={Image.fundoSomos} />
 
       {/* Conteúdo principal */}
       <main className="flex-1 bg-white px-8 py-10">
@@ -16,12 +18,12 @@ export default function ScreenFamilly() {
           {/* Ícone do usuário */}
           <div className="relative">
             <img
-              src="/assets/images/circulo_perfil.png"
+              src={Icons.circuloPerfil}
               alt="Foto do usuário"
               className="w-24 h-24 rounded-full border border-gray-200"
             />
             <img
-              src="/assets/images/mdi_user.svg"
+              src={Icons.mdi_user}
               alt="Ícone de usuário"
               className="absolute inset-0 w-24 h-24 p-6 opacity-70"
             />
@@ -70,7 +72,7 @@ export default function ScreenFamilly() {
               </li>
               <li className="flex items-center gap-2">
                 <img
-                  src="/assets/images/genero.png"
+                  src={Icons.genero}
                   alt="Gênero"
                   className="w-5 h-5"
                 />
@@ -78,7 +80,7 @@ export default function ScreenFamilly() {
               </li>
               <li className="flex items-center gap-2">
                 <img
-                  src="/assets/images/aniversario.png"
+                  src={Icons.aniversario}
                   alt="Aniversário"
                   className="w-5 h-5"
                 />
@@ -86,7 +88,7 @@ export default function ScreenFamilly() {
               </li>
               <li className="flex items-center gap-2">
                 <img
-                  src="/assets/images/email.png"
+                  src={Icons.email}
                   alt="Telefone"
                   className="w-5 h-5"
                 />
@@ -94,7 +96,7 @@ export default function ScreenFamilly() {
               </li>
               <li className="flex items-center gap-2">
                 <img
-                  src="/assets/images/email.png"
+                  src={Icons.email}
                   alt="E-mail"
                   className="w-5 h-5"
                 />
@@ -178,7 +180,7 @@ export default function ScreenFamilly() {
             {/* Botão Adicionar */}
             <button className="flex items-center gap-2 mb-5 bg-[#a5bbd7] text-[#4A4A4A] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#CCD9EA] transition">
                 <img
-                    src="/assets/images/pencialcinza.svg"
+                    src={Icons.lapisCinza}
                     alt="Adicionar"
                     className="w-5 h-5"
                 />
@@ -197,7 +199,7 @@ export default function ScreenFamilly() {
                 <div
                   className="absolute inset-0 opacity-10 bg-cover bg-center"
                   style={{
-                    backgroundImage: "url('/assets/images/fundo_somos.jpg')",
+                    backgroundImage: `url(${Image.fundoSomos})`,
                   }}
                 ></div>
 

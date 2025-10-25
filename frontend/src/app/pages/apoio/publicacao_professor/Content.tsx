@@ -225,7 +225,7 @@ export const MateriaisApoio: React.FC = () => {
                         display: 'flex',
                         alignItems: 'center',
                     }}>
-                        <img src="/assets/images/lupa.svg" alt="Lupa" className="w-6 h-6" />
+                        <img src={Icons.lupa} alt="Lupa" className="w-6 h-6" />
                     </span>
                 </div>
             </div>

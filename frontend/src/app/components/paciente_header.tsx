@@ -28,7 +28,7 @@ export default function PatientHeader({
       <div className={styles.headerSection}>
         <div className={styles.patientInfo}>
           <div className={styles.avatar}>
-            <img src="/assets/images/mdi_user.svg" alt="Icon" />
+            <img src={Icons.mdi_user} alt="Icon" />
           </div>
           <div className={styles.patientNameSection}>
             <h2>{patientName}</h2>

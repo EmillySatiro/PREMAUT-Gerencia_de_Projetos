@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import TopBar from "@/app/components/TopBar";
 import './styles.css';
+import Image from '@/app/components/assets/images';
 
 export default function HomePage() {
     const [selectedType, setSelectedType] = useState('Filtrar');
@@ -56,7 +57,7 @@ export default function HomePage() {
             </div>
           </div>
             <div className="graph-container">
-              <img src="/assets/images/graph_example.png" alt="Gráfico" className="responsive-graph" />
+              <img src={Image.grafico} alt="Gráfico" className="responsive-graph" />
             </div>
         </div>
       </div>

@@ -23,7 +23,7 @@ export default function CadastroEvento() {
         >
             {/* TopBar fixada no topo */}
             <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000 }}>
-            <TopBar background_image="/assets/images/fundo_somos.jpg" />
+            <TopBar background_image={Image.fundoSomos} />
             </div>
 
             <div

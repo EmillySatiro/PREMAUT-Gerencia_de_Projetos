@@ -1,5 +1,7 @@
-import Image from "next/image";
 import Header from "@/app/components/white_header";
+import Icons from "@/app/components/assets/icons";
+import Image from "@/app/components/assets/images";
+import NextImage from "next/image";
 
 export default function TelaAdmin() {
   const usuarios = Array(6).fill({ nome: "Fulano de Tal" });
@@ -8,7 +10,7 @@ export default function TelaAdmin() {
     <div
       className="min-h-screen flex flex-col relative"
       style={{
-        backgroundImage: "url('/assets/images/fundo_somos.jpg')",
+        backgroundImage: `url(${Image.fundoSomos})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -32,8 +34,8 @@ export default function TelaAdmin() {
               placeholder="Pesquisa"
               className="flex-1 outline-none bg-transparent text-gray-700 text-lg"
             />
-            <Image
-              src="/assets/images/lupa.svg"
+            <NextImage
+              src={Icons.lupa}
               alt="Buscar"
               width={26}
               height={26}
@@ -43,7 +45,7 @@ export default function TelaAdmin() {
           {/* Botão de filtro */}
           <div className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56">
             <div className="flex items-center gap-3">
-              <Image
+              <NextImage
                 src="/assets/images/mdi_filter.png"
                 alt="Filtro"
                 width={24}
@@ -51,7 +53,7 @@ export default function TelaAdmin() {
               />
               <span className="text-[#009B9E] font-semibold text-lg">ALUNOS</span>
             </div>
-            <Image
+            <NextImage
               src="/assets/images/listar_alunos.png"
               alt="Listar"
               width={22}
@@ -69,7 +71,7 @@ export default function TelaAdmin() {
             >
               {/* Ícone três pontos */}
               <button className="absolute top-5 right-5">
-                <Image
+                <NextImage
                   src="/assets/images/tres_pontos_bolinha.png"
                   alt="Opções"
                   width={8}
@@ -79,8 +81,8 @@ export default function TelaAdmin() {
               </button>
 
               {/* Foto de perfil */}
-              <Image
-                src="/assets/images/circulo_perfil.png"
+              <NextImage
+                src={Icons.circuloPerfil}
                 alt="Perfil"
                 width={100}
                 height={100}
