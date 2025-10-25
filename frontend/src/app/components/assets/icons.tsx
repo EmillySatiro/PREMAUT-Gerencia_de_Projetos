@@ -21,7 +21,8 @@ export class Icons {
 	static readonly mdi_instagram = '/assets/icons/mdi_instagram.svg';
 	static readonly mdi_user = '/assets/icons/mdi_user.svg';
 	static readonly mdi_youtube = '/assets/icons/mdi_youtube.svg';
-	static readonly solarHeartBroken = '/assets/icons/solar_heart_broken.svg';
+	static readonly solarHeartBroken = '/assets/icons/solar_heart-broken.svg';
+
 	static readonly telefone = '/assets/icons/telefone.svg';
 	static readonly voltar = '/assets/icons/voltar.svg';
 	static readonly circulo_perfil = '/assets/icons/circulo_perfil.svg';
