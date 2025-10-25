@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import TopBar from '@/app/components/TopBar';
 import './styles.css';
 import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function HomePage() {
   const [assunto, setAssunto] = useState('');
@@ -34,11 +35,11 @@ export default function HomePage() {
       <div className="relatorio-content">
           <div className="esquerda">
             <div className="upload_arq" onClick={handleFileUpload}>
-                <img src="/assets/images/Upload_to_the_Cloud.png" alt="Upload" />
+                <img src={Icons.cloud} alt="Upload" />
                 <p>Clique aqui para substituir um arquivo</p>
             </div>
             <div className="substituir_image" onClick={handleImageChange}>
-                <img src="/assets/images/majesticons_image.png" alt="Imagem" />
+                <img src={Icons.majesticonsImage} alt="Imagem" />
                 <p>Clique aqui para escolher uma nova capa</p>
             </div>
           </div>
