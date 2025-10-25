@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from './color';
+import Colors from './assets/color';
 
 interface TopBarProps {
   background_image?: string;

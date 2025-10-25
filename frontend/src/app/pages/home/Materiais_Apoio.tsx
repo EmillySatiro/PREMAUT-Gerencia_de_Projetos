@@ -1,6 +1,6 @@
 "use client";
 
-import Colors from '@/app/components/color';
+import Colors from '@/app/components/assets/color';
 import React from 'react';
 
 export const MateriaisApoio: React.FC = () => {
