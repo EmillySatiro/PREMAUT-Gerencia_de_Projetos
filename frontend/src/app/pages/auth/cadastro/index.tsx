@@ -11,7 +11,7 @@ export default function cadastro() {
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
   const [nascimento, setNascimento] = useState("");
-    const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
