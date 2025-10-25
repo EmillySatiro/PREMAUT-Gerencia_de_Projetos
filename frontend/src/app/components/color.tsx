@@ -9,8 +9,8 @@ export class Colors {
 	static readonly success = '#16a34a';
 	static readonly danger = '#dc2626';
 	static readonly warning = '#f59e0b';
-  static readonly azulBase = '#6D94C5';
-  static readonly azulEscuro = '#507CB4';
+	static readonly azulBase = '#6D94C5';
+	static readonly azulEscuro = '#507CB4';
 	static readonly verdeBase = '#4DA1A9';
 	static readonly verdeClarinho = '#D2E9DF';
 	static readonly gray600 = '#4b5563';
