@@ -12,6 +12,7 @@ export class Icons {
 	static readonly lapisAzul = '/assets/icons/lapis_azul.svg';
 	static readonly lapisBranco = '/assets/icons/lapis_branco.svg';
 	static readonly lapisCinza = '/assets/icons/lapis_cinza.svg';
+	static readonly lapisRosa = '/assets/icons/lapis_rosa.svg';
 	static readonly livroVerde = '/assets/icons/livro_verde.svg';
 	static readonly lupa = '/assets/icons/lupa.svg';
 	static readonly majesticonsImage = '/assets/icons/majesticons_image.svg';
@@ -23,6 +24,8 @@ export class Icons {
 	static readonly solarHeartBroken = '/assets/icons/solar_heart_broken.svg';
 	static readonly telefone = '/assets/icons/telefone.svg';
 	static readonly voltar = '/assets/icons/voltar.svg';
+	static readonly circulo_perfil = '/assets/icons/circulo_perfil.svg';
+	static readonly icone_3pontos = '/assets/icons/icone_3pontos.svg';
 }
 
 export default Icons;
