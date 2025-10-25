@@ -5,6 +5,7 @@ import Link from "next/link";
 import "./styles.css";
 
 import Icons from "@/app/components/assets/icons";
+import LogoCompleta from "@/app/components/logo_completa";
 
 export default function cadastro() {
   const [nome, setNome] = useState("");
@@ -22,9 +23,11 @@ export default function cadastro() {
 
   return (
     <div className="editar-perfil-container">
-     
-      <div className="logo-icon"></div>
-      
+
+      <div className="logo-icon">
+          <LogoCompleta />
+      </div>
+
       <div className="perfil-card">
 
         <div className="icone-perfil">
@@ -50,25 +53,25 @@ export default function cadastro() {
                 onChange={(e) => setTelefone(e.target.value)}
               />
             </div>
-                  <div className="linha">
-                    <div className="campo">
-                      <label>Senha</label>
-                      <input
-                        type="password"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                      />
-                    </div>
+            <div className="linha">
+              <div className="campo">
+                <label>Senha</label>
+                <input
+                  type="password"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                />
+              </div>
 
-                    <div className="campo">
-                      <label>Confirmar Senha</label>
-                      <input
-                        type="password"
-                        value={confirmarSenha}
-                        onChange={(e) => setConfirmarSenha(e.target.value)}
-                      />
-                    </div>
-                  </div>
+              <div className="campo">
+                <label>Confirmar Senha</label>
+                <input
+                  type="password"
+                  value={confirmarSenha}
+                  onChange={(e) => setConfirmarSenha(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
           <div className="linha">
             <div className="campo">
@@ -104,11 +107,11 @@ export default function cadastro() {
             </div>
           </div>
 
-                <button type="submit" className="botao-salvar">
-                  <Link href="./Login">
-                    Cadastrar
-                  </Link>
-                </button>
+          <button type="submit" className="botao-salvar">
+            <Link href="./Login">
+              Cadastrar
+            </Link>
+          </button>
 
         </form>
       </div>

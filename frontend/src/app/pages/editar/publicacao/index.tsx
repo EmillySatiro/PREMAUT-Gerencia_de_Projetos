@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import TopBar from '@/app/components/TopBar';
 import './styles.css';
+import Image from '@/app/components/assets/images';
 
 export default function HomePage() {
   const [assunto, setAssunto] = useState('');
@@ -26,9 +27,9 @@ export default function HomePage() {
 
   return (
     <div className="relatorio-container" >
-      <TopBar background_image='/assets/images/fundo_top_bottom.png' />
+      <TopBar background_image={Image.fundoTopBottom} />
       <button className="back-button">
-        <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+        <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
       </button>
       <div className="relatorio-content">
           <div className="esquerda">
