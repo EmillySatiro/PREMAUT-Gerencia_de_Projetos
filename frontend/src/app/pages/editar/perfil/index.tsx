@@ -19,6 +19,13 @@ export default function EditarPerfil() {
 
   return (
     <div className="editar-perfil-container">
+     
+    <div
+      className="topbar-wrapper"
+    >
+      <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
+      <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
+    </div>
 
       <div
         className="topbar-wrapper"

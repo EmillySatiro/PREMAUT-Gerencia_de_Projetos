@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import TopBar from "@/app/components/TopBar";
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 import './styles.css';
 
 export default function HomePage() {
@@ -9,9 +11,9 @@ export default function HomePage() {
   
   // Exemplo de dados de alunos
   const alunos = [
-    { id: 1, nome: "Fulano de Tal", imagem: "/assets/images/profile-placeholder.jpg" },
-    { id: 2, nome: "Ciclano Silva", imagem: "/assets/images/profile-placeholder.jpg" },
-    { id: 3, nome: "Beltrano Santos", imagem: "/assets/images/profile-placeholder.jpg" },
+    { id: 1, nome: "Fulano de Tal", imagem: Icons.circuloPerfil},
+    { id: 2, nome: "Ciclano Silva", imagem: Icons.circuloPerfil },
+    { id: 3, nome: "Beltrano Santos", imagem: Icons.circuloPerfil },
   ];
   
   const handleOptionsClick = (id: number) => {
@@ -20,7 +22,7 @@ export default function HomePage() {
 
   return (
     <div className="relatorio-container" >
-      <TopBar background_image='/assets/images/fundo_top_bottom.png' />
+      <TopBar background_image={Image.fundoTopBottom} />
         <div className="relatorio-content">
            <div className="header-section">
               <div className="search_bar">

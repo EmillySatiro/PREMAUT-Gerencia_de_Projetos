@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../components/topbar.module.css';
-import Icons from '@/app/components/assets/icons';
 import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export const TopBar: React.FC = () => {
   return (
