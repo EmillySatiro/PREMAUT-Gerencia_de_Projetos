@@ -3,8 +3,8 @@
 import Colors from '@/app/components/color';
 import React from 'react';
 
-import Image from '../../../components/assets/images';
-import Icons from '../../../components/assets/icons';
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export const MateriaisApoio: React.FC = () => {
     const [search, setSearch] = React.useState('');
