@@ -11,11 +11,8 @@ services:
       - /app/node_modules
     environment:
       NODE_ENV: development
-      # Use polling-based watchers for chokidar (safer in some container setups)
       CHOKIDAR_USEPOLLING: "true"
-      # Some tools use WATCHPACK for watching; enable polling as well
       WATCHPACK_POLLING: "true"
-    # Increase number of file descriptors available inside the container
     ulimits:
       nproc: 65535
       nofile:
@@ -32,15 +29,11 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-    # Combined environment variables (avoid duplicate keys)
     environment:
       NODE_ENV: development
-      # Use polling for watchers (reduces file descriptor usage in containers)
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
-      # Disable Turbopack to use webpack (more stable in some container setups)
       NEXT_PRIVATE_NO_TURBOPACK: "1"
-      # Disable Next.js anonymous telemetry during development
       NEXT_TELEMETRY_DISABLED: "1"
     ulimits:
       nproc: 65535

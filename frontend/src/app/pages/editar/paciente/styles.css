@@ -1,0 +1,349 @@
+:root {
+  --bg: #f8f6f2;
+  --border: #999;
+  --text: #2a2a2a;
+  --radius: 10px;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+  --header-height: 88px; /* usado para compensar header fixo */
+}
+
+/* box-sizing global para evitar cálculos quebrados em responsividade */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font);
+  color: var(--text);
+  /* padding top aumentado para não ficar embaixo do header fixo */
+  padding: calc(var(--header-height) + 16px) 16px 40px;
+  margin: 0;
+}
+
+/* Títulos responsivos */
+.titulo {
+  color: rgba(6,6,6,0.72);
+  /* usa clamp para escalar bem entre telas pequenas e grandes */
+  font-size: clamp(28px, 6.5vw, 70.3px);
+  font-family: "Inria Serif", serif;
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 18px;
+  display: block;
+  width: 100%;
+  white-space: nowrap;       /* mantém a linha única (reto contínuo) */
+  overflow: hidden;         /* evita overflow visual */
+  text-overflow: ellipsis;  /* opcional: indica corte com reticências */
+  hyphens: none;
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+/* formulário com largura fluida */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Campos individuais */
+.campo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.campo label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: var(--bg);
+  padding: 0 6px;
+  font-size: 14px;
+  color: #555;
+  pointer-events: none;
+}
+
+.campo input,
+.campo textarea,
+.campo select,
+.campo .input-genero {
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-size: clamp(14px, 1.8vw, 16px);
+  background: #faf9f6;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus,
+.campo .input-genero:focus {
+  border-color: #000;
+}
+
+/* Campos lado a lado */
+.linha {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.metade {
+  flex: 1;
+  min-width: 0; /* importante para evitar overflow em flex items */
+}
+
+/* Ajuste visual para o select/date */
+input[type="date"] {
+  color-scheme: light;
+  cursor: pointer;
+}
+
+/* Botão enviar: em telas pequenas ocupa toda a largura */
+.submit-button {
+  background: #6B9BD1;
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+  transition: background 0.3s;
+}
+
+.submit-button:hover {
+  background: #5A8BC0;
+}
+
+/* Container principal fixo */
+.relatorio-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  /* adiciona padding-top para não ficar abaixo do header fixo */
+  padding: calc(var(--header-height) + 8px) 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--bg);
+  overflow: auto;
+  z-index: 999;
+}
+
+/* centro do conteúdo com largura máxima */
+.relatorio-container .relatorio-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+/* botão de voltar com hitbox quadrada */
+.back-button {
+  --back-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--back-size);
+  height: var(--back-size);
+  padding: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.back-button > * {
+  pointer-events: none;
+}
+
+.back-button:hover {
+  background: rgba(0, 0, 0, 0);
+  border-color: #666;
+}
+
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(107,155,209,0.18);
+}
+
+.campo select,
+.campo .input-genero {
+  /* estilos já aplicados acima em bloco único */
+}
+
+/* Header fixo adaptável */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1001;
+  gap: 12px;
+  padding: 8px;
+  background: transparent; /* manter transparente, se quiser, pode usar blur */
+}
+
+/* Info do paciente */
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+/* Avatar circular e responsivo */
+.circle-avatar {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  flex: 0 0 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e0e0e0 0%, #bdbdbd 100%);
+  /* manter o avatar sempre alinhado à direita dentro do flex container */
+  margin-left: auto;
+  align-self: center;
+}
+
+.avatar {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  flex: 0 0 116px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.Icon_perfil {
+  width: 100%;
+  height: 100%;
+}
+
+/* variantes do botão voltar */
+.back-button.small { --back-size: 36px; }
+.back-button.large { --back-size: 56px; }
+
+/* Responsividade: múltiplos breakpoints */
+
+/* Tablets / medium screens */
+@media (max-width: 900px) {
+  :root { --header-height: 84px; }
+  .relatorio-container { padding-left: 12px; padding-right: 12px; }
+
+  .header-section {
+    right: 12px;
+    left: 12px;
+    gap: 10px;
+  }
+
+  .circle-avatar,
+  .avatar {
+    width: 92px;
+    height: 92px;
+    flex: 0 0 92px;
+  }
+
+  .submit-button {
+    padding: 0.9rem 2rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  :root { --header-height: 120px; } /* header pode crescer em layout vertical */
+  body { padding-top: calc(var(--header-height) + 12px); }
+  .relatorio-container { padding-top: calc(var(--header-height) + 8px); }
+
+  .header-section {
+    /* empilha conteúdo do header em telas pequenas */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    left: 8px;
+    right: 8px;
+    top: 8px;
+  }
+
+  .patient-info {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .titulo {
+    font-size: clamp(22px, 8vw, 36px);
+    margin-bottom: 8px;
+  }
+
+  .linha {
+    flex-direction: column;
+  }
+
+  .submit-button {
+    width: 100%;
+    float: none;
+    padding: 12px;
+  }
+
+  .relatorio-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 400px) {
+  .circle-avatar,
+  .avatar {
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+  }
+
+  .campo input,
+  .campo textarea,
+  .campo select,
+  .campo .input-genero {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .titulo {
+    font-size: clamp(18px, 10vw, 28px);
+  }
+}

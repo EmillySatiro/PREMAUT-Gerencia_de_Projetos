@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from '../styles/patient_header.module.css';
+import Icons from './assets/icons';
 
 interface PatientHeaderProps {
   patientName: string;
@@ -21,14 +22,14 @@ export default function PatientHeader({
       {/* Deps algum infeliz tira esse botão aqui, ele não faz parte desse elemento */}
       {showBackButton && (
         <button className={styles.backButton} onClick={onBackClick}>
-          <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
       )}
 
       <div className={styles.headerSection}>
         <div className={styles.patientInfo}>
           <div className={styles.avatar}>
-            <img src="/assets/images/mdi_user.svg" alt="Icon" />
+            <img src={Icons.mdi_user} alt="Icon" />
           </div>
           <div className={styles.patientNameSection}>
             <h2>{patientName}</h2>
