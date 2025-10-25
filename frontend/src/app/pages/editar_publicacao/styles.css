@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:wght@400;700&display=swap');
+
+.relatorio-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  overflow: hidden; /* garante que o blur não extrapole */
+}
+
+.relatorio-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #F6F4F0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(500px);
+  z-index: -1;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+  position: absolute;
+  top: 120px; /* Aumentado para dar mais espaço abaixo do TopBar */
+  left: 2rem;
+  z-index: 1;
+}
+
+.relatorio-content {
+  padding: 4rem 2rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+  min-height: calc(100vh - 120px); /* Altura mínima para centralizar verticalmente (subtrai a altura do topbar) */
+}
+
+.esquerda, .direita {
+  flex: 1;
+  min-width: 400px; /* Aumentado de 300px para 400px para dar mais largura */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 535px; /* Altura total para acomodar os dois cards + gap */
+}
+
+.upload_arq, .substituir_image {
+  border: 2px dashed #4DA1A9;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #F0FCFF;
+  transition: all 0.3s ease;
+  height: 250px; /* Aumentado de 180px para 250px */
+  width: 100%; /* Garantir que ocupe toda a largura disponível */
+  box-sizing: border-box; /* Garantir que padding e border não aumentem a largura total */
+}
+
+.upload_arq:hover, .substituir_image:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: #5A8BC0;
+}
+
+.upload_arq img, .substituir_image img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+}
+
+.upload_arq p, .substituir_image p {
+  color: #333;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
+}
+
+.label_arquivo, .descricao_label {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.label_arquivo {
+  height: 80px; /* Altura fixa para o campo de nome do arquivo */
+}
+
+.descricao_label {
+  flex: 1; /* Faz com que ocupe o restante do espaço disponível */
+  display: flex;
+  flex-direction: column;
+}
+
+.label_arquivo input, .descricao_label textarea {
+  border: 1px solid #6D94C5; /* Alterada cor da borda para #6D94C5 */
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%; /* Ocupa toda a altura da div pai */
+}
+
+.descricao_label textarea {
+  border: 1px solid #6D94C5;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%; /* Ocupar toda a altura disponível da div pai */
+  resize: none; /* Removendo a capacidade de redimensionar */
+  box-sizing: border-box;
+}
+
+.label_arquivo p, .descricao_label p {
+  position: absolute;
+  top: -10px; /* Posiciona na parte superior, meio fora da borda */
+  left: 15px;
+  margin: 0;
+  padding: 0 8px; /* Adiciona espaço horizontal em volta do texto */
+  font-weight: bold;
+  color: #6D94C5; /* Alterada cor do texto para #6D94C5 */
+  font-size: 0.9rem;
+  background-color: #F6F4F0; /* Fundo branco para cobrir a linha da borda */
+  z-index: 1;
+  line-height: 1.2; /* Ajusta a altura da linha */
+}
+
+.submit-button {
+  background: #4DA1A9;
+  color: white;
+  border: none;
+  padding: 1rem 6rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: absolute; /* Posicionamento absoluto para fixar no canto */
+  bottom: 2rem; /* Distância da parte inferior */
+  right: 2rem; /* Distância da direita */
+  z-index: 1; /* Garante que esteja acima de outros elementos */
+}
+
+.submit-button:hover {
+  background: #5A8BC0;
+}
