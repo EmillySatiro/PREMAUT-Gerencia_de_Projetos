@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import TopBar from '@/app/components/TopBar';
 import './styles.css';
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function HomePage() {
   const [arquivo, setArquivo] = useState<File | null>(null);
@@ -37,11 +39,11 @@ export default function HomePage() {
 
   return (
     <main className="upload-page">
-      <TopBar background_image='/assets/images/fundo_top_bottom.png' />
+      <TopBar background_image={Image.fundoTopBottom} />
       
       <div className="upload-content">
         <button className="back-button" onClick={handleBack}>
-          <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
 
         <div className="upload-container">
@@ -57,7 +59,7 @@ export default function HomePage() {
                 />
                 <label htmlFor="arquivoInput" className="upload-label">
                   <div className="upload-icon-cloud">
-                    <img src="/assets/images/cloud.svg" alt="Upload" />
+                    <img src={Icons.cloud} alt="Upload" />
                   </div>
                   <p className="upload-text">Clique aqui para escolher um arquivo</p>
                 </label>
@@ -74,7 +76,7 @@ export default function HomePage() {
                 />
                 <label htmlFor="capaInput" className="upload-label">
                   <div className="upload-icon-image">
-                    <img src="/assets/images/majesticons_image.svg" alt="Upload" />
+                    <img src={Icons.majesticonsImage} alt="Upload" />
                   </div>
                   <p className="upload-text">Clique aqui para escolher a capa</p>
                 </label>
