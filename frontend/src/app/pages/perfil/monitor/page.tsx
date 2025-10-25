@@ -2,12 +2,14 @@
 
 import React from 'react';
 import TopBar from "@/app/components/TopBar";
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function ScreenMonitor() {
     return (
         <div className="min-h-screen flex flex-col">
             {/* TopBar */}
-            <TopBar background_image="/assets/images/fundo_somos.jpg" />
+            <TopBar background_image={Image.fundoSomos} />
 
             {/* Conteúdo principal */}
             <main className="flex-1 bg-white px-8 py-10">
@@ -16,12 +18,12 @@ export default function ScreenMonitor() {
             {/* Ícone do usuário */}
             <div className="relative">
                 <img
-                src="/assets/images/circulo_perfil.png"
+                src={Icons.circuloPerfil}
                 alt="Foto do usuário"
                 className="w-24 h-24 rounded-full border border-gray-200"
                 />
                 <img
-                src="/assets/images/mdi_user.svg"
+                src={Icons.mdi_user}
                 alt="Ícone de usuário"
                 className="absolute inset-0 w-24 h-24 p-6 opacity-70"
                 />
@@ -45,7 +47,7 @@ export default function ScreenMonitor() {
 
                 <button className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-[#FFDFA4] text-[#FFDFA4] rounded-full px-4 py-2 text-sm hover:bg-[#FFF8EA] transition">
                 <img
-                    src="/assets/images/lapis_amarelo.png"
+                    src={Icons.lapisAmarelo}
                     alt="Editar"
                     className="w-4 h-4"
                 />
@@ -62,7 +64,7 @@ export default function ScreenMonitor() {
                 <ul className="text-sm text-gray-600 space-y-3">
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/genero.png"
+                    src={Icons.genero}
                     alt="Gênero"
                     className="w-5 h-5"
                     />
@@ -70,7 +72,7 @@ export default function ScreenMonitor() {
                 </li>
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/aniversario.png"
+                    src={Icons.aniversario}
                     alt="Aniversário"
                     className="w-5 h-5"
                     />
@@ -78,7 +80,7 @@ export default function ScreenMonitor() {
                 </li>
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/telefone.png"
+                    src={Icons.telefone}
                     alt="Telefone"
                     className="w-4 h-4"
                     />
@@ -86,7 +88,7 @@ export default function ScreenMonitor() {
                 </li>
                 <li className="flex items-center gap-2">
                     <img
-                    src="/assets/images/email.png"
+                    src={Icons.email}
                     alt="E-mail"
                     className="w-5 h-5"
                     />
@@ -127,7 +129,7 @@ export default function ScreenMonitor() {
             {/* Botão Adicionar */}
             <button className="flex items-center gap-2 bg-[#FCDFA1] text-[#2A5387] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#fae7bb] transition mb-10">
                 <img
-                src="/assets/images/pencialcinza.svg"
+                src={Icons.lapisCinza}
                 alt="Adicionar"
                 className="w-5 h-5"
                 />
@@ -143,7 +145,7 @@ export default function ScreenMonitor() {
                 >
                     {/* Ícone de 3 pontos no canto superior direito */}
                     <img
-                    src="/assets/images/points3.svg"
+                    src={Icons.icone_3pontos}
                     alt="Opções"
                     className="absolute top-4 right-4 w-6 h-6 opacity-80"
                     />
