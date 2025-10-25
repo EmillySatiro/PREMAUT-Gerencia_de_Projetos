@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors from './color';
+import Colors from './assets/color';
 
 import Image from './assets/images';
 import Icons from './assets/icons';
