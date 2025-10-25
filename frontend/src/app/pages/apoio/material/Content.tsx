@@ -1,5 +1,7 @@
 "use client";
 
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 import Colors from '@/app/components/color';
 import React from 'react';
 
@@ -14,7 +16,7 @@ export const MateriaisApoio: React.FC = () => {
     const livro: Livro =
     {
         nome: "Meu filho è autista e agora?",
-        urlDaCapa: "/assets/images/capa_livro.jpg",
+        urlDaCapa: Image.capaLivro,
         descricao: "O livro fala sobre o impacto que o diagnóstico de autismo causa em uma família e como os pais podem lidar com essa nova realidade. A autora, que é mãe e professora, mistura conhecimento prático com sua experiência pessoal, trazendo um tom de conversa e acolhimento. ",
     }
         ;
@@ -22,8 +24,8 @@ export const MateriaisApoio: React.FC = () => {
     return (
         <div className="flex flex-col min-h-screen p-4">
             <div className="">
-                <a href="/pages/materiais_apoio">
-                    <img src="/assets/images/mdi_arrow-up.svg" alt="" className="w-12 h-12" />
+                <a href="/pages/apoio/materiais">
+                    <img src={Icons.mdi_arrow_back} alt="" className="w-12 h-12" />
                 </a>
             </div>
             <div

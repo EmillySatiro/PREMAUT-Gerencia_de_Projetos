@@ -1,55 +1,57 @@
 "use client";
 
 import Colors from '@/app/components/color';
-
 import React from 'react';
+
+import Image from '../../../components/assets/images';
+import Icons from '../../../components/assets/icons';
 
 export const MateriaisApoio: React.FC = () => {
     const [search, setSearch] = React.useState('');
 
     const livros: { urlImage: string; name: string; qtdPag: string }[] = [
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 1',
             qtdPag: '20 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 2',
             qtdPag: '15 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 3',
             qtdPag: '30 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: '/assets/images/capa_livro.jpg',
+            urlImage: Image.capaLivro,
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },

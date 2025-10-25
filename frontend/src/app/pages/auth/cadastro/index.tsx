@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import "./styles.css";
 
+import Icons from "@/app/components/assets/icons";
+
 export default function cadastro() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
@@ -17,7 +19,6 @@ export default function cadastro() {
     e.preventDefault();
     console.log({ nome, genero, telefone, email, nascimento });
   };
-
 
   return (
     <div className="editar-perfil-container">
