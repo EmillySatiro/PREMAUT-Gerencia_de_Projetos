@@ -30,7 +30,7 @@ export default function HomePage() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                <img src="/assets/images/lupa.svg" alt="Pesquisar" />
+                <img src={Icons.lupa} alt="Pesquisar" />
               </div>
            </div>
            <div className="cards">
