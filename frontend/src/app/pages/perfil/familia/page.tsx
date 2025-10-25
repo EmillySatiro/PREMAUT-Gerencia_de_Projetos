@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import TopBar from "@/app/components/TopBar";
+import TopBar from '@/app/components/TopBar';
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 
@@ -9,7 +9,7 @@ export default function ScreenFamilly() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* TopBar */}
-      <TopBar background_image={Image.fundoSomos} />
+      <TopBar background_image={Image.fundoSomos}/>
 
       {/* Conteúdo principal */}
       <main className="flex-1 bg-white px-8 py-10">
@@ -34,10 +34,10 @@ export default function ScreenFamilly() {
             <div>
               <div className="flex items-center gap-3">
                 <h2 className="text-2xl font-semibold text-gray-800">
-                  Nome do Paciente
+                  Nome do Familiar
                 </h2>
-                <span className="text-sm bg-[#DFEDFF]  text-[#6D94C5] px-3 py-1 rounded-full">
-                  Paciente
+                <span className="text-sm bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">
+                  Familiar
                 </span>
               </div>
               <span className="text-xs text-gray-500 mt-1 block">
@@ -45,9 +45,9 @@ export default function ScreenFamilly() {
               </span>
             </div>
 
-            <button className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-[#6D94C5] text-[#6D94C5] rounded-full px-4 py-2 text-sm hover:bg-[#DFEDFF] transition">
+            <button className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-emerald-400 text-emerald-700 rounded-full px-4 py-2 text-sm hover:bg-emerald-50 transition">
               <img
-                src="/assets/images/pencialazul.svg"
+                src={Icons.lapisVerde}
                 alt="Editar"
                 className="w-4 h-4"
               />
@@ -59,12 +59,12 @@ export default function ScreenFamilly() {
         {/* Blocos de informações */}
         <section className="grid md:grid-cols-2 gap-8 mb-10">
           {/* Informações básicas */}
-          <div className="border border-[#6D94C5] rounded-xl p-6">
+          <div className="border border-emerald-200 rounded-xl p-6">
             <h3 className="font-semibold text-gray-700 mb-3">Informações básicas</h3>
             <ul className="text-sm text-gray-600 space-y-3">
               <li className="flex items-center gap-2">
                 <img
-                  src="/assets/images/perfil_pequeno.png"
+                  src={Icons.mdi_user_pequeno}
                   alt="Aluno vinculado"
                   className="w-5 h-5"
                 />
@@ -88,7 +88,7 @@ export default function ScreenFamilly() {
               </li>
               <li className="flex items-center gap-2">
                 <img
-                  src={Icons.email}
+                  src={Icons.telefone}
                   alt="Telefone"
                   className="w-5 h-5"
                 />
@@ -106,7 +106,7 @@ export default function ScreenFamilly() {
           </div>
 
           {/* Informações de suporte */}
-          <div className="border border-[#6D94C5] rounded-xl p-6">
+          <div className="border border-emerald-200 rounded-xl p-6">
             <h3 className="font-semibold text-gray-700 mb-3">Informações de suporte</h3>
             <ul className="text-sm text-gray-600 space-y-2">
               <li>
@@ -136,8 +136,8 @@ export default function ScreenFamilly() {
 
         {/* Gráfico e estatísticas - layout em duas colunas */}
         <section
-          className="border border-[#6D94C5] rounded-xl p-8 mb-10 grid md:grid-cols-2 gap-6 items-center"
-          style={{ backgroundColor: 'rgb(165, 187, 215)' }}
+          className="border border-emerald-200 rounded-xl p-8 mb-10 grid md:grid-cols-2 gap-6 items-center"
+          style={{ backgroundColor: 'rgb(210, 233, 223)' }}
         >
           {/* Coluna Esquerda - dados */}
           <div className="flex flex-col items-center md:items-start">
@@ -160,7 +160,7 @@ export default function ScreenFamilly() {
           {/* Coluna Direita - gráfico */}
           <div className="w-full flex justify-center">
             <img
-              src="/assets/images/grafico.png"
+              src={Image.grafico}
               alt="Gráfico de incidentes e autocorreção"
               className="w-full max-w-2xl rounded-lg shadow-md"
             />
@@ -171,23 +171,10 @@ export default function ScreenFamilly() {
         <section>
           <h3
             className="text-lg font-semibold text-gray-700 mb-4 px-2 py-1 rounded-md"
-            style={{ backgroundColor: 'rgb(165, 187, 215)' }}
+            style={{ backgroundColor: 'rgb(210, 233, 223)' }}
           >
             Relatórios
           </h3>
-
-          <div className="flex justify-end">
-            {/* Botão Adicionar */}
-            <button className="flex items-center gap-2 mb-5 bg-[#a5bbd7] text-[#4A4A4A] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#CCD9EA] transition">
-                <img
-                    src={Icons.lapisCinza}
-                    alt="Adicionar"
-                    className="w-5 h-5"
-                />
-                Adicionar
-            </button>
-          </div>
-
 
           <div className="space-y-4">
             {[1, 2, 3, 4].map((i) => (
@@ -206,7 +193,7 @@ export default function ScreenFamilly() {
                 {/* Conteúdo */}
                 <div className="relative flex items-center gap-3">
                   <img
-                    src="/assets/images/relatorio.png"
+                    src={Icons.relatorio}
                     alt="Ícone de relatório"
                     className="w-6 h-6"
                   />
