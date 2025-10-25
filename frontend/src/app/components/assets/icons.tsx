@@ -25,8 +25,8 @@ export class Icons {
 
 	static readonly telefone = '/assets/icons/telefone.svg';
 	static readonly voltar = '/assets/icons/voltar.svg';
-	static readonly circulo_perfil = '/assets/icons/circulo_perfil.svg';
-	static readonly icone_3pontos = '/assets/icons/icone_3pontos.svg';
+	static readonly circuloPerfil = '/assets/icons/circulo_perfil.svg';
+	static readonly icone3pontos = '/assets/icons/icone_3pontos.svg';
 }
 
 export default Icons;

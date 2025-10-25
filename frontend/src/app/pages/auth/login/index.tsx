@@ -1,7 +1,8 @@
 import React from "react";
 
-import './styles.css'; 
+import './styles.css';
 import Link from "next/link";
+import LogoCompleta from "@/app/components/logo_completa";
 
 const Login: React.FC = () => {
   return (
@@ -9,30 +10,31 @@ const Login: React.FC = () => {
       {/* Conteúdo principal centralizado sobre o fundo */}
       <div className="content">
         <div className="logo-icon">
-          <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
+          <LogoCompleta />
         </div>
+
         <div className="login-card">
           <div className="login-title">Entrar</div>
           <div className="login-description">
             Bem-vindo ao PREMAUT, um projeto que apoia, acolhe e inclui pessoas com autismo.
           </div>
-            <div className="campo">
-              <label htmlFor="email">E-mail / Usuário</label>
-              <input
-                id="email"
-                type="text"
-                placeholder="Digite seu e-mail ou usuário"
-              />
-            </div>
+          <div className="campo">
+            <label htmlFor="email">E-mail / Usuário</label>
+            <input
+              id="email"
+              type="text"
+              placeholder="Digite seu e-mail ou usuário"
+            />
+          </div>
 
-            <div className="campo">
-              <label htmlFor="senha">Senha</label>
-              <input
-                id="senha"
-                type="password"
-                placeholder="Digite sua senha"
-              />
-            </div>
+          <div className="campo">
+            <label htmlFor="senha">Senha</label>
+            <input
+              id="senha"
+              type="password"
+              placeholder="Digite sua senha"
+            />
+          </div>
           <Link href="./home" className="login-button">
             Entrar
           </Link>
@@ -44,14 +46,14 @@ const Login: React.FC = () => {
             </Link>
           </div>
           <div className="register-link2">
-            <Link href="./Esqueci_a_senha" className="register-link-highlight2">
+            <Link href="./esqueci_a_senha" className="register-link-highlight2">
               <span>Esqueceu sua senha?</span>
             </Link>
           </div>
         </div>
-        </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Login;

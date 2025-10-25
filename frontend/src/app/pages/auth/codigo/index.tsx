@@ -1,32 +1,34 @@
 import React from "react";
 
-import './styles.css'; 
+import './styles.css';
 import Link from "next/link";
+import LogoCompleta from '../../../components/logo_completa';
+
 const Codigo: React.FC = () => {
   return (
     <div className="container">
       {/* Conteúdo principal centralizado sobre o fundo */}
       <div className="content">
         <div className="logo-icon">
-          <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
+          <LogoCompleta />
         </div>
         <div className="login-card">
           <div className="login-title">Esqueceu sua  senha</div>
           <div className="login-description">
-           Digite o código que mandamos para seu e-mail. Logo em seguida redefina sua senha. 
+            Digite o código que mandamos para seu e-mail. Logo em seguida redefina sua senha.
           </div>
-            <div className="campo">
+          <div className="campo">
             <label htmlFor="email">Código</label>
             <input
-                id="email"
-                type="text"
-                placeholder="Digite o código"
+              id="email"
+              type="text"
+              placeholder="Digite o código"
             />
-            </div>
+          </div>
 
-            <div className="login-button">
+          <div className="login-button">
             <Link href="./Redefinir_senha">Redefinir</Link>
-            </div>
+          </div>
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
@@ -35,9 +37,9 @@ const Codigo: React.FC = () => {
             </Link>
           </div>
         </div>
-        </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Codigo;
