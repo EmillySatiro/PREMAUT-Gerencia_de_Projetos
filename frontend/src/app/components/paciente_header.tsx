@@ -21,7 +21,7 @@ export default function PatientHeader({
       {/* Deps algum infeliz tira esse botão aqui, ele não faz parte desse elemento */}
       {showBackButton && (
         <button className={styles.backButton} onClick={onBackClick}>
-          <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
       )}
 

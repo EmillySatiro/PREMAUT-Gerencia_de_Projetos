@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import TopBar from '@/app/components/TopBar';
 import "./styles.css";
+import Icons from "@/app/components/assets/icons";
 
 export default function EditarPerfil() {
   const [nome, setNome] = useState("");
@@ -16,7 +17,6 @@ export default function EditarPerfil() {
     console.log({ nome, genero, telefone, email, nascimento });
   };
 
-
   return (
     <div className="editar-perfil-container">
      
@@ -27,14 +27,18 @@ export default function EditarPerfil() {
       <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
     </div>
 
+      <div
+        className="topbar-wrapper"
+      >
+        <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
+        <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
+      </div>
 
       <div className="perfil-card">
-      <button className="voltar" onClick={() => window.history.back()}>
-        <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="32" />
-      </button>
+        <button className="voltar" onClick={() => window.history.back()}>
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="32" />
+        </button>
 
-
-      
         <div className="icone-perfil">
           <img src={Icons.mdi_user} alt="Perfil" />
         </div>
@@ -98,7 +102,7 @@ export default function EditarPerfil() {
             Salvar
           </button>
 
-         
+
         </form>
       </div>
     </div>
