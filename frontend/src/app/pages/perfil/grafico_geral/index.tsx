@@ -6,6 +6,7 @@ import FormSection from '@/app/components/form_relatorio';
 import TypeDropdown from '@/app/components/type_dropdown';
 import PatientHeader from '@/app/components/paciente_header';
 import './styles.css';
+
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 
