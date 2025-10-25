@@ -4,40 +4,41 @@ import React, { useState } from 'react';
 import TopBar from "@/app/components/TopBar";
 import './styles.css';
 import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export default function HomePage() {
-    const [selectedType, setSelectedType] = useState('Filtrar');
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedType, setSelectedType] = useState('Filtrar');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const options = ['INCIDENTES', 'OCORRÊNCIAS', 'OBSERVAÇÕES', 'EVOLUÇÃO'];
+  const options = ['INCIDENTES', 'OCORRÊNCIAS', 'OBSERVAÇÕES', 'EVOLUÇÃO'];
 
   return (
     <div className="relatorio-container" >
-    <TopBar background_image='' />
-    <div className="relatorio-content">
+      <TopBar background_image='' />
+      <div className="relatorio-content">
         <button className="back-button">
-          <img src="/assets/images/mdi_arrow-up.svg" alt="Voltar" width="54" height="54" />
+          <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
         </button>
 
         <div className="header-section">
           <div className="type-selector">
             <div className="dropdown">
-              <button 
+              <button
                 className="type-button active"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 {selectedType}
-                <svg 
-                  width="16" 
-                  height="16" 
-                  viewBox="0 0 16 16" 
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
                   fill="none"
                   style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }}
                 >
-                  <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              
+
               {isDropdownOpen && (
                 <div className="dropdown-menu">
                   {options.map((option) => (
@@ -56,9 +57,9 @@ export default function HomePage() {
               )}
             </div>
           </div>
-            <div className="graph-container">
-              <img src={Image.grafico} alt="Gráfico" className="responsive-graph" />
-            </div>
+          <div className="graph-container">
+            <img src={Image.grafico} alt="Gráfico" className="responsive-graph" />
+          </div>
         </div>
       </div>
     </div>
