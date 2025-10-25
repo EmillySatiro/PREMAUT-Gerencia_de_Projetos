@@ -2,6 +2,8 @@
 
 'use client';
 
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 import React from 'react';
 
 export const Somos: React.FC = () => {
@@ -68,7 +70,7 @@ export const Somos: React.FC = () => {
         >
             <div>
                 <div className="flex items-center">
-                    <img src="/assets/images/estrela.svg" alt="Estrela" className="h-4 w-4 object-contain" />
+                    <img src={Icons.estrela} alt="Estrela" className="h-4 w-4 object-contain" />
                     <p className="text-left font-bold" style={{ fontFamily: 'Afacad', fontSize: '12px', color: '#000' }}>
                         Somos
                     </p>
