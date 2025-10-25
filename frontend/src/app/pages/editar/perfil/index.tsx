@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import TopBar from '@/app/components/TopBar';
 import "./styles.css";
 import Icons from "@/app/components/assets/icons";
+import LogoCompleta from '@/app/components/logo_completa';
 
 export default function EditarPerfil() {
   const [nome, setNome] = useState("");
@@ -19,19 +20,11 @@ export default function EditarPerfil() {
 
   return (
     <div className="editar-perfil-container">
-     
-    <div
-      className="topbar-wrapper"
-    >
-      <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
-      <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
-    </div>
 
       <div
         className="topbar-wrapper"
       >
-        <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
-        <span className="premautTitle" style={{ marginLeft: 8 }}>PREMAUT</span>
+        <LogoCompleta />  
       </div>
 
       <div className="perfil-card">
