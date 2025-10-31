@@ -8,7 +8,8 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=production
-
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
   frontend:
     build: ./frontend
     container_name: front_premaut
