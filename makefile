@@ -10,3 +10,7 @@ run_backend:
 
 run_front:
 	cd frontend && npm run dev
+
+run_test_back:
+	docker compose -f docker-compose.dev.yml build --no-cache backend-test
+	docker compose -f docker-compose.dev.yml run --rm backend-test
