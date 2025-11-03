@@ -5,62 +5,32 @@ import React from 'react';
 
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
+import { Material } from '@/types/material';
+import { buscarMateriais } from '@/app/services/materiaisService';
 
 export const MateriaisApoio: React.FC = () => {
     const [search, setSearch] = React.useState('');
 
-    const livros: { urlImage: string; name: string; qtdPag: string }[] = [
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 1',
-            qtdPag: '20 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 2',
-            qtdPag: '15 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 3',
-            qtdPag: '30 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-    ];
+    const [materiais, setMateriais] = React.useState<Material[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
 
-    const filteredLivros = livros.filter(
+    React.useEffect(() => {
+        buscarMateriais()
+            .then(data => {
+                setMateriais(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
+
+
+    const filteredLivros = materiais.filter(
         livro =>
-            livro.name.toLowerCase().includes(search.toLowerCase()) ||
-            livro.qtdPag.toLowerCase().includes(search.toLowerCase())
+            livro.nome.toLowerCase().includes(search.toLowerCase())
     );
 
     const getGridColumns = () => {
@@ -129,8 +99,8 @@ export const MateriaisApoio: React.FC = () => {
                         }}
                     >
                         <img
-                            src={item.urlImage}
-                            alt={item.name}
+                            src={item.capa_url}
+                            alt={item.nome}
                             style={{
                                 width: '100%',
                                 height: '100%',
@@ -139,30 +109,34 @@ export const MateriaisApoio: React.FC = () => {
                             }}
                         />
 
-                        <div
-                            className="absolute items-center pointer-events-none z-10"
-                            style={{ top: 20, right: 0 }}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 124 34"
-                                className="w-22 h-17"
-                                preserveAspectRatio="xMidYMid meet"
-                            >
-                                <path d="M0.477875 0.685059H123.218V33.8581H0.477875L18.3084 17.2716L0.477875 0.685059Z" fill="#C02828" />
-                            </svg>
+                        {item.qtd_paginas && (
 
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <span
-                                    className="text-xs font-bold text-white"
-                                    style={{
-                                        lineHeight: 1,
-                                        fontSize: '10px'
-                                    }}>
-                                    {(item.qtdPag.match(/\d+/)?.[0]) ?? item.qtdPag} páginas
-                                </span>
+                            <div
+                                className="absolute items-center pointer-events-none z-10"
+                                style={{ top: 20, right: 0 }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 124 34"
+                                    className="w-22 h-17"
+                                    preserveAspectRatio="xMidYMid meet"
+                                >
+                                    <path d="M0.477875 0.685059H123.218V33.8581H0.477875L18.3084 17.2716L0.477875 0.685059Z" fill="#C02828" />
+                                </svg>
+
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <span
+                                        className="text-xs font-bold text-white"
+                                        style={{
+                                            lineHeight: 1,
+                                            fontSize: '10px'
+                                        }}>
+                                        {(item.qtd_paginas.match(/\d+/)?.[0]) ?? item.qtd_paginas} páginas
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        )}
+
                     </div>
 
                     <div
@@ -182,7 +156,7 @@ export const MateriaisApoio: React.FC = () => {
                                 fontFamily: 'Inria Serif',
                             }}
                         >
-                            {item.name}
+                            {item.nome}
                         </span>
                     </div>
                 </div>

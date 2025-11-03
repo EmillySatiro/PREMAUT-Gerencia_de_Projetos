@@ -50,6 +50,8 @@ services:
       WATCHPACK_POLLING: "true"
       NEXT_PRIVATE_NO_TURBOPACK: "1"
       NEXT_TELEMETRY_DISABLED: "1"
+    env_file:
+      - .env
     ulimits:
       nproc: 65535
       nofile:

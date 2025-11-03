@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import { supabase } from '../services/supabaseClient';
 
+export const getMateriais = async (req: Request, res: Response) => {
+  const { data, error } = await supabase.from('arquivos').select('*');
+  if (error) return res.status(500).json({ error: error.message });
+  return res.json(data);
+};
+
 export const uploadArquivo = async (req: Request, res: Response) => {
   const file = req.file;
   if (!file) return res.status(400).json({ error: 'Arquivo não enviado' });
