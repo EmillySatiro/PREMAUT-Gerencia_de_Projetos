@@ -3,63 +3,32 @@
 import Icons from '@/app/components/assets/icons';
 import Image from '@/app/components/assets/images';
 import Colors from '@/app/components/color';
+import { buscarMateriais } from '@/app/services/materiaisService';
+import { Material } from '@/types/material';
 import React from 'react';
 
 export const MateriaisApoio: React.FC = () => {
     const [search, setSearch] = React.useState('');
 
-    const livros: { urlImage: string; name: string; qtdPag: string }[] = [
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 1',
-            qtdPag: '20 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 2',
-            qtdPag: '15 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 3',
-            qtdPag: '30 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-        {
-            urlImage: Image.capaLivro,
-            name: 'Livro de atividades 4',
-            qtdPag: '25 páginas',
-        },
-    ];
+    const [materiais, setMateriais] = React.useState<Material[]>([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
 
-    const filteredLivros = livros.filter(
+    React.useEffect(() => {
+        buscarMateriais()
+            .then(data => {
+                setMateriais(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
+
+    const filteredLivros = materiais.filter(
         livro =>
-            livro.name.toLowerCase().includes(search.toLowerCase()) ||
-            livro.qtdPag.toLowerCase().includes(search.toLowerCase())
+            livro.nome.toLowerCase().includes(search.toLowerCase())
     );
 
     const getGridColumns = () => {
@@ -77,7 +46,7 @@ export const MateriaisApoio: React.FC = () => {
     const [gridColumns, setGridColumns] = React.useState(getGridColumns());
 
     const [dialogOpen, setDialogOpen] = React.useState(false);
-    const [selectedLivro, setSelectedLivro] = React.useState<null | { urlImage: string; name: string; qtdPag: string }>(null);
+    const [selectedLivro, setSelectedLivro] = React.useState<null | Material>(null);
 
     React.useEffect(() => {
         const handleResize = () => setGridColumns(getGridColumns());
@@ -117,7 +86,7 @@ export const MateriaisApoio: React.FC = () => {
                         cursor: 'pointer'
                     }}
                     onClick={() => { setSelectedLivro(item); setDialogOpen(true); }}
-                >
+                >   
                     <div
                         style={{
                             flex: 1,
@@ -131,8 +100,8 @@ export const MateriaisApoio: React.FC = () => {
                         }}
                     >
                         <img
-                            src={item.urlImage}
-                            alt={item.name}
+                            src={item.capa_url}
+                            alt={item.nome}
                             style={{
                                 width: '100%',
                                 height: '100%',
@@ -141,30 +110,33 @@ export const MateriaisApoio: React.FC = () => {
                             }}
                         />
 
-                        <div
-                            className="absolute items-center pointer-events-none z-10"
-                            style={{ top: 20, right: 0 }}
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 124 34"
-                                className="w-22 h-17"
-                                preserveAspectRatio="xMidYMid meet"
-                            >
-                                <path d="M0.477875 0.685059H123.218V33.8581H0.477875L18.3084 17.2716L0.477875 0.685059Z" fill="#C02828" />
-                            </svg>
+                        {item.qtd_paginas && (
 
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <span
-                                    className="text-xs font-bold text-white"
-                                    style={{
-                                        lineHeight: 1,
-                                        fontSize: '10px'
-                                    }}>
-                                    {(item.qtdPag.match(/\d+/)?.[0]) ?? item.qtdPag} páginas
-                                </span>
+                            <div
+                                className="absolute items-center pointer-events-none z-10"
+                                style={{ top: 20, right: 0 }}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 124 34"
+                                    className="w-22 h-17"
+                                    preserveAspectRatio="xMidYMid meet"
+                                >
+                                    <path d="M0.477875 0.685059H123.218V33.8581H0.477875L18.3084 17.2716L0.477875 0.685059Z" fill="#C02828" />
+                                </svg>
+
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <span
+                                        className="text-xs font-bold text-white"
+                                        style={{
+                                            lineHeight: 1,
+                                            fontSize: '10px'
+                                        }}>
+                                        {(item.qtd_paginas.match(/\d+/)?.[0]) ?? item.qtd_paginas} páginas
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
 
                     <div
@@ -185,7 +157,7 @@ export const MateriaisApoio: React.FC = () => {
                                 fontFamily: 'Inria Serif',
                             }}
                         >
-                            {item.name}
+                            {item.nome}
                         </span>
                     </div>
                 </div>
@@ -237,10 +209,10 @@ export const MateriaisApoio: React.FC = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black/50" onClick={() => setDialogOpen(false)} />
                     <div style={{ background: '#fff', padding: '16px', borderRadius: '12px', minWidth: '260px', zIndex: 60 }}>
-                        <div style={{ marginBottom: '8px', fontWeight: '700' }}>{selectedLivro.name}</div>
+                        <div style={{ marginBottom: '8px', fontWeight: '700' }}>{selectedLivro.nome}</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <button
-                                onClick={() => { /* editar action */ setDialogOpen(false); console.log('Editar', selectedLivro); }}
+                                onClick={() => { setDialogOpen(false); console.log('Editar', selectedLivro); }}
                                 onMouseEnter={() => { /* noop */ }}
                                 style={{
                                     background: '#fff',

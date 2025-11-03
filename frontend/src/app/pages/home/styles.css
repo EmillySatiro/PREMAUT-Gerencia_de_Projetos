@@ -1,0 +1,45 @@
+/* Estilos customizados para o Swiper no Materiais de Apoio */
+
+.swiper-pagination {
+  position: static !important;
+  margin-top: 20px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px !important;
+  height: 12px !important;
+  background-color: #e2e2e2 !important;
+  opacity: 1 !important;
+  margin: 0 6px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #5d5d5d !important;
+  transform: scale(1.2) !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 4px !important;
+  }
+}
+
+/* Hide scrollbar for Webkit browsers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
