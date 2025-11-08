@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:wght@400;700&display=swap');
+
+.relatorio-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.relatorio-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/fundo_somos.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: blur(500px);
+  z-index: -1;
+}
+
+.relatorio-content {
+  padding: 32px 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.submit-button {
+  background: #6B9BD1;
+  color: white;
+  border: none;
+  width: 296px;
+  height: 65px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 16px;
+  margin-right: 36px;
+  float: right;
+}
+
+.submit-button:hover {
+  background: #5A8BC0;
+}

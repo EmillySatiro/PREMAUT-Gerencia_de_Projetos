@@ -1,0 +1,9 @@
+{
+  "testing.automaticallyOpenTestResults": "neverOpen",
+  "testing.automaticallyOpenPeekView": "never",
+  "jest.outputConfig": {
+    "revealOn": "run",
+    "revealWithFocus": "none",
+    "clearOnRun": "none"
+  }
+}
