@@ -1,0 +1,70 @@
+.formSection {
+  margin-bottom: 32px;
+  padding: 0 36px;
+}
+
+.formContainer {
+  background: white;
+  border-radius: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.labelSection {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 29px 29px;
+  border-bottom: 2px solid #E3EBF5;
+  margin-left: 31px;
+  margin-right: 31px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.labelText {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.assuntoInput {
+  flex: 1;
+  border: none;
+  font-size: 18px;
+  font-family: 'Inria Serif', serif;
+  background: transparent;
+  padding: 0;
+  caret-color: #6B9BD1;
+}
+
+.assuntoInput:focus {
+  outline: none;
+}
+
+.assuntoInput::placeholder {
+  color: #999;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 29px 29px;
+  border: none;
+  font-size: 18px;
+  font-family: 'Inria Serif', serif;
+  resize: none;
+  background: transparent;
+  box-sizing: border-box;
+  overflow: hidden;
+  caret-color: #6B9BD1;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: #999;
+}
