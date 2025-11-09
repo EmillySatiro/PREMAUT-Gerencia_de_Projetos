@@ -52,3 +52,48 @@ export async function cadastrarUsuario(req: Request, res: Response) {
     return res.status(500).json({ error: "Erro interno no servidor." });
   }
 }
+
+export async function loginUsuario(req: Request, res: Response) {
+  try {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+      return res.status(400).json({ error: "E-mail e senha são obrigatórios." });
+    }
+
+    const { data: usuario, error } = await supabase
+      .from("Usuarios")
+      .select("*")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Erro ao buscar usuário:", error);
+      return res.status(500).json({ error: "Erro ao buscar usuário." });
+    }
+
+    if (!usuario) {
+      return res.status(400).json({ error: "Usuário não encontrado." });
+    }
+
+    const senhaValida = await bcrypt.compare(senha, usuario.senha);
+
+    if (!senhaValida) {
+      return res.status(401).json({ error: "Senha incorreta." });
+    }
+
+    // Login bem-sucedido
+    return res.status(200).json({
+      message: "Login realizado com sucesso!",
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email,
+        tipo_usuario: usuario.tipo_usuario,
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+    return res.status(500).json({ error: "Erro interno no servidor." });
+  }
+}
