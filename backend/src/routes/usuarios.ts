@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { cadastrarUsuario } from "../controllers/usuariosController"; // Importa a função real de cadastro
+import { cadastrarUsuario, loginUsuario } from "../controllers/usuariosController";
 
 const router = express.Router();
 
@@ -10,11 +10,24 @@ const router = express.Router();
  */
 router.post("/cadastro", async (req: Request, res: Response) => {
   try {
-    // Chama o controller que lida com o cadastro e o banco
     await cadastrarUsuario(req, res);
   } catch (error) {
     console.error("Erro na rota de cadastro:", error);
     res.status(500).json({ error: "Erro no servidor ao cadastrar usuário." });
+  }
+});
+
+/**
+ * @route POST /api/usuarios/login
+ * @desc Login de usuário
+ * @access Público
+ */
+router.post("/login", async (req: Request, res: Response) => {
+  try {
+    await loginUsuario(req, res);
+  } catch (error) {
+    console.error("Erro na rota de login:", error);
+    res.status(500).json({ error: "Erro no servidor ao fazer login." });
   }
 });
 
