@@ -60,7 +60,7 @@ const Redefinir_senha: React.FC = () => {
 
 
       setTimeout(() => {
-      router.push("/Login");
+      router.push("./login");
     }, 2000);
     } catch (erro: any) {
       setMensagem(erro.message || "Erro ao redefinir senha.");
@@ -119,7 +119,7 @@ const Redefinir_senha: React.FC = () => {
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
-            <Link href="/pages/cadastro" className="register-link-highlight">
+            <Link href="./cadastro" className="register-link-highlight">
               <span>Cadastre-se</span>
             </Link>
           </div>

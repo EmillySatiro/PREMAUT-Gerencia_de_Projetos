@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import "./styles.css";
+import Icons from "@/app/components/assets/icons";
 
 export default function Cadastro() {
   const [nome, setNome] = useState("");
@@ -62,7 +63,7 @@ export default function Cadastro() {
       }
 
       setMensagem("Usuário cadastrado com sucesso!");
-      setTimeout(() => router.push("/Login"), 1500);
+      setTimeout(() => router.push("./login"), 1500);
     } catch (erro: any) {
       console.error("Erro no cadastro:", erro);
       setMensagem(erro.message || "Erro ao cadastrar usuário.");
@@ -76,7 +77,7 @@ export default function Cadastro() {
     <div className="editar-perfil-container">
       <div className="perfil-card">
         <div className="icone-perfil">
-          <img src="/assets/images/mdi_user.svg" alt="Ícone de Perfil" />
+            <img src={Icons.mdi_user} alt="Ícone de Perfil" />
         </div>
 
         <form className="form-perfil" onSubmit={handleSubmit}>
@@ -177,7 +178,7 @@ export default function Cadastro() {
 
           <p className="link-login">
             Já tem uma conta?{" "}
-            <Link href="/Login" className="link">
+            <Link href="/auth/login" className="link">
               Entrar
             </Link>
           </p>

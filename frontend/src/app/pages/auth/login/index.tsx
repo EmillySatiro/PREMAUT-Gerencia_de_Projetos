@@ -91,7 +91,7 @@ const Login: React.FC = () => {
             </Link>
           </div>
           <div className="register-link2">
-            <Link href="./Esqueci_a_senha" className="register-link-highlight2">
+            <Link href="./esqueci_a_senha" className="register-link-highlight2">
               <span>Esqueceu sua senha?</span>
             </Link>
           </div>
