@@ -9,13 +9,10 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "multer": "^2.0.2",
-    "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "swiper": "^12.0.3"
+    "swiper": "^12.0.3",
+    "next": "15.5.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
