@@ -1,26 +1,28 @@
-import Colors from '@/app/components/color';
+import Colors from '@/app/components/assets/color';
+import Icons from '@/app/components/assets/icons';
+import Image from '@/app/components/assets/images';
 import React from 'react';
 
 export const Objetivo: React.FC = () => {
 
     const atividades: { urlImage: string; topic: string; description: string }[] = [
         {
-            urlImage: '/assets/images/cavalo.svg',
+            urlImage: Icons.cavalo,
             topic: 'Atividades de leitura, escrita e matemática adaptadas',
             description: 'Jogos pedagógicos que estimulam atenção, memória e raciocínio.',
         },
         {
-            urlImage: '/assets/images/cavalo.svg',
+            urlImage: Icons.cavalo,
             topic: 'Atividades de leitura, escrita e matemática adaptadas',
             description: 'Jogos pedagógicos que estimulam atenção, memória e raciocínio.',
         },
         {
-            urlImage: '/assets/images/cavalo.svg',
+            urlImage: Icons.cavalo,
             topic: 'Atividades de leitura, escrita e matemática adaptadas',
             description: 'Jogos pedagógicos que estimulam atenção, memória e raciocínio.',
         },
         {
-            urlImage: '/assets/images/cavalo.svg',
+            urlImage: Icons.cavalo,
             topic: 'Atividades de leitura, escrita e matemática adaptadas',
             description: 'Jogos pedagógicos que estimulam atenção, memória e raciocínio.',
         },
@@ -85,7 +87,7 @@ export const Objetivo: React.FC = () => {
                         }}
                     >O que fazemos no <br/> PREMAUT?</h2>
                     <img
-                        src="/assets/images/coracao_rodolfo.png"
+                        src={Image.coracaoRodolfo}
                         alt="Coracao Rodolfo"
                         className="w-40 h-40 ml-4"
                     />
@@ -123,7 +125,7 @@ export const Objetivo: React.FC = () => {
                     >
                         Todas as atividades
                     </span>
-                    <img src="/assets/images/mdi_arrow.svg" alt="Flecha" aria-hidden="true" className="w-4 h-4" />
+                    <img src={Icons.mdi_arrow} alt="Flecha" aria-hidden="true" className="w-4 h-4" />
                 </button>
             </div>
             {listItems}
