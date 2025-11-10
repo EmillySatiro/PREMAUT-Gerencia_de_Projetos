@@ -55,7 +55,10 @@ export const TopBar: React.FC = () => {
       {/* Login Button - Desktop */}
       <button 
         className="hidden md:block px-3 py-1 rounded bg-white text-white text-sm"
-        style={{ boxShadow: '0 8px 6px rgba(0, 0, 0, 0.3)' }}
+        style={{ 
+          boxShadow: '0 8px 6px rgba(0, 0, 0, 0.3)', 
+          cursor: 'pointer'
+        }}
         onClick={() => window.location.href = '/auth/login'}
       >
         <span
