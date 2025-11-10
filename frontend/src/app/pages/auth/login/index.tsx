@@ -1,15 +1,9 @@
 "use client";
 
-<<<<<<<< HEAD:frontend/src/app/pages/auth/login/index.tsx
-import './styles.css';
-import Link from "next/link";
-import LogoCompleta from "@/app/components/logo_completa";
-========
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import './styles.css';
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/login/index.tsx
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -50,36 +44,13 @@ const Login: React.FC = () => {
       {/* Conteúdo principal centralizado sobre o fundo */}
       <div className="content">
         <div className="logo-icon">
-          <LogoCompleta />
+          <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
         </div>
-
         <div className="login-card">
           <div className="login-title">Entrar</div>
           <div className="login-description">
             Bem-vindo ao PREMAUT, um projeto que apoia, acolhe e inclui pessoas com autismo.
           </div>
-<<<<<<<< HEAD:frontend/src/app/pages/auth/login/index.tsx
-          <div className="campo">
-            <label htmlFor="email">E-mail / Usuário</label>
-            <input
-              id="email"
-              type="text"
-              placeholder="Digite seu e-mail ou usuário"
-            />
-          </div>
-
-          <div className="campo">
-            <label htmlFor="senha">Senha</label>
-            <input
-              id="senha"
-              type="password"
-              placeholder="Digite sua senha"
-            />
-          </div>
-          <Link href="./home" className="login-button">
-            Entrar
-          </Link>
-========
 
           <form onSubmit={handleSubmit}>
             <div className="campo">
@@ -112,7 +83,6 @@ const Login: React.FC = () => {
           </form>
 
           {mensagem && <p className="mensagem-feedback">{mensagem}</p>}
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/login/index.tsx
 
           <div className="register-link">
             <span>Não possui cadastro? </span>

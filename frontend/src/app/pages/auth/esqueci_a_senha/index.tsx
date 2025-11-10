@@ -3,14 +3,9 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-<<<<<<<< HEAD:frontend/src/app/pages/auth/esqueci_a_senha/index.tsx
-import './styles.css';
-import LogoCompleta from "@/app/components/logo_completa";
-========
 import { useRouter } from "next/navigation"; 
 import "./styles.css";
 
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Esqueci_a_senha/index.tsx
 
 const Esqueci_a_senha: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +41,7 @@ const Esqueci_a_senha: React.FC = () => {
    
       setTimeout(() => {
   
-        router.push(`/pages/Codigo?email=${encodeURIComponent(email)}`);
+        router.push(`./codigo?email=${encodeURIComponent(email)}`);
       }, 1000);
 
     } catch (erro: any) {
@@ -60,30 +55,12 @@ const Esqueci_a_senha: React.FC = () => {
     <div className="container">
       <div className="content">
         <div className="logo-icon">
-          <LogoCompleta />
+          <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
         </div>
-
         <div className="login-card">
           <div className="login-title">Esqueceu sua senha</div>
           <div className="login-description">
             Digite o seu e-mail para recuperar sua conta.
-<<<<<<<< HEAD:frontend/src/app/pages/auth/esqueci_a_senha/index.tsx
-            Chegará um código de confirmação no seu e-mail ,
-            clique em continuar para digitar o código.
-          </div>
-          <div className="campo">
-            <label htmlFor="email">E-mail </label>
-            <input
-              id="email"
-              type="text"
-              placeholder="Digite seu e-mail"
-            />
-          </div>
-
-          <Link href="./Codigo" className="login-button">
-            Continuar
-          </Link>
-========
             Um código de confirmação será enviado para o seu e-mail.
           </div>
 
@@ -107,7 +84,6 @@ const Esqueci_a_senha: React.FC = () => {
           </button>
 
           {mensagem && <p className="mensagem-feedback">{mensagem}</p>}
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Esqueci_a_senha/index.tsx
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
