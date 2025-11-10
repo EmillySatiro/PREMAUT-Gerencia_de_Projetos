@@ -34,7 +34,7 @@ export const TopBar: React.FC = () => {
           <a href="#inicio" className={styles.topbarLink}>Inicio</a>
           <a href="#noticias" className={styles.topbarLink}>Noticias</a>
           <a href="#sobre" className={styles.topbarLink}>Sobre</a>
-          <a href="/pages/screen-admin" className={styles.topbarLink}>Painel</a>
+          <a href="/painel/admin" className={styles.topbarLink}>Painel</a>
         </nav>
       </div>
 
@@ -56,6 +56,7 @@ export const TopBar: React.FC = () => {
       <button 
         className="hidden md:block px-3 py-1 rounded bg-white text-white text-sm"
         style={{ boxShadow: '0 8px 6px rgba(0, 0, 0, 0.3)' }}
+        onClick={() => window.location.href = '/auth/login'}
       >
         <span
           className={styles.topbarLink}
@@ -70,9 +71,15 @@ export const TopBar: React.FC = () => {
             <a href="#inicio" className={styles.topbarLink} onClick={() => setIsMenuOpen(false)}>Inicio</a>
             <a href="#noticias" className={styles.topbarLink} onClick={() => setIsMenuOpen(false)}>Noticias</a>
             <a href="#sobre" className={styles.topbarLink} onClick={() => setIsMenuOpen(false)}>Sobre</a>
-            <a href="/pages/screen-admin" className={styles.topbarLink} onClick={() => setIsMenuOpen(false)}>Painel</a>
+            <a href="/painel/admin" className={styles.topbarLink} onClick={() => setIsMenuOpen(false)}>Painel</a>
             <button className="px-3 py-2 rounded bg-white text-sm border border-gray-300 mt-2">
-              <span className={styles.topbarLink} style={{ fontSize: '12px', fontWeight: '600' }}>Entrar</span>
+              <span
+                className={styles.topbarLink}
+                style={{ fontSize: '12px', fontWeight: '600', cursor: 'pointer' }}
+                onClick={() => window.location.href = '/auth/login'}
+              >
+                Entrar
+              </span>
             </button>
           </nav>
         </div>
