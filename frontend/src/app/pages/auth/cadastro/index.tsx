@@ -73,7 +73,6 @@ export default function Cadastro() {
 
   };
 
-<<<<<<<< HEAD:frontend/src/app/pages/auth/cadastro/index.tsx
   return (
     <div className="editar-perfil-container">
       <div className="perfil-card">
