@@ -1,2 +1,7 @@
 .env
 ocult/comands.txt
+node_modules/
+dist/
+.vscode/
+src/services/supabaseClient.ts
+package-lock.json
