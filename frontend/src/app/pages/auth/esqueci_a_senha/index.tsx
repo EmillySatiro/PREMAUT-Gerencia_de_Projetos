@@ -1,21 +1,73 @@
-import React from "react";
+"use client";
+
+
+import React, { useState } from "react";
 import Link from "next/link";
+<<<<<<<< HEAD:frontend/src/app/pages/auth/esqueci_a_senha/index.tsx
 import './styles.css';
 import LogoCompleta from "@/app/components/logo_completa";
+========
+import { useRouter } from "next/navigation"; 
+import "./styles.css";
+
+>>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Esqueci_a_senha/index.tsx
 
 const Esqueci_a_senha: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [carregando, setCarregando] = useState(false);
+
+  const router = useRouter();
+
+  const handleEnviarCodigo = async () => {
+    if (!email) {
+      setMensagem("Por favor, insira seu e-mail.");
+      return;
+    }
+
+    setCarregando(true);
+    setMensagem("");
+
+    try {
+      const resposta = await fetch("http://localhost:3001/api/usuarios/esqueci-senha", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(data.error || "Erro ao enviar código.");
+      }
+
+      setMensagem("Código enviado com sucesso!");
+
+   
+      setTimeout(() => {
+  
+        router.push(`/pages/Codigo?email=${encodeURIComponent(email)}`);
+      }, 1000);
+
+    } catch (erro: any) {
+      setMensagem(erro.message || "Erro ao enviar código.");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   return (
     <div className="container">
-      {/* Conteúdo principal centralizado sobre o fundo */}
       <div className="content">
         <div className="logo-icon">
           <LogoCompleta />
         </div>
 
         <div className="login-card">
-          <div className="login-title">Esqueceu sua  senha</div>
+          <div className="login-title">Esqueceu sua senha</div>
           <div className="login-description">
             Digite o seu e-mail para recuperar sua conta.
+<<<<<<<< HEAD:frontend/src/app/pages/auth/esqueci_a_senha/index.tsx
             Chegará um código de confirmação no seu e-mail ,
             clique em continuar para digitar o código.
           </div>
@@ -31,6 +83,31 @@ const Esqueci_a_senha: React.FC = () => {
           <Link href="./Codigo" className="login-button">
             Continuar
           </Link>
+========
+            Um código de confirmação será enviado para o seu e-mail.
+          </div>
+
+          <div className="campo">
+            <label htmlFor="email">E-mail</label>
+            <input
+              id="email"
+              type="text"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <button
+            className="login-button"
+            onClick={handleEnviarCodigo}
+            disabled={carregando}
+          >
+            {carregando ? "Enviando..." : "Continuar"}
+          </button>
+
+          {mensagem && <p className="mensagem-feedback">{mensagem}</p>}
+>>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Esqueci_a_senha/index.tsx
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
