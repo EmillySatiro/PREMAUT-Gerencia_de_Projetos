@@ -1,15 +1,9 @@
 "use client";
 
-<<<<<<<< HEAD:frontend/src/app/pages/auth/codigo/index.tsx
-import './styles.css';
-import Link from "next/link";
-import LogoCompleta from '../../../components/logo_completa';
-========
 import React, { useState } from "react";
 import "./styles.css";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Codigo/index.tsx
 
 const Codigo: React.FC = () => {
   const searchParams = useSearchParams();
@@ -55,7 +49,7 @@ const Codigo: React.FC = () => {
 
 
         setTimeout(() => {
-          router.push(`/pages/Redefinir_senha?email=${email}&codigo=${codigo}`);
+          router.push(`./redefinir_senha?email=${email}&codigo=${codigo}`);
         }, 1000);
       } else {
         setMensagem(data.error || "Código incorreto. Tente novamente.");
@@ -73,27 +67,6 @@ const Codigo: React.FC = () => {
     <div className="container">
       <div className="content">
         <div className="logo-icon">
-<<<<<<<< HEAD:frontend/src/app/pages/auth/codigo/index.tsx
-          <LogoCompleta />
-        </div>
-        <div className="login-card">
-          <div className="login-title">Esqueceu sua  senha</div>
-          <div className="login-description">
-            Digite o código que mandamos para seu e-mail. Logo em seguida redefina sua senha.
-          </div>
-          <div className="campo">
-            <label htmlFor="email">Código</label>
-            <input
-              id="email"
-              type="text"
-              placeholder="Digite o código"
-            />
-          </div>
-
-          <div className="login-button">
-            <Link href="./Redefinir_senha">Redefinir</Link>
-          </div>
-========
           <img
             src="/assets/images/logo_completa.png"
             alt="Logo PREMAUT"
@@ -131,7 +104,6 @@ const Codigo: React.FC = () => {
               {mensagem}
             </p>
           )}
->>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/Codigo/index.tsx
 
           <div className="register-link">
             <span>Não possui cadastro? </span>
