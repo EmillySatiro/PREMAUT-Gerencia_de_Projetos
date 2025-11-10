@@ -1,5 +1,11 @@
 import express, { Request, Response } from "express";
-import { cadastrarUsuario, loginUsuario } from "../controllers/usuariosController";
+import {
+  cadastrarUsuario,
+  loginUsuario,
+  enviarCodigoRecuperacao,
+  redefinirSenha,
+  verificarCodigo,
+} from "../controllers/usuariosController";
 
 const router = express.Router();
 
@@ -8,29 +14,30 @@ const router = express.Router();
  * @desc Cadastrar novo usuário
  * @access Público
  */
-router.post("/cadastro", async (req: Request, res: Response) => {
-  try {
-    await cadastrarUsuario(req, res);
-  } catch (error) {
-    console.error("Erro na rota de cadastro:", error);
-    res.status(500).json({ error: "Erro no servidor ao cadastrar usuário." });
-  }
-});
+router.post("/cadastro", cadastrarUsuario);
 
 /**
  * @route POST /api/usuarios/login
  * @desc Login de usuário
  * @access Público
  */
-router.post("/login", async (req: Request, res: Response) => {
-  try {
-    await loginUsuario(req, res);
-  } catch (error) {
-    console.error("Erro na rota de login:", error);
-    res.status(500).json({ error: "Erro no servidor ao fazer login." });
-  }
-});
+router.post("/login", loginUsuario);
 
+/**
+ * @route POST /api/usuarios/esqueci-senha
+ * @desc Envia código de recuperação de senha para o e-mail
+ * @access Público
+ */
+router.post("/esqueci-senha", enviarCodigoRecuperacao);
+
+/**
+ * @route POST /api/usuarios/redefinir-senha
+ * @desc Redefinir senha do usuário com código recebido
+ * @access Público
+ */
+router.post("/redefinir-senha", redefinirSenha);
+
+router.post("/verificar-codigo", verificarCodigo);
 /**
  * @route GET /api/usuarios/teste
  * @desc Verificar se a rota está ativa
