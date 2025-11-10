@@ -1,10 +1,50 @@
-import React from "react";
+"use client";
 
+<<<<<<<< HEAD:frontend/src/app/pages/auth/login/index.tsx
 import './styles.css';
 import Link from "next/link";
 import LogoCompleta from "@/app/components/logo_completa";
+========
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import './styles.css';
+>>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/login/index.tsx
 
 const Login: React.FC = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [carregando, setCarregando] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCarregando(true);
+    setMensagem("");
+
+    try {
+      const resposta = await fetch("http://localhost:3001/api/usuarios/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const data = await resposta.json();
+
+      if (!resposta.ok) {
+        throw new Error(data.error || "Erro ao fazer login.");
+      }
+
+      setMensagem(data.message);
+      setTimeout(() => router.push("/home"), 1000);
+    } catch (erro: any) {
+      setMensagem(erro.message || "Erro ao fazer login.");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   return (
     <div className="container">
       {/* Conteúdo principal centralizado sobre o fundo */}
@@ -18,6 +58,7 @@ const Login: React.FC = () => {
           <div className="login-description">
             Bem-vindo ao PREMAUT, um projeto que apoia, acolhe e inclui pessoas com autismo.
           </div>
+<<<<<<<< HEAD:frontend/src/app/pages/auth/login/index.tsx
           <div className="campo">
             <label htmlFor="email">E-mail / Usuário</label>
             <input
@@ -38,6 +79,40 @@ const Login: React.FC = () => {
           <Link href="./home" className="login-button">
             Entrar
           </Link>
+========
+
+          <form onSubmit={handleSubmit}>
+            <div className="campo">
+              <label htmlFor="email">E-mail / Usuário</label>
+              <input
+                id="email"
+                type="text"
+                placeholder="Digite seu e-mail ou usuário"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="campo">
+              <label htmlFor="senha">Senha</label>
+              <input
+                id="senha"
+                type="password"
+                placeholder="Digite sua senha"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="login-button" disabled={carregando}>
+              {carregando ? "Entrando..." : "Entrar"}
+            </button>
+          </form>
+
+          {mensagem && <p className="mensagem-feedback">{mensagem}</p>}
+>>>>>>>> c88651cd9cdafce2b0dce3f13e5eaadeb57a3fc2:frontend/src/app/pages/login/index.tsx
 
           <div className="register-link">
             <span>Não possui cadastro? </span>

@@ -75,6 +75,7 @@ export const MateriaisApoio: React.FC = () => {
                 <button
                     type="button"
                     onClick={() => window.location.href = '/pages/apoio/materiais'}
+                    onClick={() => window.location.href = '/pages/apoio/materiais'}
                     style={{
                         borderRadius: 10,
                         border: '3.733px solid #FFF',
