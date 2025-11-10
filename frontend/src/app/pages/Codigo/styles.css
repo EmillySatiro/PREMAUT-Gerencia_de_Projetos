@@ -44,6 +44,20 @@ body, html {
   justify-content: center;
   z-index: 10;
 }
+.mensagem-feedback {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mensagem-feedback.erro {
+  color: #ff4d4d; /* vermelho */
+}
+
+.mensagem-feedback.sucesso {
+  color: #4caf50; /* verde */
+}
 
 .logo-img {
   width: 100%;

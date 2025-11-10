@@ -16,8 +16,6 @@ app.use(express.json());
 
 app.use("/api/usuarios", usuariosRoutes);
 
-
-
 app.listen(PORT, () => {
   console.log(`Servidor rodando: http://${IP}:${PORT}`);
 });
