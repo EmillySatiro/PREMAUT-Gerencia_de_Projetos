@@ -19,6 +19,20 @@ services:
         soft: 65536
         hard: 65536
 
+
+  backend-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    command: npm test
+    depends_on:
+      - backend
+
   frontend:
     build:
       context: ./frontend
@@ -40,3 +54,15 @@ services:
       nofile:
         soft: 65536
         hard: 65536
+
+  # supabase:
+  #   image: supabase/supabase:latest
+  #   container_name: supabase_premaut
+  #   environment:
+  #     - SUPABASE_DB_USER=premaut_user
+  #     - SUPABASE_DB_PASSWORD=securepassword
+  #     - SUPABASE_DB_NAME=premaut_db
+  #   ports:
+  #     - "54321:5432"
+  #   volumes:
+  #     - supabase_data:/var/lib/postgresql/data
