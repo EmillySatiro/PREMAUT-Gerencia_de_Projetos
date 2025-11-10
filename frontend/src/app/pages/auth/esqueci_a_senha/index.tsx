@@ -41,7 +41,7 @@ const Esqueci_a_senha: React.FC = () => {
    
       setTimeout(() => {
   
-        router.push(`/pages/Codigo?email=${encodeURIComponent(email)}`);
+        router.push(`./codigo?email=${encodeURIComponent(email)}`);
       }, 1000);
 
     } catch (erro: any) {

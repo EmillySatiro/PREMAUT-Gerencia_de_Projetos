@@ -49,7 +49,7 @@ const Codigo: React.FC = () => {
 
 
         setTimeout(() => {
-          router.push(`/pages/Redefinir_senha?email=${email}&codigo=${codigo}`);
+          router.push(`./redefinir_senha?email=${email}&codigo=${codigo}`);
         }, 1000);
       } else {
         setMensagem(data.error || "Código incorreto. Tente novamente.");
