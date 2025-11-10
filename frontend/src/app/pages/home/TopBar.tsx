@@ -1,12 +1,14 @@
 import React from 'react';
-import styles from '../../components/topbar.module.css';
+import styles from '@/app/styles/topbar.module.css';
+import Image from '@/app/components/assets/images';
+import Icons from '@/app/components/assets/icons';
 
 export const TopBar: React.FC = () => {
   return (
     <header
       className="sticky top-0 z-40 flex items-center justify-between h-16 px-6"
       style={{
-        backgroundImage: "url('/assets/images/fundo_top_bottom.png')",
+        backgroundImage: `url(${Image.fundoTopBottom})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -14,7 +16,7 @@ export const TopBar: React.FC = () => {
       }}
     >
       <div className="flex items-center space-x-1">
-        <img src="/assets/images/solar_heart-broken.svg" alt="Coração" className="h-10 w-10" />
+        <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
         <span className="premautTitle">PREMAUT</span>
       </div>
       <div
