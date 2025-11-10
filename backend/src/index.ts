@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors'; // <-- Não esqueça do import!
 import routes from './routes';
 import relatorioRoutes from './routes/relatorioRoutes';
-import uploadRouter from './routes/materiaisRoutes';
+import materiaisRoutes from './routes/materiaisRoutes';
 import usuariosRoutes from "./routes/usuarios"; 
 
 const app = express();
@@ -11,8 +11,7 @@ app.use(express.json());
 
 app.use('/api', routes);
 app.use('/api/relatorios', relatorioRoutes);
-app.use('/api/materiais', uploadRouter);
-app.use('/api/upload', uploadRouter);
+app.use('/api/materiais', materiaisRoutes);
 app.use("/api/usuarios", usuariosRoutes);
 
 export default app;
