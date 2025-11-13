@@ -50,8 +50,22 @@ services:
       WATCHPACK_POLLING: "true"
       NEXT_PRIVATE_NO_TURBOPACK: "1"
       NEXT_TELEMETRY_DISABLED: "1"
+    env_file:
+      - .env
     ulimits:
       nproc: 65535
       nofile:
         soft: 65536
         hard: 65536
+
+  # supabase:
+  #   image: supabase/supabase:latest
+  #   container_name: supabase_premaut
+  #   environment:
+  #     - SUPABASE_DB_USER=premaut_user
+  #     - SUPABASE_DB_PASSWORD=securepassword
+  #     - SUPABASE_DB_NAME=premaut_db
+  #   ports:
+  #     - "54321:5432"
+  #   volumes:
+  #     - supabase_data:/var/lib/postgresql/data

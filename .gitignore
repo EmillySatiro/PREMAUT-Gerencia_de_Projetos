@@ -8,4 +8,3 @@ dist/
 
 src/services/supabaseClient.ts
 
-package-lock.json
