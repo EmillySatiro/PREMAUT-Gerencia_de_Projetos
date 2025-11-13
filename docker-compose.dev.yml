@@ -34,20 +34,6 @@ services:
     depends_on:
       - backend
 
-
-  backend-test:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    command: npm test
-    depends_on:
-      - backend
-
   frontend:
     build:
       context: ./frontend
