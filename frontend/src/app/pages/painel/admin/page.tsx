@@ -1,9 +1,23 @@
+"use client";
+import { useState } from "react";
 import TopBar from "@/app/components/TopBar";
 import Icons from "@/app/components/assets/icons";
 import Image from "@/app/components/assets/images";
 import NextImage from "next/image";
 
 export default function TelaAdmin() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("ALUNOS");
+
+  const filterOptions = [
+    "PACIENTE",
+    "MONITOR",
+    "PROFESSOR",
+    "FAMILIAR",
+    "ALUNO",
+    "COMUM",
+  ];
+
   const usuarios = Array(6).fill({ nome: "Fulano de Tal" });
 
   return (
@@ -22,31 +36,56 @@ export default function TelaAdmin() {
               placeholder="Pesquisa"
               className="flex-1 outline-none bg-transparent text-gray-700 text-lg"
             />
-            <NextImage
-              src={Icons.lupa}
-              alt="Buscar"
-              width={26}
-              height={26}
-            />
+            <NextImage src={Icons.lupa} alt="Buscar" width={26} height={26} />
           </div>
 
-          {/* Botão de filtro */}
-          <div className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56">
-            <div className="flex items-center gap-3">
+          {/* Botão de filtro com dropdown */}
+          <div className="relative">
+            <div
+              className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className="flex items-center gap-3">
+                <NextImage
+                  src={Icons.mdi_filtro}
+                  alt="Filtro"
+                  width={24}
+                  height={24}
+                />
+                <span className="text-[#009B9E] font-semibold text-lg">
+                  {selectedFilter}
+                </span>
+              </div>
               <NextImage
-                src={Icons.mdi_filtro}
-                alt="Filtro"
-                width={24}
-                height={24}
+                src={Icons.seta_baixo}
+                alt="Listar"
+                width={22}
+                height={22}
+                className={`transition-transform ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
               />
-              <span className="text-[#009B9E] font-semibold text-lg">ALUNOS</span>
             </div>
-            <NextImage
-              src={Icons.seta_baixo}
-              alt="Listar"
-              width={22}
-              height={22}
-            />
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-xl z-10 overflow-hidden">
+                {filterOptions.map((option, index) => (
+                  <div
+                    key={index}
+                    className="px-6 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
+                    onClick={() => {
+                      setSelectedFilter(option);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <span className="text-[#009B9E] font-semibold text-lg">
+                      {option}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
