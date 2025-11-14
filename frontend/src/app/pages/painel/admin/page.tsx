@@ -1,30 +1,32 @@
-import Header from "@/app/components/white_header";
+"use client";
+import { useState } from "react";
+import TopBar from "@/app/components/TopBar";
 import Icons from "@/app/components/assets/icons";
 import Image from "@/app/components/assets/images";
 import NextImage from "next/image";
 
 export default function TelaAdmin() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("ALUNOS");
+
+  const filterOptions = [
+    "PACIENTE",
+    "MONITOR",
+    "PROFESSOR",
+    "FAMILIAR",
+    "ALUNO",
+    "COMUM",
+  ];
+
   const usuarios = Array(6).fill({ nome: "Fulano de Tal" });
 
   return (
-    <div
-      className="min-h-screen flex flex-col relative"
-      style={{
-        backgroundImage: `url(${Image.fundoSomos})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Sobreposição branca translúcida */}
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
-
-      {/* Cabeçalho */}
-      <div className="relative z-10">
-        <Header />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      {/* TopBar */}
+      <TopBar background_image={Image.fundoSomos} />
 
       {/* Conteúdo principal */}
-      <main className="relative z-10 flex flex-col items-center justify-start p-10">
+      <main className="flex-1 bg-white px-8 py-10">
         {/* Barra de pesquisa e filtro */}
         <div className="flex flex-wrap justify-end items-center gap-6 mb-12 w-full max-w-6xl pr-15">
           {/* Campo de pesquisa */}
@@ -34,36 +36,61 @@ export default function TelaAdmin() {
               placeholder="Pesquisa"
               className="flex-1 outline-none bg-transparent text-gray-700 text-lg"
             />
-            <NextImage
-              src={Icons.lupa}
-              alt="Buscar"
-              width={26}
-              height={26}
-            />
+            <NextImage src={Icons.lupa} alt="Buscar" width={26} height={26} />
           </div>
 
-          {/* Botão de filtro */}
-          <div className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56">
-            <div className="flex items-center gap-3">
+          {/* Botão de filtro com dropdown */}
+          <div className="relative">
+            <div
+              className="flex items-center justify-between bg-white rounded-full px-6 py-3 shadow-lg cursor-pointer hover:shadow-xl transition w-56"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className="flex items-center gap-3">
+                <NextImage
+                  src={Icons.mdi_filtro}
+                  alt="Filtro"
+                  width={24}
+                  height={24}
+                />
+                <span className="text-[#009B9E] font-semibold text-lg">
+                  {selectedFilter}
+                </span>
+              </div>
               <NextImage
-                src={Icons.mdi_filtro}
-                alt="Filtro"
-                width={24}
-                height={24}
+                src={Icons.seta_baixo}
+                alt="Listar"
+                width={22}
+                height={22}
+                className={`transition-transform ${
+                  isDropdownOpen ? "rotate-180" : ""
+                }`}
               />
-              <span className="text-[#009B9E] font-semibold text-lg">ALUNOS</span>
             </div>
-            <NextImage
-              src={Icons.seta_baixo}
-              alt="Listar"
-              width={22}
-              height={22}
-            />
+
+            {/* Dropdown menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-xl z-10 overflow-hidden">
+                {filterOptions.map((option, index) => (
+                  <div
+                    key={index}
+                    className="px-6 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
+                    onClick={() => {
+                      setSelectedFilter(option);
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <span className="text-[#009B9E] font-semibold text-lg">
+                      {option}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
         {/* Grade de cartões */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {usuarios.map((user, index) => (
             <div
               key={index}
