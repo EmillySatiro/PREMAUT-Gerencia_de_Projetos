@@ -1,4 +1,4 @@
-import Header from "@/app/components/white_header";
+import TopBar from "@/app/components/TopBar";
 import Icons from "@/app/components/assets/icons";
 import Image from "@/app/components/assets/images";
 import NextImage from "next/image";
@@ -7,24 +7,12 @@ export default function TelaAdmin() {
   const usuarios = Array(6).fill({ nome: "Fulano de Tal" });
 
   return (
-    <div
-      className="min-h-screen flex flex-col relative"
-      style={{
-        backgroundImage: `url(${Image.fundoSomos})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Sobreposição branca translúcida */}
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
-
-      {/* Cabeçalho */}
-      <div className="relative z-10">
-        <Header />
-      </div>
+    <div className="min-h-screen flex flex-col">
+      {/* TopBar */}
+      <TopBar background_image={Image.fundoSomos} />
 
       {/* Conteúdo principal */}
-      <main className="relative z-10 flex flex-col items-center justify-start p-10">
+      <main className="flex-1 bg-white px-8 py-10">
         {/* Barra de pesquisa e filtro */}
         <div className="flex flex-wrap justify-end items-center gap-6 mb-12 w-full max-w-6xl pr-15">
           {/* Campo de pesquisa */}
@@ -63,7 +51,7 @@ export default function TelaAdmin() {
         </div>
 
         {/* Grade de cartões */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {usuarios.map((user, index) => (
             <div
               key={index}
