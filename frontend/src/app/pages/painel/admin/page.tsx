@@ -13,8 +13,9 @@ export default function TelaAdmin() {
   const [loading, setLoading] = useState(true);
 
   // Initialize Supabase client
-  const supabaseUrl = "https://zarzjizqfsxkpsatghfd.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InphcnpqaXpxZnN4a3BzYXRnaGZkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MTg1MzM1MCwiZXhwIjoyMDc3NDI5MzUwfQ.dFA2szl0waKFHLzAkyuQsT-298w7NN08JSPRoUw2ojY";
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY as string;
 
   const supabase = createClient(supabaseUrl, supabaseKey);
 
