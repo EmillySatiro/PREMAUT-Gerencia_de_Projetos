@@ -1,21 +1,137 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation'; // Import necessário para ler a URL
 import TopBar from '@/app/components/TopBar';
 import Image from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 
-export default function ScreenFamilly() {
+// --- Tipos (Interfaces) ---
+interface Paciente {
+  id: string;
+  nome: string;
+  genero: string;
+  nivel_suporte: string;
+  nascimento: string;
+  comodidade: string; 
+  telefone: string;
+  email: string;
+  remedios: string;
+  estereotipia: string;
+  reforco_positivo: string;
+  reforco_negativo: string;
+}
+
+interface Relatorio {
+  id: number;
+  assunto: string;
+  tipo: string; 
+  created_at: string;
+  paciente_id: number | string;
+}
+
+function ScreenFamillyContent() {
+  const searchParams = useSearchParams();
+  const idUrl = searchParams.get('id');
+
+  const [paciente, setPaciente] = useState<Paciente | null>(null);
+  const [relatorios, setRelatorios] = useState<Relatorio[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  const [stats, setStats] = useState({ incidentes: 0, autocorreceo: 0 });
+
+  // URL da API vinda do .env (ou fallback para localhost:3001)
+  const API_URL = process.env.NEXT_PUBLIC_URL_API || 'http://localhost:3001';
+  
+  // Lógica do ID: Tenta pegar da URL (?id=...), senão usa o fixo de teste
+  const PACIENTE_ID = idUrl || "5f8d04f6-8864-4c1f-9638-7c7a05996e1d"; 
+
+  useEffect(() => {
+    async function fetchData() {
+      if (!PACIENTE_ID) return;
+
+      try {
+        setLoading(true);
+
+        // 1. Buscar dados do Paciente na sua API
+        const resPaciente = await fetch(`${API_URL}/api/pacientes/${PACIENTE_ID}`);
+        if (resPaciente.ok) {
+          const dataPaciente = await resPaciente.json();
+          setPaciente(dataPaciente);
+        } else {
+            console.error("Erro ao buscar paciente:", resPaciente.statusText);
+            setPaciente(null);
+        }
+
+        // 2. Buscar Relatórios na sua API
+        const resRelatorios = await fetch(`${API_URL}/api/relatorios`);
+        if (resRelatorios.ok) {
+          const dataRelatorios: Relatorio[] = await resRelatorios.json();
+          
+          // Filtragem local
+          const meusRelatorios = dataRelatorios.filter(r => String(r.paciente_id) === String(PACIENTE_ID));
+          
+          setRelatorios(meusRelatorios);
+
+          // 3. Calcular Estatísticas
+          const incidentes = meusRelatorios.filter(r => r.tipo?.toLowerCase().includes('incidente')).length;
+          const autocorreceo = meusRelatorios.filter(r => r.tipo?.toLowerCase().includes('autocorreção') || r.tipo?.toLowerCase().includes('autocorrecao')).length;
+          
+          setStats({ incidentes, autocorreceo });
+        } else {
+             console.error("Erro ao buscar relatórios:", resRelatorios.statusText);
+        }
+
+      } catch (error) {
+        console.error("Erro de conexão com o backend:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [API_URL, PACIENTE_ID]);
+
+  // Funções utilitárias de formatação
+  const formatarData = (dataISO: string) => {
+    if (!dataISO) return "Data inválida";
+    const data = new Date(dataISO);
+    return data.toLocaleDateString('pt-BR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const formatarDataCurta = (dataISO: string) => {
+     if (!dataISO) return "";
+     return new Date(dataISO).toLocaleDateString('pt-BR', {
+       day: '2-digit',
+       month: 'short',
+       year: 'numeric'
+     });
+  };
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Carregando dados do paciente...</div>;
+  }
+
+  if (!paciente) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center">
+        <p className="text-gray-600 mb-4">Paciente não encontrado.</p>
+        <button onClick={() => window.location.reload()} className="text-emerald-600 hover:underline">Tentar novamente</button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      {/* TopBar */}
       <TopBar background_image={Image.fundoSomos}/>
 
-      {/* Conteúdo principal */}
       <main className="flex-1 bg-white px-8 py-10">
         {/* Cabeçalho do perfil */}
         <section className="flex flex-col md:flex-row items-center gap-6 mb-10">
-          {/* Ícone do usuário */}
           <div className="relative">
             <img
               src={Icons.circuloPerfil}
@@ -29,184 +145,130 @@ export default function ScreenFamilly() {
             />
           </div>
 
-          {/* Informações do usuário */}
           <div className="flex flex-col md:flex-row md:items-center w-full justify-between">
             <div>
               <div className="flex items-center gap-3">
                 <h2 className="text-2xl font-semibold text-gray-800">
-                  Nome do Familiar
+                  Familiar Responsável
                 </h2>
                 <span className="text-sm bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">
                   Familiar
                 </span>
               </div>
               <span className="text-xs text-gray-500 mt-1 block">
-                cadastrado em: 28 maio 2024
+                Visualizando perfil de: <span className="font-bold text-emerald-600">{paciente.nome}</span>
               </span>
+              {/* Mostra ID apenas para debug se necessário */}
+              {/* <span className="text-[10px] text-gray-300 block">ID: {paciente.id}</span> */}
             </div>
 
             <button className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-emerald-400 text-emerald-700 rounded-full px-4 py-2 text-sm hover:bg-emerald-50 transition">
-              <img
-                src={Icons.lapisVerde}
-                alt="Editar"
-                className="w-4 h-4"
-              />
+              <img src={Icons.lapisVerde} alt="Editar" className="w-4 h-4" />
               Editar perfil
             </button>
           </div>
         </section>
 
-        {/* Blocos de informações */}
+        {/* Informações */}
         <section className="grid md:grid-cols-2 gap-8 mb-10">
-          {/* Informações básicas */}
           <div className="border border-emerald-200 rounded-xl p-6">
             <h3 className="font-semibold text-gray-700 mb-3">Informações básicas</h3>
             <ul className="text-sm text-gray-600 space-y-3">
               <li className="flex items-center gap-2">
-                <img
-                  src={Icons.mdi_user_pequeno}
-                  alt="Aluno vinculado"
-                  className="w-5 h-5"
-                />
-                <span>Aluno vinculado: Fulano de tal</span>
+                <img src={Icons.mdi_user_pequeno} alt="Aluno" className="w-5 h-5" />
+                <span>Aluno vinculado: <strong>{paciente.nome}</strong></span>
               </li>
               <li className="flex items-center gap-2">
-                <img
-                  src={Icons.genero}
-                  alt="Gênero"
-                  className="w-5 h-5"
-                />
-                <span>Gênero: Feminino</span>
+                <img src={Icons.genero} alt="Gênero" className="w-5 h-5" />
+                <span>Gênero: {paciente.genero || "-"}</span>
               </li>
               <li className="flex items-center gap-2">
-                <img
-                  src={Icons.aniversario}
-                  alt="Aniversário"
-                  className="w-5 h-5"
-                />
-                <span>Aniversário: 2 Setembro 2005</span>
+                <img src={Icons.aniversario} alt="Nascimento" className="w-5 h-5" />
+                <span>Aniversário: {formatarData(paciente.nascimento || "")}</span>
               </li>
               <li className="flex items-center gap-2">
-                <img
-                  src={Icons.telefone}
-                  alt="Telefone"
-                  className="w-5 h-5"
-                />
-                <span>Telefone: (89) 99400-0000</span>
+                <img src={Icons.telefone} alt="Telefone" className="w-5 h-5" />
+                <span>Telefone: {paciente.telefone || "-"}</span>
               </li>
               <li className="flex items-center gap-2">
-                <img
-                  src={Icons.email}
-                  alt="E-mail"
-                  className="w-5 h-5"
-                />
-                <span>E-mail: fulano@gmail.com</span>
+                <img src={Icons.email} alt="E-mail" className="w-5 h-5" />
+                <span>E-mail: {paciente.email || "-"}</span>
               </li>
             </ul>
           </div>
 
-          {/* Informações de suporte */}
           <div className="border border-emerald-200 rounded-xl p-6">
             <h3 className="font-semibold text-gray-700 mb-3">Informações de suporte</h3>
             <ul className="text-sm text-gray-600 space-y-2">
-              <li>
-                <strong>Nível de suporte:</strong> N1
-              </li>
-              <li>
-                <strong>Estereotipia:</strong> Balançar o corpo repetidamente, bater ou sacudir as mãos, rodar objetos de forma insistente.
-              </li>
-              <li>
-                <strong>Comorbidades:</strong> TDAH
-              </li>
-              <li>
-                <strong>Medicação:</strong> Metilfenidato
-              </li>
-              <li>
-                <strong>Reforçador positivo:</strong> A criança ganha um elogio ou doce ao guardar os brinquedos.
-              </li>
-              <li>
-                <strong>Reforçador negativo:</strong> A pessoa coloca o cinto de segurança e o som irritante do carro para.
-              </li>
-              <li>
-                <strong>Atividade física:</strong> Futebol
-              </li>
+              <li><strong>Nível de suporte:</strong> {paciente.nivel_suporte || "-"}</li>
+              <li><strong>Estereotipia:</strong> {paciente.estereotipia || "Nenhuma relatada"}</li>
+              <li><strong>Comorbidades:</strong> {paciente.comodidade || "Nenhuma relatada"}</li>
+              <li><strong>Medicação:</strong> {paciente.remedios || "Nenhuma"}</li>
+              <li><strong>Reforçador positivo:</strong> {paciente.reforco_positivo || "-"}</li>
+              <li><strong>Reforçador negativo:</strong> {paciente.reforco_negativo || "-"}</li>
+              <li><strong>Atividade física:</strong> Futebol</li>
             </ul>
           </div>
         </section>
 
-        {/* Gráfico e estatísticas - layout em duas colunas */}
+        {/* Estatísticas */}
         <section
           className="border border-emerald-200 rounded-xl p-8 mb-10 grid md:grid-cols-2 gap-6 items-center"
           style={{ backgroundColor: 'rgb(210, 233, 223)' }}
         >
-          {/* Coluna Esquerda - dados */}
           <div className="flex flex-col items-center md:items-start">
             <div className="flex flex-col gap-8 mb-6">
               <div className="text-center md:text-left">
-                <p className="text-5xl font-bold text-gray-800">43</p>
-                <p className="text-base text-gray-700 font-medium">INCIDENTES</p>
+                <p className="text-5xl font-bold text-gray-800">{stats.incidentes}</p>
+                <p className="text-base text-gray-700 font-medium uppercase">INCIDENTES</p>
               </div>
               <div className="text-center md:text-left">
-                <p className="text-5xl font-bold text-gray-800">34</p>
-                <p className="text-base text-gray-700 font-medium">AUTOCORREÇÃO</p>
+                <p className="text-5xl font-bold text-gray-800">{stats.autocorreceo}</p>
+                <p className="text-base text-gray-700 font-medium uppercase">AUTOCORREÇÃO</p>
               </div>
             </div>
-
-            <button className="bg-white text-gray-700 rounded-lg px-6 py-2 shadow-sm hover:bg-gray-50">
-              VISUALIZAR
-            </button>
+            <button className="bg-white text-gray-700 rounded-lg px-6 py-2 shadow-sm hover:bg-gray-50">VISUALIZAR</button>
           </div>
-
-          {/* Coluna Direita - gráfico */}
           <div className="w-full flex justify-center">
-            <img
-              src={Image.grafico}
-              alt="Gráfico de incidentes e autocorreção"
-              className="w-full max-w-2xl rounded-lg shadow-md"
-            />
+            <img src={Image.grafico} alt="Gráfico" className="w-full max-w-2xl rounded-lg shadow-md" />
           </div>
         </section>
 
         {/* Relatórios */}
         <section>
-          <h3
-            className="text-lg font-semibold text-gray-700 mb-4 px-2 py-1 rounded-md"
-            style={{ backgroundColor: 'rgb(210, 233, 223)' }}
-          >
-            Relatórios
+          <h3 className="text-lg font-semibold text-gray-700 mb-4 px-2 py-1 rounded-md" style={{ backgroundColor: 'rgb(210, 233, 223)' }}>
+            Relatórios Recentes
           </h3>
-
           <div className="space-y-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="relative flex justify-between items-center bg-white rounded-xl shadow-md shadow-gray-200 p-4 hover:shadow-lg transition overflow-hidden"
-              >
-                {/* Background translúcido */}
-                <div
-                  className="absolute inset-0 opacity-10 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${Image.fundoSomos})`,
-                  }}
-                ></div>
-
-                {/* Conteúdo */}
-                <div className="relative flex items-center gap-3">
-                  <img
-                    src={Icons.relatorio}
-                    alt="Ícone de relatório"
-                    className="w-6 h-6"
-                  />
-                  <p className="text-gray-700 text-sm font-medium">
-                    Mordeu o coleguinha
-                  </p>
+            {relatorios.length === 0 ? (
+              <p className="text-gray-500 text-sm">Nenhum relatório encontrado para este aluno.</p>
+            ) : (
+              relatorios.map((relatorio) => (
+                <div key={relatorio.id} className="relative flex justify-between items-center bg-white rounded-xl shadow-md shadow-gray-200 p-4 hover:shadow-lg transition overflow-hidden">
+                  <div className="absolute inset-0 opacity-10 bg-cover bg-center" style={{ backgroundImage: `url(${Image.fundoSomos})` }}></div>
+                  <div className="relative flex items-center gap-3">
+                    <img src={Icons.relatorio} alt="Ícone" className="w-6 h-6" />
+                    <div className="flex flex-col">
+                        <p className="text-gray-700 text-sm font-medium">{relatorio.assunto}</p>
+                        <span className="text-xs text-emerald-600 font-bold">{relatorio.tipo}</span>
+                    </div>
+                  </div>
+                  <span className="relative text-xs text-gray-500">{formatarDataCurta(relatorio.created_at)}</span>
                 </div>
-                <span className="relative text-xs text-gray-500">25 set 2024</span>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </section>
       </main>
     </div>
+  );
+}
+
+// Componente Principal com Suspense (Necessário para usar useSearchParams no Next.js App Router)
+export default function ScreenFamilly() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Carregando...</div>}>
+      <ScreenFamillyContent />
+    </Suspense>
   );
 }
