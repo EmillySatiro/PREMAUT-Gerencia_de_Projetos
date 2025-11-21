@@ -30,8 +30,18 @@ const Login: React.FC = () => {
         throw new Error(data.error || "Erro ao fazer login.");
       }
 
-      setMensagem(data.message);
-      setTimeout(() => router.push("/home"), 1000);
+      // SALVA O USUÁRIO NO localStorage
+      localStorage.setItem("user", JSON.stringify(data.usuario));
+
+      setMensagem("Login realizado com sucesso!");
+
+      // SE FOR MONITOR, VAI PARA PÁGINA DO MONITOR
+      if (data.usuario.tipo_usuario === "monitor") {
+        setTimeout(() => router.push("/perfil/monitor"), 1000);
+      } else {
+        setTimeout(() => router.push("/home"), 1000);
+      }
+
     } catch (erro: any) {
       setMensagem(erro.message || "Erro ao fazer login.");
     } finally {
@@ -41,7 +51,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="container">
-      {/* Conteúdo principal centralizado sobre o fundo */}
       <div className="content">
         <div className="logo-icon">
           <img src="/assets/images/logo_completa.png" alt="Logo PREMAUT" className="logo-img" />
