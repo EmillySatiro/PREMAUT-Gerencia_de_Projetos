@@ -5,6 +5,7 @@ import relatorioRoutes from './routes/relatorioRoutes';
 import materiaisRoutes from './routes/materiaisRoutes';
 import usuariosRoutes from "./routes/usuarios"; 
 import monitorRouter from "./routes/monitorRouter";
+import pacientesRoutes from './routes/pacientesRoutes';
 
 const app = express();
 app.use(cors());
@@ -14,5 +15,7 @@ app.use("/api/monitor", monitorRouter);
 app.use('/api/relatorios', relatorioRoutes);
 app.use('/api/materiais', materiaisRoutes);
 app.use("/api/usuarios", usuariosRoutes);
+app.use('/api/pacientes', pacientesRoutes);
 
 export default app;
+
