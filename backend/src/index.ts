@@ -14,10 +14,7 @@ app.use(express.json());
 app.use('/api', routes);
 app.use("/api/monitor", monitorRouter);
 app.use('/api/relatorios', relatorioRoutes);
-app.use('/api/materiais', materiaisRoutes);
-app.use("/api/usuarios", usuariosRoutes);
-app.use('/api/pacientes', pacientesRoutes);
-app.use("/api/monitor", monitorRoutes);
+app.use('/api/upload', uploadRouter);
 
 export default app;
 
