@@ -38,6 +38,8 @@ const Login: React.FC = () => {
       // SE FOR MONITOR, VAI PARA PÁGINA DO MONITOR
       if (data.usuario.tipo_usuario === "monitor") {
         setTimeout(() => router.push("/perfil/monitor"), 1000);
+      } else if (data.usuario.tipo_usuario === "professor") {
+        setTimeout(() => router.push("/perfil/professor"), 1000);
       } else {
         setTimeout(() => router.push("/home"), 1000);
       }

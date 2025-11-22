@@ -5,6 +5,7 @@ import {
   enviarCodigoRecuperacao,
   redefinirSenha,
   verificarCodigo,
+  getUsuarioById
 } from "../controllers/usuariosController";
 
 const router = express.Router();
@@ -38,6 +39,7 @@ router.post("/esqueci-senha", enviarCodigoRecuperacao);
 router.post("/redefinir-senha", redefinirSenha);
 
 router.post("/verificar-codigo", verificarCodigo);
+
 /**
  * @route GET /api/usuarios/teste
  * @desc Verificar se a rota está ativa
@@ -45,5 +47,7 @@ router.post("/verificar-codigo", verificarCodigo);
 router.get("/teste", (req: Request, res: Response) => {
   res.json({ mensagem: "Rota de usuários ativa! 🚀" });
 });
+
+router.get("/:id", getUsuarioById);
 
 export default router;
