@@ -222,6 +222,8 @@ export default function ScreenPaciente() {
             <button
               className="flex items-center gap-2 text-white px-4 py-2 rounded-md shadow-md hover:opacity-90 transition"
               style={{ backgroundColor: '#335B8D' }}
+              // Ir para Relatorio escrever, frontend\src\app\pages\cadastrar\relatorio_escrever
+              onClick={() => window.location.href = '/cadastrar/relatorio_escrever'}
             >
               <img
                 src={Icons.lapisBranco}

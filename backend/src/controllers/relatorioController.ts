@@ -15,10 +15,10 @@ export const getRelatorioById = async (req: Request, res: Response) => {
 };
 
 export const createRelatorio = async (req: Request, res: Response) => {
-  const { assunto, body, tipo, pacienteId } = req.body;
+  const { assunto, body, tipo, paciente_id  } = req.body;
   const { data, error } = await supabase
     .from('relatorios')
-    .insert([{ assunto, body, tipo, paciente_id: pacienteId }])
+    .insert([{ assunto, body, tipo, paciente_id  }])
     .select();
   if (error) return res.status(500).json({ error: error.message });
   if (!data) return res.status(500).json({ error: 'Erro ao criar relatório' });
@@ -27,11 +27,11 @@ export const createRelatorio = async (req: Request, res: Response) => {
 
 export const updateRelatorio = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { assunto, body, tipo, pacienteId } = req.body;
+  const { assunto, body, tipo, paciente_id  } = req.body;
   console.log('Controller update, id:', id, typeof id);
   const { data, error } = await supabase
     .from('relatorios')
-    .update({ assunto, body, tipo, paciente_id: pacienteId })
+    .update({ assunto, body, tipo, paciente_id  })
     .eq('id', Number(id))
     .select();
 

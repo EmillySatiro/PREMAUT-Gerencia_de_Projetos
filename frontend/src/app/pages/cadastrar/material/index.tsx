@@ -10,7 +10,7 @@ import Icons from '@/app/components/assets/icons';
 export default function HomePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const id = searchParams.get('id'); // Pega o ID da URL se existir
+  const id = searchParams.get('id');
 
   const [arquivo, setArquivo] = useState<File | null>(null);
   const [capa, setCapa] = useState<File | null>(null);
@@ -21,10 +21,9 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [salvando, setSalvando] = useState(false);
 
-  // Busca os dados se tiver ID na URL
   useEffect(() => {
     const buscarArquivo = async () => {
-      if (!id) return; // Se não tem ID, é criação
+      if (!id) return;
 
       setLoading(true);
       try {
@@ -35,14 +34,11 @@ export default function HomePage() {
         }
 
         const dados = await response.json();
-        console.log('📦 Dados recebidos:', dados);
-
         setNomeArquivo(dados.nome || '');
         setDescricao(dados.descricao || '');
         setUrlArquivo(dados.url || '');
         setCapaUrl(dados.capa_url || '');
       } catch (error) {
-        console.error('❌ Erro ao buscar arquivo:', error);
         alert('Erro ao carregar os dados do arquivo');
       } finally {
         setLoading(false);
@@ -64,7 +60,6 @@ export default function HomePage() {
     }
   };
 
-  // Função para fazer upload de arquivo e retornar a URL
   const uploadArquivoParaStorage = async (file: File, tipo: 'arquivo' | 'capa'): Promise<string | null> => {
     const formData = new FormData();
     formData.append('file', file);
@@ -80,22 +75,18 @@ export default function HomePage() {
       }
 
       const data = await response.json();
-      console.log(`✅ ${tipo} enviado:`, data.url);
       return data.url;
     } catch (error) {
-      console.error(`❌ Erro ao enviar ${tipo}:`, error);
       alert(`Erro ao enviar ${tipo}`);
       return null;
     }
   };
 
-  // Função para atualizar os metadados
   const atualizarMetadados = async () => {
     if (!id) return;
 
     setSalvando(true);
     try {
-      // Se houver novos arquivos, fazer upload primeiro
       let novaUrlArquivo = urlArquivo;
       let novaCapaUrl = capaUrl;
 
@@ -109,7 +100,6 @@ export default function HomePage() {
         if (url) novaCapaUrl = url;
       }
 
-      // Atualizar metadados na tabela
       const response = await fetch(`http://localhost:3001/api/materiais/${id}/metadados`, {
         method: 'PUT',
         headers: {
@@ -132,7 +122,6 @@ export default function HomePage() {
       
       alert('Arquivo atualizado com sucesso!');
       
-      // Atualizar os estados com os novos dados
       setUrlArquivo(dadosAtualizados.url);
       setCapaUrl(dadosAtualizados.capa_url);
       setArquivo(null);
@@ -146,11 +135,9 @@ export default function HomePage() {
     }
   };
 
-  // Função para criar novo arquivo
   const criarNovoArquivo = async () => {
     setSalvando(true);
     try {
-      // Validação
       if (!arquivo) {
         alert('Por favor, selecione um arquivo');
         setSalvando(false);
@@ -163,7 +150,6 @@ export default function HomePage() {
         return;
       }
 
-      // Upload do arquivo
       let urlArquivoNovo = '';
       let capaUrlNova = '';
 
@@ -181,19 +167,8 @@ export default function HomePage() {
         if (url) capaUrlNova = url;
       }
 
-      // Aqui você precisaria ter um endpoint POST para criar o registro na tabela
-      // Por enquanto, apenas mostrando os dados
-      console.log('📝 Criar novo arquivo:', {
-        nome: nomeArquivo,
-        descricao: descricao,
-        url: urlArquivoNovo,
-        capa_url: capaUrlNova,
-      });
-
       alert('Funcionalidade de criação será implementada no backend');
-      
     } catch (error) {
-      console.error('❌ Erro ao criar arquivo:', error);
       alert('Erro ao criar arquivo');
     } finally {
       setSalvando(false);

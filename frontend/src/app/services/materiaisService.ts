@@ -1,6 +1,8 @@
 import ConfigApp from "../components/config/config";
 
-const API_URL = `${ConfigApp.URL_API}/api/materiais`;
+
+const API_URL = 'http://localhost:3001/api/materiais';
+
 
 // Função para buscar materiais da API
 export async function buscarMateriais() {
