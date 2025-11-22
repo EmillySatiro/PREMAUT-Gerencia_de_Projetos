@@ -1,6 +1,7 @@
 install_dependecias:
 	cd backend && npm install
 	cd frontend && npm install
+	cd frontend && npm install recharts
 
 run_dev:
 	docker compose -f docker-compose.dev.yml down && docker compose -f docker-compose.dev.yml up --build
