@@ -78,7 +78,7 @@ export const getRelatorioStats = async (req: Request, res: Response) => {
     data.forEach((relatorio: any) => {
       // Extrai a data (YYYY-MM-DD) para agrupar
       const dataIso = new Date(relatorio.created_at).toISOString().split('T')[0];
-      
+
       if (!stats[dataIso]) {
         stats[dataIso] = { incidente: 0, autocorrecao: 0 };
       }
@@ -103,6 +103,34 @@ export const getRelatorioStats = async (req: Request, res: Response) => {
 
   } catch (error: any) {
     console.error('Erro ao buscar estatísticas:', error);
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const getRelatoriosByPaciente = async (req: Request, res: Response) => {
+  const { pacienteId } = req.params;
+  console.log(`[getRelatoriosByPaciente] Buscando relatórios para pacienteId: ${pacienteId}`);
+
+  if (!pacienteId) {
+    return res.status(400).json({ error: 'pacienteId é obrigatório' });
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('relatorios')
+      .select('*')
+      .eq('paciente_id', pacienteId)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('[getRelatoriosByPaciente] Erro Supabase:', error);
+      throw error;
+    }
+
+    console.log(`[getRelatoriosByPaciente] Encontrados ${data?.length} relatórios.`);
+    return res.status(200).json(data);
+  } catch (error: any) {
+    console.error('Erro ao buscar relatórios do paciente:', error);
     return res.status(500).json({ error: error.message });
   }
 };

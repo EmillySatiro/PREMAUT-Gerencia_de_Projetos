@@ -282,7 +282,10 @@ export default function ScreenMonitor() {
                       {aluno.nome.charAt(0)}
                     </div>
                     <h3 className="text-gray-800 font-medium mb-4 text-lg">{aluno.nome}</h3>
-                    <button className="bg-[#4da1a9] text-white text-sm px-5 py-2 rounded-[20px] hover:bg-[#3a8289] transition">
+                    <button
+                      onClick={() => router.push(`/perfil/paciente?id=${aluno.id}`)}
+                      className="bg-[#4da1a9] text-white text-sm px-5 py-2 rounded-[20px] hover:bg-[#3a8289] transition"
+                    >
                       Verificar perfil
                     </button>
                   </div>
