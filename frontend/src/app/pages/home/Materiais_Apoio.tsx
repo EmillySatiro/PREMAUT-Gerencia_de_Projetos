@@ -1,55 +1,53 @@
 "use client";
 
-import Colors from '@/app/components/assets/color';
+import Colors from '@/app/components/color';
 import React from 'react';
-
-import Image from '@/app/components/assets/images';
 
 export const MateriaisApoio: React.FC = () => {
 
     const livros: { urlImage: string; name: string; qtdPag: string }[] = [
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 1',
             qtdPag: '20 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 2',
             qtdPag: '15 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 3',
             qtdPag: '30 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
         {
-            urlImage: Image.capaLivro,
+            urlImage: '/assets/images/capa_livro.jpg',
             name: 'Livro de atividades 4',
             qtdPag: '25 páginas',
         },
@@ -341,7 +339,7 @@ export const MateriaisApoio: React.FC = () => {
             className='flex flex-col items-center justify-center px-10 py-8'
             style={
                 {
-                    backgroundImage: `url(${Image.fundoGirassol})`,
+                    backgroundImage: "url('/assets/images/fundo_girassol.jpg')",
                     backgroundSize: 'cover',
                     backgroundColor: 'rgba(211,211,211,0.9)',
                     backgroundBlendMode: 'overlay',
@@ -385,7 +383,7 @@ export const MateriaisApoio: React.FC = () => {
                 </div>
                 <button
                     type="button"
-                    onClick={() => window.location.href = '/pages/apoio/materiais'}
+                    onClick={() => window.location.href = '/pages/materiais_apoio'}
                     style={{
                         borderRadius: 10,
                         border: '3.733px solid #FFF',

@@ -1,15 +1,12 @@
 import React from 'react';
-import Colors from './assets/color';
-
-import Image from './assets/images';
-import Icons from './assets/icons';
+import Colors from './color';
 
 interface TopBarProps {
   background_image?: string;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
-  background_image = Image.fundoGirassol,
+  background_image = '/assets/images/fundo_girassol.jpg',
 }) => {
   return (
     <header
@@ -25,7 +22,7 @@ export const TopBar: React.FC<TopBarProps> = ({
     >
       <a href="/pages/home">
         <div className="flex items-center space-x-1">
-          <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
+          <img src="/assets/images/solar_heart-broken.svg" alt="Coração" className="h-10 w-10" />
           <span className="premautTitle">PREMAUT</span>
         </div>
       </a>

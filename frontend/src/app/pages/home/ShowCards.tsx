@@ -1,7 +1,6 @@
 
 'use client';
 
-import Icons from '@/app/components/assets/icons';
 import React from 'react';
 
 export type ShowCardsProps = { images?: string[] };
@@ -51,7 +50,7 @@ export const ShowCards: React.FC<ShowCardsProps> = ({ images = [] }) => {
                     }}
                 >
                     <img
-                        src={Icons.voltar}
+                        src="/assets/images/voltar.svg"
                         alt="Voltar"
                         style={{
                             width: 32,
@@ -93,7 +92,7 @@ export const ShowCards: React.FC<ShowCardsProps> = ({ images = [] }) => {
                     }}
                 >
                     <img
-                        src={Icons.avancar}
+                        src="/assets/images/avancar.svg"
                         alt="Avancar"
                         style={{
                             width: 32,

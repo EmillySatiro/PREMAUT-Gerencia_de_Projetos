@@ -1,9 +1,14 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
-  return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello, Next.js!</h1>
-    </div>
-  );
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+export default function RootRedirect() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/pages/home"); // 👈 redireciona automaticamente
+  }, [router]);
+
+  return null; // não precisa renderizar nada
 }

@@ -1,15 +1,28 @@
-import express from 'express';
-import cors from 'cors'; // <-- Não esqueça do import!
-import routes from './routes';
-import relatorioRoutes from './routes/relatorioRoutes';
-import uploadRouter from './routes/uploadRoutes';
+import express from "express";
+import cors from "cors";
+import routes from "./routes";
+import eventoRoutes from "./routes/eventoRoutes";
+import pacienteRoutes from "./routes/pacienteRoutes";
 
 const app = express();
-app.use(cors());
+
+// CORS para aceitar requisições do Next.js
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
+
 app.use(express.json());
 
-app.use('/api', routes);
-app.use('/api/relatorios', relatorioRoutes);
-app.use('/api/upload', uploadRouter);
+// Rotas principais
+app.use("/api", routes);
+app.use("/api/eventos", eventoRoutes);
+app.use("/api/pacientes", pacienteRoutes);
+
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Servidor rodando: http://localhost:${PORT}`);
+});
 
 export default app;

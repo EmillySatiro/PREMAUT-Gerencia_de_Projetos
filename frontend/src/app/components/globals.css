@@ -1,0 +1,28 @@
+/* 🎨 colors.css ou dentro de globals.css */
+:root {
+  /* Cores principais */
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0369a1;
+
+  /* Fundo e texto */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+
+  /* Estados */
+  --color-success: #16a34a;
+  --color-danger: #dc2626;
+  --color-warning: #f59e0b;
+
+  /* Paleta personalizada */
+  --color-azul-base: #6d94c5;
+  --color-azul-escuro: #507cb4;
+  --color-verde-base: #4da1a9;
+  --color-verde-clarinho: #d2e9df;
+  --color-gray-600: #4b5563;
+}
+
+/* Exemplo modo escuro */
+[data-theme="dark"] {
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
+}

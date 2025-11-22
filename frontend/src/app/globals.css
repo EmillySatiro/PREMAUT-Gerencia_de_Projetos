@@ -3,6 +3,7 @@
 :root {
   --background: #f6f4f0;
   --foreground: #171717;
+  /* Paleta personalizada */
   /* Project color tokens */
   --color-primary: #0ea5e9;
   --color-primary-dark: #0369a1;
@@ -10,8 +11,11 @@
   --color-danger: #dc2626;
   --color-warning: #f59e0b;
   
-  --verde-base: #4DA1A9;
-  --azul-base: #6D94C5;
+  --color-azul-base: #6D94C5;
+  --color-azul-escuro: #507CB4;
+  --color-verde-base: #4DA1A9;
+  --color-verde-clarinho: #D2E9DF;
+  --color-gray-600: #4b5563;
 }
 
 @theme inline {
@@ -165,7 +169,7 @@ body {
 }
 
 .premautTitle {
-  color: var(--azul-base, #6D94C5);
+  color: var(--color-azul-base, #6D94C5);
   font-family: "Wash Your Hand";
   font-size: 22px;
   font-style: normal;

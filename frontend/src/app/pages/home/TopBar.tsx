@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from '@/app/styles/topbar.module.css';
-import Image from '@/app/components/assets/images';
-import Icons from '@/app/components/assets/icons';
+import Image from 'next/image';
 
 export const TopBar: React.FC = () => {
+  const topbarLink = "text-gray-800 hover:text-gray-600 px-2";
+
   return (
     <header
       className="sticky top-0 z-40 flex items-center justify-between h-16 px-6"
       style={{
-        backgroundImage: `url(${Image.fundoTopBottom})`,
+        backgroundImage: "url('/assets/images/fundo_top_bottom.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -16,7 +16,7 @@ export const TopBar: React.FC = () => {
       }}
     >
       <div className="flex items-center space-x-1">
-        <img src={Icons.solarHeartBroken} alt="Coração" className="h-10 w-10" />
+        <Image src="/assets/images/solar_heart-broken.svg" alt="Coração" width={40} height={40} />
         <span className="premautTitle">PREMAUT</span>
       </div>
       <div
@@ -28,30 +28,24 @@ export const TopBar: React.FC = () => {
         }
       >
         <nav className="hidden sm:flex items-center space-x-4">
-          <a href="" className={styles.topbarLink}>Inicio</a>
-          <a href="#noticias" className={styles.topbarLink}>Noticias</a>
-          <a href="#sobre" className={styles.topbarLink}>Sobre</a>
-          <a href="/pages/screen-admin" className={styles.topbarLink}>Painel</a>
+          <a href="/" className={topbarLink}>Inicio</a>
+          <a href="#noticias" className={topbarLink}>Noticias</a>
+          <a href="#sobre" className={topbarLink}>Sobre</a>
+          <a href="/pages/screen-admin" className={topbarLink}>Painel</a>
         </nav>
       </div>
-      <button 
-      className="px-3 py-1 rounded bg-white text-white text-sm"
-      style={
-        {
-            boxShadow: '0 8px 6px rgba(0, 0, 0, 0.3)' 
-        }
-      }
+      <a
+        href="/pages/login"
+        className="px-3 py-1 rounded bg-white text-sm"
+        style={{ boxShadow: '0 8px 6px rgba(0, 0, 0, 0.3)' }}
       >
         <span
-          className={styles.topbarLink}
-          style={
-            {
-              fontSize: '12px',
-              fontWeight: '600'
-            }
-          }
-        >Entrar</span>
-      </button>
+          className={topbarLink}
+          style={{ fontSize: '12px', fontWeight: 600 }}
+        >
+          Entrar
+        </span>
+      </a>
 
     </header>
   );

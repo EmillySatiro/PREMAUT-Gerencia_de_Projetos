@@ -2,10 +2,7 @@
 
 'use client';
 
-import Icons from '@/app/components/assets/icons';
 import React from 'react';
-
-import Image from '@/app/components/assets/images';
 
 export const Somos: React.FC = () => {
     const items: { topic: string; value: string }[] = [
@@ -60,7 +57,7 @@ export const Somos: React.FC = () => {
             className='flex flex-col items-center justify-center space-y-4 py-8 px-16'
             style={
                 {
-                    backgroundImage: `url(${Image.fundoSomos})`,
+                    backgroundImage: "url('/assets/images/fundo_somos.jpg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundColor: 'rgba(211,211,211,0.9)',
@@ -71,7 +68,7 @@ export const Somos: React.FC = () => {
         >
             <div>
                 <div className="flex items-center">
-                    <img src={Icons.estrela} alt="Estrela" className="h-4 w-4 object-contain" />
+                    <img src="/assets/images/estrela.svg" alt="Estrela" className="h-4 w-4 object-contain" />
                     <p className="text-left font-bold" style={{ fontFamily: 'Afacad', fontSize: '12px', color: '#000' }}>
                         Somos
                     </p>
