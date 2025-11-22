@@ -29,7 +29,7 @@ export default function HomePage() {
       setLoading(true);
       try {
         const response = await fetch(`http://localhost:3001/api/materiais/${id}`);
-        
+
         if (!response.ok) {
           throw new Error('Arquivo não encontrado');
         }
@@ -70,13 +70,19 @@ export default function HomePage() {
     formData.append('file', file);
 
     try {
+      console.log(`📤 Enviando ${tipo}:`, file.name, file.type, file.size);
+
       const response = await fetch('http://localhost:3001/api/materiais', {
         method: 'POST',
         body: formData,
       });
 
+      console.log(`📊 Response status: ${response.status} ${response.statusText}`);
+
       if (!response.ok) {
-        throw new Error('Erro ao fazer upload');
+        const errorText = await response.text();
+        console.error(`❌ Erro do servidor (${response.status}):`, errorText);
+        throw new Error(`Erro ao fazer upload: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();
@@ -84,7 +90,7 @@ export default function HomePage() {
       return data.url;
     } catch (error) {
       console.error(`❌ Erro ao enviar ${tipo}:`, error);
-      alert(`Erro ao enviar ${tipo}`);
+      alert(`Erro ao enviar ${tipo}: ${error instanceof Error ? error.message : 'Erro desconhecido'}`);
       return null;
     }
   };
@@ -129,9 +135,9 @@ export default function HomePage() {
 
       const dadosAtualizados = await response.json();
       console.log('✅ Arquivo atualizado:', dadosAtualizados);
-      
+
       alert('Arquivo atualizado com sucesso!');
-      
+
       // Atualizar os estados com os novos dados
       setUrlArquivo(dadosAtualizados.url);
       setCapaUrl(dadosAtualizados.capa_url);
@@ -181,17 +187,38 @@ export default function HomePage() {
         if (url) capaUrlNova = url;
       }
 
-      // Aqui você precisaria ter um endpoint POST para criar o registro na tabela
-      // Por enquanto, apenas mostrando os dados
-      console.log('📝 Criar novo arquivo:', {
-        nome: nomeArquivo,
-        descricao: descricao,
-        url: urlArquivoNovo,
-        capa_url: capaUrlNova,
+      // Pega o professorId da URL
+      const professorId = searchParams.get('professorId');
+
+      const response = await fetch('http://localhost:3001/api/materiais/novo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: nomeArquivo,
+          descricao: descricao,
+          url: urlArquivoNovo,
+          capa_url: capaUrlNova,
+          professor_id: professorId // Envia o ID do professor se existir
+        }),
       });
 
-      alert('Funcionalidade de criação será implementada no backend');
-      
+      if (!response.ok) {
+        throw new Error('Erro ao criar registro no banco');
+      }
+
+      const data = await response.json();
+      console.log('✅ Arquivo criado:', data);
+
+      alert('Arquivo criado com sucesso!');
+
+      if (professorId) {
+        router.push('/perfil/professor');
+      } else {
+        router.back();
+      }
+
     } catch (error) {
       console.error('❌ Erro ao criar arquivo:', error);
       alert('Erro ao criar arquivo');
@@ -230,7 +257,7 @@ export default function HomePage() {
   return (
     <main className="upload-page">
       <TopBar background_image={Image.fundoTopBottom} />
-      
+
       <div className="upload-content">
         <button className="back-button" onClick={handleBack}>
           <img src={Icons.mdi_arrow_back} alt="Voltar" width="54" height="54" />
@@ -253,8 +280,8 @@ export default function HomePage() {
                     <img src={Icons.cloud} alt="Upload" />
                   </div>
                   <p className="upload-text">
-                    {urlArquivo 
-                      ? 'Arquivo já cadastrado - Clique para substituir' 
+                    {urlArquivo
+                      ? 'Arquivo já cadastrado - Clique para substituir'
                       : 'Clique aqui para escolher um arquivo'}
                   </p>
                 </label>
@@ -278,18 +305,18 @@ export default function HomePage() {
                 <label htmlFor="capaInput" className="upload-label">
                   <div className="upload-icon-image">
                     {capaUrl && !capa ? (
-                      <img 
-                        src={capaUrl} 
-                        alt="Capa atual" 
-                        style={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }} 
+                      <img
+                        src={capaUrl}
+                        alt="Capa atual"
+                        style={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
                       />
                     ) : (
                       <img src={Icons.majesticonsImage} alt="Upload" />
                     )}
                   </div>
                   <p className="upload-text">
-                    {capaUrl 
-                      ? 'Clique para substituir a capa' 
+                    {capaUrl
+                      ? 'Clique para substituir a capa'
                       : 'Clique aqui para escolher a capa'}
                   </p>
                 </label>
@@ -324,8 +351,8 @@ export default function HomePage() {
           </div>
 
           <div className="button-container">
-            <button 
-              className="cadastrar-btn" 
+            <button
+              className="cadastrar-btn"
               onClick={handleCadastrar}
               disabled={salvando}
             >

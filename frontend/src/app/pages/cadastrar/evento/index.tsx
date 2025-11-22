@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import TopBar from '@/app/components/TopBar';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import "./styles.css";
 
@@ -9,15 +10,50 @@ import Image from "@/app/components/assets/images";
 import Icons from "@/app/components/assets/icons";
 
 export default function CadastroEvento() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const professorId = searchParams.get('professorId');
+
     const [data, setData] = useState("");
     const [criador, setCriador] = useState("");
     const [localizacao, setLocalizacao] = useState("");
     const [descricao, setDescricao] = useState("");
     const [titulo, setTitulo] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log({ data, criador, localizacao, descricao });
+
+        try {
+            const response = await fetch('http://localhost:3001/api/eventos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    titulo,
+                    data,
+                    localizacao,
+                    descricao,
+                    criador: professorId || criador // Usa o ID do professor se disponível, senão o texto digitado (fallback)
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao criar evento');
+            }
+
+            alert('Evento criado com sucesso!');
+
+            if (professorId) {
+                router.push('/perfil/professor');
+            } else {
+                router.back();
+            }
+
+        } catch (error) {
+            console.error('Erro ao criar evento:', error);
+            alert('Erro ao criar evento');
+        }
     };
 
     return (
@@ -42,7 +78,7 @@ export default function CadastroEvento() {
                 <button
                     className="back-button"
                     type="button"
-                    onClick={() => window.history.back()}
+                    onClick={() => router.back()}
                 >
                     <img
                         src={Icons.mdi_arrow_back}
@@ -78,16 +114,18 @@ export default function CadastroEvento() {
                             />
                         </div>
 
-                        <div className="campo metade">
-                            <label htmlFor="criador">Criador do evento</label>
-                            <input
-                                id="criador"
-                                type="text"
-                                placeholder="Nome do criador"
-                                value={criador}
-                                onChange={(e) => setCriador(e.target.value)}
-                            />
-                        </div>
+                        {!professorId && (
+                            <div className="campo metade">
+                                <label htmlFor="criador">Criador do evento</label>
+                                <input
+                                    id="criador"
+                                    type="text"
+                                    placeholder="Nome do criador"
+                                    value={criador}
+                                    onChange={(e) => setCriador(e.target.value)}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="campo">
