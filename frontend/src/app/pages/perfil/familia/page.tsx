@@ -3,7 +3,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import TopBar from '@/app/components/TopBar';
-import ImageAssets from '@/app/components/assets/images'; // Renomeei para evitar conflito com o componente Image do Next ou HTML
+import ImageAssets from '@/app/components/assets/images';
 import Icons from '@/app/components/assets/icons';
 import {
   LineChart,
@@ -53,6 +53,7 @@ function ScreenFamillyContent() {
   const idUrl = searchParams.get('id');
 
   const [paciente, setPaciente] = useState<Paciente | null>(null);
+  const [nomeFamiliar, setNomeFamiliar] = useState<string>(""); // Estado para o nome do familiar
   const [relatorios, setRelatorios] = useState<Relatorio[]>([]);
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [loading, setLoading] = useState(true);
@@ -79,6 +80,18 @@ function ScreenFamillyContent() {
         } else {
           console.error("Erro ao buscar paciente:", resPaciente.statusText);
           setPaciente(null);
+        }
+
+        // 1.5 Buscar dados do Familiar (NOVO)
+        // Criaremos esse endpoint no backend para buscar na tabela familia_paciente + Usuarios
+        const resFamiliar = await fetch(`${API_URL}/api/pacientes/${PACIENTE_ID}/familiar`);
+        if (resFamiliar.ok) {
+          const dataFamiliar = await resFamiliar.json();
+          // Supondo que o backend retorne { nome: "Nome do Familiar" }
+          setNomeFamiliar(dataFamiliar.nome || "Nome não encontrado");
+        } else {
+          console.warn("Familiar não encontrado ou erro na requisição");
+          setNomeFamiliar("Familiar não identificado");
         }
 
         // 2. Buscar Relatórios
@@ -198,10 +211,11 @@ function ScreenFamillyContent() {
             <div>
               <div className="flex items-center gap-3">
                 <h2 className="text-2xl font-semibold text-gray-800">
-                  Familiar Responsável
+                  {/* Exibe o nome do familiar ou um carregando/fallback */}
+                  {nomeFamiliar || 'Carregando...'}
                 </h2>
                 <span className="text-sm bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full">
-                  Familiar
+                  Familiar Responsável
                 </span>
               </div>
               <span className="text-xs text-gray-500 mt-1 block">

@@ -71,3 +71,30 @@ export const removePaciente = async (req: Request, res: Response) => {
   if (count === 0) return res.status(404).json({ error: 'Paciente não encontrado' });
   return res.status(204).send();
 };
+
+// --- NOVA FUNÇÃO PARA BUSCAR O FAMILIAR ---
+export const getFamiliarByPacienteId = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  // Busca na tabela de ligação (familia_paciente) e faz o join com Usuarios para pegar o nome
+  const { data, error } = await supabase
+    .from('familia_paciente')
+    .select('usuario_id, Usuarios (nome)') 
+    .eq('paciente_id', id)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Erro ao buscar familiar:", error);
+    return res.status(500).json({ error: error.message });
+  }
+
+  if (!data || !data.Usuarios) {
+    // Retorna 404 se não houver vínculo
+    return res.status(404).json({ error: 'Familiar não encontrado' });
+  }
+
+  // O PostgREST pode retornar o join como objeto ou array. Assumindo objeto único:
+  const usuario = data.Usuarios as any; 
+  
+  return res.json({ nome: usuario.nome });
+};
