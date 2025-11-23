@@ -1,13 +1,15 @@
 import { Router } from 'express';
-import { 
+import {
   getRelatorios, getRelatorioById,
-   createRelatorio, 
-  updateRelatorio, removeRelatorio, getRelatorioStats
+  createRelatorio,
+  updateRelatorio, removeRelatorio, getRelatorioStats,
+  getRelatoriosByPaciente
 } from '../controllers/relatorioController';
 
 const router = Router();
 
 router.get('/', getRelatorios);
+router.get('/paciente/:pacienteId', getRelatoriosByPaciente); // Nova rota
 router.get('/:id', getRelatorioById);
 router.post('/', createRelatorio);
 router.put('/:id', updateRelatorio);

@@ -3,9 +3,43 @@ import { supabase } from '../services/supabaseClient';
 
 // Listar todos os eventos
 export const getEventos = async (req: Request, res: Response) => {
-  const { data, error } = await supabase.from('eventos').select('*');
-  if (error) return res.status(500).json({ error: error.message });
-  return res.json(data);
+  try {
+    const { criador } = req.query;
+
+    let query = supabase.from('eventos').select('*');
+
+    if (criador) {
+      // Se tiver criador (professorId), busca primeiro na tabela de relacionamento
+      const { data: links, error: linkError } = await supabase
+        .from('Professor_Eventos')
+        .select('evento_id')
+        .eq('professor_id', criador);
+
+      if (linkError) {
+        throw linkError;
+      }
+
+      const eventoIds = links.map((link: any) => link.evento_id);
+
+      // Filtra os eventos pelos IDs encontrados
+      if (eventoIds.length > 0) {
+        query = query.in('id', eventoIds);
+      } else {
+        // Se não tiver eventos vinculados, retorna lista vazia
+        return res.status(200).json([]);
+      }
+    }
+
+    const { data, error } = await query;
+
+    if (error) {
+      throw error;
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar eventos' });
+  }
 };
 
 // Buscar evento por ID (Inteiro)
@@ -23,15 +57,48 @@ export const getEventoById = async (req: Request, res: Response) => {
 
 // Criar novo evento
 export const createEvento = async (req: Request, res: Response) => {
-  const { titulo, data, localizacao, descricao, criador } = req.body;
+  try {
+    const { titulo, data, localizacao, descricao, criador } = req.body;
 
-  const { data: novoEvento, error } = await supabase
-    .from('eventos')
-    .insert([{ titulo, data, localizacao, descricao, criador }])
-    .select();
+    // 1. Cria o evento na tabela eventos
+    const { data: evento, error: eventoError } = await supabase
+      .from('eventos')
+      .insert([
+        {
+          titulo,
+          data,
+          localizacao,
+          descricao,
+        },
+      ])
+      .select()
+      .single();
 
-  if (error) return res.status(500).json({ error: error.message });
-  return res.status(201).json(novoEvento[0]);
+    if (eventoError) {
+      throw eventoError;
+    }
+
+    // 2. Se tiver criador (professorId), cria o vínculo na tabela Professor_Eventos
+    if (criador && evento) {
+      const { error: linkError } = await supabase
+        .from('Professor_Eventos')
+        .insert([
+          {
+            professor_id: criador,
+            evento_id: evento.id,
+          },
+        ]);
+
+      if (linkError) {
+        console.error('Erro ao vincular evento ao professor:', linkError);
+      }
+    }
+
+    res.status(201).json(evento);
+  } catch (error) {
+    console.error('Erro ao criar evento:', error);
+    res.status(500).json({ error: 'Erro ao criar evento' });
+  }
 };
 
 // Atualizar evento

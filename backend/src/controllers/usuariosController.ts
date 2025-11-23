@@ -106,7 +106,7 @@ export async function enviarCodigoRecuperacao(req: Request, res: Response) {
       return res.status(400).json({ error: "O e-mail é obrigatório." });
     }
 
-  
+
     const { data: usuario, error: buscaErr } = await supabase
       .from("Usuarios")
       .select("*")
@@ -155,7 +155,7 @@ export async function enviarCodigoRecuperacao(req: Request, res: Response) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    
+
 
 
     const previewUrl = nodemailer.getTestMessageUrl(info);
@@ -251,7 +251,7 @@ export async function redefinirSenha(req: Request, res: Response) {
 
     console.log(`[redefinirSenha] email=${email} codigo=${codigo}`);
 
- 
+
     const { data: usuario, error: usuarioErr } = await supabase
       .from("Usuarios")
       .select("id")
@@ -266,7 +266,7 @@ export async function redefinirSenha(req: Request, res: Response) {
       return res.status(404).json({ error: "Usuário não encontrado." });
     }
 
- 
+
     const { data: recuperacao, error: rcErr } = await supabase
       .from("RecuperacaoSenha")
       .select("id, codigo, criado_em")
@@ -298,7 +298,7 @@ export async function redefinirSenha(req: Request, res: Response) {
       return res.status(400).json({ error: "Link expirado. Solicite outro código." });
     }
 
-  
+
     const senhaCriptografada = await bcrypt.hash(novaSenha, 10);
     const { error: updateErr } = await supabase
       .from("Usuarios")
@@ -310,7 +310,7 @@ export async function redefinirSenha(req: Request, res: Response) {
       return res.status(500).json({ error: "Erro ao atualizar senha." });
     }
 
-  
+
     const { error: delErr } = await supabase
       .from("RecuperacaoSenha")
       .delete()
@@ -324,5 +324,28 @@ export async function redefinirSenha(req: Request, res: Response) {
   } catch (err: any) {
     console.error("[redefinirSenha] erro inesperado:", err);
     return res.status(500).json({ error: "Erro interno no servidor.", detalhes: err.message });
+  }
+}
+
+export async function getUsuarioById(req: Request, res: Response) {
+  const { id } = req.params;
+  console.log(`[getUsuarioById] Buscando usuário com ID: ${id}`);
+  try {
+    const { data, error } = await supabase
+      .from("Usuarios")
+      .select("id, nome, email, telefone, genero, nascimento, criado_em, tipo_usuario")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error("[getUsuarioById] Erro Supabase:", error);
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    console.log(`[getUsuarioById] Usuário encontrado: ${data?.nome}, Tipo: ${data?.tipo_usuario}`);
+    return res.status(200).json(data);
+  } catch (error: any) {
+    console.error("[getUsuarioById] Erro interno:", error);
+    return res.status(500).json({ error: error.message });
   }
 }

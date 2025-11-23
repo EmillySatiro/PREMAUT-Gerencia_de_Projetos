@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-
 import TopBar from '@/app/components/TopBar';
 import FormSection from '@/app/components/form_relatorio';
 import TypeDropdown from '@/app/components/type_dropdown';
