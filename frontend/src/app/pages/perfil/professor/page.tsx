@@ -200,7 +200,7 @@ export default function ScreenProfessor() {
                             </div>
                             <span className="text-xs text-gray-500 mt-1 block">cadastrado em: {dataCadastro}</span>
                         </div>
-                        <button onClick={() => router.push('/perfil/professor/editar')} className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-[#FFCBBD] text-[#FFCBBD] rounded-full px-4 py-2 text-sm hover:bg-[#FFEBE5] transition">
+                        <button onClick={() => router.push('/editar/professor')} className="mt-4 md:mt-0 flex items-center gap-2 bg-white border border-[#FFCBBD] text-[#FFCBBD] rounded-full px-4 py-2 text-sm hover:bg-[#FFEBE5] transition">
                             <img src={Icons.lapisRosa} alt="Editar" className="w-4 h-4" />
                             Editar perfil
                         </button>

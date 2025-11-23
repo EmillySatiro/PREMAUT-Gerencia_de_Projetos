@@ -92,7 +92,7 @@ export default function ScreenMonitor() {
   };
 
   const handleEditClick = () => {
-    router.push("/perfil/monitor/editar");
+    router.push("/editar/monitor");
   };
 
   const handleAddClick = () => {
