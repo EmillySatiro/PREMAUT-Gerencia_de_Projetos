@@ -14,15 +14,37 @@ interface PerfilMonitor {
   nascimento: string;
   nascimentoISO?: string;
   dataCadastro: string;
+  inicio_periodo?: string;
+  fim_periodo?: string;
+  curso?: string;
+  professor?: string;
+}
+
+interface Aluno {
+  link_id: number;
+  id: string;
+  nome: string;
+  nascimento: string;
+}
+
+interface PacienteDisponivel {
+  id: string;
+  nome: string;
 }
 
 export default function ScreenMonitor() {
   const [perfil, setPerfil] = useState<PerfilMonitor | null>(null);
+  const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState<PerfilMonitor | null>(null);
+  // Estado para o menu "Adicionar"
+  const [showAddMenu, setShowAddMenu] = useState(false);
+
+  // Estado para o modal de vincular
+  const [showLinkModal, setShowLinkModal] = useState(false);
+  const [availablePatients, setAvailablePatients] = useState<PacienteDisponivel[]>([]);
+  const [selectedPatient, setSelectedPatient] = useState("");
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -38,7 +60,7 @@ export default function ScreenMonitor() {
       return;
     }
 
-    // Chama a API com o ID do usuário
+    // 1. Busca Perfil
     fetch(`/api/monitor/perfil/${user.id}`, {
       headers: { "Content-Type": "application/json" },
     })
@@ -48,98 +70,83 @@ export default function ScreenMonitor() {
       })
       .then(data => {
         setPerfil(data.perfil);
-        setLoading(false);
       })
       .catch(err => {
         console.error(err);
-        setLoading(false);
         router.push("/auth/login");
       });
+
+    // 2. Busca Alunos Vinculados
+    fetchLinkedStudents(user.id);
+
   }, [router]);
 
-  // Converte YYYY-MM-DD para DD/MM/YYYY
-  const formatDateToBR = (isoDate: string | undefined) => {
-    if (!isoDate) return "";
-    const [year, month, day] = isoDate.split("-");
-    return `${day}/${month}/${year}`;
-  };
-
-  // Converte DD/MM/YYYY para YYYY-MM-DD
-  const formatDateToISO = (brDate: string) => {
-    if (!brDate) return null;
-    const parts = brDate.split("/");
-    if (parts.length !== 3) return null;
-    const [day, month, year] = parts;
-    return `${year}-${month}-${day}`;
+  const fetchLinkedStudents = (monitorId: string) => {
+    fetch(`/api/monitor/pacientes/${monitorId}`)
+      .then(res => res.json())
+      .then(data => {
+        setAlunos(data.alunos || []);
+        setLoading(false);
+      })
+      .catch(err => console.error(err));
   };
 
   const handleEditClick = () => {
-    if (perfil) {
-      setFormData({
-        ...perfil,
-        nascimento: formatDateToBR(perfil.nascimentoISO) // Usa a data formatada para edição
-      });
-      setIsEditing(true);
-    }
+    router.push("/perfil/monitor/editar");
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    if (formData) {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+  const handleAddClick = () => {
+    setShowAddMenu(!showAddMenu);
   };
 
-  // Máscara de data DD/MM/YYYY
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, ""); // Remove tudo que não é dígito
-
-    if (value.length > 8) value = value.slice(0, 8); // Limita a 8 números
-
-    if (value.length > 4) {
-      value = value.replace(/^(\d{2})(\d{2})(\d+)/, "$1/$2/$3");
-    } else if (value.length > 2) {
-      value = value.replace(/^(\d{2})(\d+)/, "$1/$2");
-    }
-
-    if (formData) {
-      setFormData({ ...formData, nascimento: value });
-    }
+  const handleCadastrarClick = () => {
+    router.push("/cadastrar/paciente");
   };
 
-  const handleSave = async () => {
-    if (!formData) return;
+  const handleVincularClick = () => {
+    setShowAddMenu(false);
+    const userData = localStorage.getItem("user");
+    if (!userData) return;
+    const user = JSON.parse(userData);
+
+    // Busca pacientes disponíveis
+    fetch(`/api/monitor/pacientes/disponiveis/${user.id}`)
+      .then(res => res.json())
+      .then(data => {
+        setAvailablePatients(data.pacientes || []);
+        setShowLinkModal(true);
+      })
+      .catch(err => alert("Erro ao buscar pacientes disponíveis."));
+  };
+
+  const handleSaveLink = async () => {
+    if (!selectedPatient) return;
 
     const userData = localStorage.getItem("user");
     if (!userData) return;
     const user = JSON.parse(userData);
 
-    const nascimentoISO = formatDateToISO(formData.nascimento);
-
     try {
-      const res = await fetch(`/api/monitor/perfil/${user.id}`, {
-        method: "PUT",
+      const res = await fetch("/api/monitor/pacientes/vincular", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nome: formData.nome,
-          email: formData.email,
-          genero: formData.genero,
-          telefone: formData.telefone,
-          nascimento: nascimentoISO,
-        }),
+          monitorId: user.id,
+          pacienteId: selectedPatient
+        })
       });
 
-      if (!res.ok) throw new Error("Erro ao atualizar perfil");
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Erro ao vincular");
+      }
 
-      // Atualiza o estado local com os novos dados (recarrega da API para garantir formato correto)
-      const updatedRes = await fetch(`/api/monitor/perfil/${user.id}`);
-      const updatedData = await updatedRes.json();
-      setPerfil(updatedData.perfil);
-
-      setIsEditing(false);
-      alert("Perfil atualizado com sucesso!");
-    } catch (error) {
-      console.error(error);
-      alert("Erro ao atualizar perfil.");
+      alert("Paciente vinculado com sucesso!");
+      setShowLinkModal(false);
+      setSelectedPatient("");
+      fetchLinkedStudents(user.id); // Atualiza a lista
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
@@ -162,7 +169,7 @@ export default function ScreenMonitor() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative" onClick={() => showAddMenu && setShowAddMenu(false)}>
       <TopBar background_image={Image.fundoSomos} />
 
       <main className="flex-1 bg-white px-8 py-10">
@@ -204,7 +211,7 @@ export default function ScreenMonitor() {
               </li>
               <li className="flex items-center gap-2">
                 <img src={Icons.aniversario} alt="Aniversário" className="w-5 h-5" />
-                <span>Aniversário: {formatDateToBR(perfil.nascimentoISO)}</span>
+                <span>Aniversário: {perfil.nascimento}</span>
               </li>
               <li className="flex items-center gap-2">
                 <img src={Icons.telefone} alt="Telefone" className="w-4 h-4" />
@@ -217,14 +224,14 @@ export default function ScreenMonitor() {
             </ul>
           </div>
 
-          {/* INFORMAÇÕES DE SUPORTE (fixo) */}
+          {/* INFORMAÇÕES DE SUPORTE (dinâmico) */}
           <div className="border border-[#FFDFA4] rounded-xl p-3 max-w-sm mx-auto flex flex-col justify-center h-[140px]">
             <h3 className="font-semibold text-gray-700 mb-3 text-center">Informações</h3>
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-600">
-              <li><strong>Início da Orientação:</strong> 2024.1</li>
-              <li><strong>Fim do Período:</strong> 2024.2</li>
-              <li><strong>Curso:</strong> Psicologia</li>
-              <li><strong>Especialidade:</strong> Saúde da criança e do adolescente</li>
+              <li><strong>Início da Orientação:</strong> {perfil.inicio_periodo || "Não informado"}</li>
+              <li><strong>Fim do Período:</strong> {perfil.fim_periodo || "Não informado"}</li>
+              <li><strong>Curso:</strong> {perfil.curso || "Não informado"}</li>
+              <li><strong>Especialidade:</strong> {perfil.professor || "Não informado"}</li>
             </ul>
           </div>
 
@@ -233,110 +240,95 @@ export default function ScreenMonitor() {
             <h3 className="font-semibold text-gray-800 text-lg text-center">Alunos vinculados</h3>
           </div>
 
-          <div className="col-span-2 rounded-xl p-12 bg-[url('/assets/images/fundo_top_bottom.png')] bg-center bg-cover min-h-[700px] flex flex-col items-start">
-            <button className="flex items-center gap-2 bg-[#FCDFA1] text-[#2A5387] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#fae7bb] transition mb-10">
-              <img src={Icons.lapisCinza} alt="Adicionar" className="w-5 h-5" />
-              Adicionar
-            </button>
+          <div className="col-span-2 rounded-xl p-12 bg-[url('/assets/images/fundo_top_bottom.png')] bg-center bg-cover min-h-[700px] flex flex-col items-start relative">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full justify-items-center">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="relative bg-white rounded-2xl shadow-lg w-[280px] h-[230px] flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl">
-                  <img src={Icons.icone_3pontos} alt="Opções" className="absolute top-4 right-4 w-6 h-6 opacity-80" />
-                  <div className="w-20 h-20 rounded-full bg-gray-300 mb-5"></div>
-                  <h3 className="text-gray-800 font-medium mb-4 text-lg">Fulano de Tal</h3>
-                  <button className="bg-[#4da1a9] text-white text-sm px-5 py-2 rounded-[20px] hover:bg-[#3a8289] transition">
-                    Verificar perfil
+            {/* Botão Adicionar com Menu */}
+            <div className="relative mb-10">
+              <button
+                onClick={(e) => { e.stopPropagation(); handleAddClick(); }}
+                className="flex items-center gap-2 bg-[#FCDFA1] text-[#2A5387] px-5 py-3 rounded-[15.82px] font-medium shadow-md hover:bg-[#fae7bb] transition"
+              >
+                <img src={Icons.lapisCinza} alt="Adicionar" className="w-5 h-5" />
+                Adicionar
+              </button>
+
+              {showAddMenu && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 z-10 overflow-hidden">
+                  <button
+                    onClick={handleCadastrarClick}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-50 text-gray-700 text-sm border-b border-gray-100"
+                  >
+                    Cadastrar novo paciente
+                  </button>
+                  <button
+                    onClick={handleVincularClick}
+                    className="w-full text-left px-4 py-3 hover:bg-gray-50 text-gray-700 text-sm"
+                  >
+                    Vincular paciente existente
                   </button>
                 </div>
-              ))}
+              )}
+            </div>
+
+            {/* Lista de Alunos */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full justify-items-center">
+              {alunos.length === 0 ? (
+                <div className="col-span-3 text-gray-500 italic">Nenhum aluno vinculado.</div>
+              ) : (
+                alunos.map((aluno) => (
+                  <div key={aluno.link_id} className="relative bg-white rounded-2xl shadow-lg w-[280px] h-[230px] flex flex-col items-center justify-center transition transform hover:scale-105 hover:shadow-xl">
+                    <img src={Icons.icone_3pontos} alt="Opções" className="absolute top-4 right-4 w-6 h-6 opacity-80 cursor-pointer" />
+                    <div className="w-20 h-20 rounded-full bg-gray-300 mb-5 flex items-center justify-center text-2xl text-white font-bold">
+                      {aluno.nome.charAt(0)}
+                    </div>
+                    <h3 className="text-gray-800 font-medium mb-4 text-lg">{aluno.nome}</h3>
+                    <button
+                      onClick={() => router.push(`/perfil/paciente?id=${aluno.id}`)}
+                      className="bg-[#4da1a9] text-white text-sm px-5 py-2 rounded-[20px] hover:bg-[#3a8289] transition"
+                    >
+                      Verificar perfil
+                    </button>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </section>
       </main>
 
-      {/* MODAL DE EDIÇÃO */}
-      {isEditing && formData && (
-        <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
-          <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-2xl">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">Editar Perfil</h2>
+      {/* Modal de Vincular */}
+      {showLinkModal && (
+        <div className="fixed inset-0 bg-black/30 flex justify-center items-center z-50" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-2xl">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">Vincular Paciente</h3>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                <input
-                  type="text"
-                  name="nome"
-                  value={formData.nome}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Gênero</label>
-                <select
-                  name="genero"
-                  value={formData.genero}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
-                >
-                  <option value="Masculino">Masculino</option>
-                  <option value="Feminino">Feminino</option>
-                  <option value="Outro">Outro</option>
-                  <option value="Não informado">Não informado</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
-                <input
-                  type="text"
-                  name="telefone"
-                  value={formData.telefone}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Data de Nascimento</label>
-                <input
-                  type="text"
-                  name="nascimento"
-                  placeholder="DD/MM/YYYY"
-                  value={formData.nascimento}
-                  onChange={handleDateChange}
-                  maxLength={10}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
-                />
-                <p className="text-xs text-gray-500 mt-1">Formato: DD/MM/YYYY</p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
-                />
-              </div>
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Selecione o paciente:</label>
+              <select
+                value={selectedPatient}
+                onChange={(e) => setSelectedPatient(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FFDFA4]"
+              >
+                <option value="">Selecione...</option>
+                {availablePatients.map(p => (
+                  <option key={p.id} value={p.id}>{p.nome}</option>
+                ))}
+              </select>
             </div>
 
-            <div className="flex justify-end gap-4 mt-8">
+            <div className="flex justify-end gap-3">
               <button
-                onClick={() => setIsEditing(false)}
+                onClick={() => setShowLinkModal(false)}
                 className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
               >
                 Cancelar
               </button>
               <button
-                onClick={handleSave}
-                className="px-6 py-2 bg-[#FFDFA4] text-[#2A5387] font-semibold rounded-lg hover:bg-[#fae7bb] transition"
+                onClick={handleSaveLink}
+                disabled={!selectedPatient}
+                className="px-6 py-2 bg-[#6d94c5] text-white font-semibold rounded-lg hover:bg-[#5a7da8] transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Salvar
+                Vincular
               </button>
             </div>
           </div>

@@ -26,6 +26,13 @@ export async function getPerfilMonitor(req: Request, res: Response) {
       return res.status(403).json({ error: "Acesso negado ou usuário não encontrado." });
     }
 
+    // Busca dados específicos do monitor (se existirem)
+    const { data: dadosMonitor, error: monitorError } = await supabase
+      .from("DadosMonitor")
+      .select("inicio_periodo, fim_periodo, curso, professor")
+      .eq("usuario_id", id)
+      .maybeSingle();
+
     const perfil = {
       nome: usuario.nome,
       email: usuario.email,
@@ -43,6 +50,12 @@ export async function getPerfilMonitor(req: Request, res: Response) {
         day: "numeric",
         month: "long",
         year: "numeric",
+      }),
+      ...(dadosMonitor || {
+        inicio_periodo: "Não informado",
+        fim_periodo: "Não informado",
+        curso: "Não informado",
+        professor: "Não informado",
       }),
     };
 
