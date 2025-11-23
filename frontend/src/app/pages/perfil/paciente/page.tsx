@@ -192,7 +192,7 @@ export default function ScreenPaciente() {
             </div>
 
             <button
-              onClick={() => router.push(`/perfil/paciente/editar?id=${id}`)}
+              onClick={() => router.push(`/editar/paciente?id=${id}`)}
               className="mt-4 md:mt-0 flex items-center gap-2 bg-white border text-sm rounded-full px-4 py-2 hover:bg-gray-50 transition"
               style={{ borderColor: '#335B8D', color: '#335B8D' }}
             >
